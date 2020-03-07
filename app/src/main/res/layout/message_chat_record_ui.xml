@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--聊天界面-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_chatRecord"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/self_linearlayout_addborder">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp">
+
+            <EditText
+                android:id="@+id/input_text"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="发私信"
+                android:maxLines="2"
+                android:textCursorDrawable="@drawable/selfedit_text_formessage" />
+
+            <Button
+                android:id="@+id/send"
+                android:layout_width="40dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/btn_round_msgchat"
+                android:text="发送"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

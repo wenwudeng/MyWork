@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Shape下的属性：
+
+    solid
+    描述：内部填充
+    属性：android:color 填充颜色
+
+    size
+    描述：大小
+
+    属性：
+    android:width 宽
+    android:height 高
+
+    gradient
+    描述：渐变色
+    属性：
+    android:startColor渐变起始颜色
+    android:endColor渐变结束颜色
+    android:centerColor渐变中间颜色
+    android:angle 渐变的角度，angle=0时，渐变色是从左向右，然后逆时针方向转；当angle=90时，渐变色从上往下。angle必然是45的倍数
+    android:type 渐变类型：linear(线性)、radial(放射性，以开始色为中心)、sweep(扫描线式渐变)
+    android:userLevel如果要使用LevelListDrawable对象，就要设置为true。设置true无渐变色，false有渐变色
+    android:grdientRadial渐变半径，只有设置type为radial时，此值才生效
+    android:centerX 渐变中心X点坐标的相对位置
+    android:centerY 渐变中心Y点坐标的相对位置
+
+    stroke
+    描述：描边
+    属性：
+    android:width 描边宽度
+    android:color 描边颜色
+    android:dashwidth描边样式为虚线时的宽度，值为0时为实线，值大于0时为虚线
+    android:dashGap 描边为虚线时，虚线之间的间隔
+
+    corners
+    描述：圆角
+    属性：
+    android:radius 四个角半径值
+    android:topLeftRadius左上角半径值
+    android:topRightRadius右上角半径值
+    android:bottomLeftRadius右下角半径值
+    android:bottomRightRadius左下角半径值
+
+    padding
+    描述：内边距
+    属性：
+    android:left 左内边距
+    android:right 右内边距
+    android:top 上内边距
+    android:bottom 下内边距-->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <corners android:radius="30dp" />
+
+</shape>

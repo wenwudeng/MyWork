@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--聊天-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <!--左布局-->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <!--左用户头像-->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/left_photo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/img"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#0000"/>
+
+        <!--左聊天气泡-->
+        <com.cxd.chatview.moudle.ChatView
+            android:id="@+id/left_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/left_photo"
+
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:layout_marginRight="20dp"
+
+            xmlns:chat="http://schemas.android.com/apk/res-auto"
+            chat:arrow_direction="left"
+            chat:is_arrow_center="true"
+            chat:arrow_up_distance="10dp"
+            chat:arrow_width="5dp"
+            chat:arrow_height="12dp"
+            chat:stroke_width="1px"
+            chat:stroke_color="#FFFFFF"
+            chat:fill_color="#FFFFFF"
+            chat:press_stroke_color="#50111111"
+            chat:press_fill_color="#50111111"
+            chat:conner_radius="6dp">
+
+            <TextView
+                android:textSize="16dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/left_msg"
+                android:text="这是箭头向左的聊天气泡"
+                android:textColor="#4a4a4a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </com.cxd.chatview.moudle.ChatView>
+
+    </RelativeLayout>
+
+
+    <!--右布局-->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <!--右边用户头像-->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/right_photo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/timg"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#0000"
+            android:layout_alignParentRight="true"/>
+
+        <!--右边聊天气泡-->
+        <com.cxd.chatview.moudle.ChatView
+            android:id="@+id/right_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:layout_toLeftOf="@id/right_photo"
+
+            xmlns:chat="http://schemas.android.com/apk/res-auto"
+            chat:arrow_direction="right"
+            chat:is_arrow_center="true"
+            chat:arrow_up_distance="10dp"
+            chat:arrow_width="5dp"
+            chat:arrow_height="12dp"
+            chat:stroke_width="1px"
+            chat:stroke_color="#95ec69"
+            chat:fill_color="#95ec69"
+            chat:press_stroke_color="#50111111"
+            chat:press_fill_color="#50111111"
+            chat:conner_radius="6dp">
+
+            <TextView
+                android:textSize="16dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/right_msg"
+                android:text="这是箭头向左的聊天气泡"
+                android:textColor="#4a4a4a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </com.cxd.chatview.moudle.ChatView>
+    </RelativeLayout>
+
+
+</LinearLayout>

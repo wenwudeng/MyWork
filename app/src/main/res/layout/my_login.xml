@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!--顶部栏-->
+    <LinearLayout
+        android:id="@+id/loginTopBar"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:layout_height="wrap_content"
+            android:text="取消" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:textColor="#4a4a4a"
+            android:textSize="20sp"
+            android:text="登录" />
+
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:layout_height="wrap_content"
+            android:text="注册" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/red"/>
+
+    <!--登录界面-->
+
+    <LinearLayout
+        android:id="@+id/login_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/loginName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:theme="@style/MyEditText"
+            android:hint="手机号/用户名/邮箱"
+            android:textCursorDrawable="@drawable/selfedit_text_forlogin"
+            android:textColorHint="#cccccc"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/loginPassword"
+            android:layout_width="match_parent"
+            android:textColorHint="#cccccc"
+            android:layout_height="wrap_content"
+            android:theme="@style/MyEditText"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:hint="请输入密码"
+            android:ems="10"
+            android:textCursorDrawable="@drawable/selfedit_text_forlogin"
+            android:inputType="textPassword" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/forgotPassword"
+                android:layout_alignParentRight="true"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:text="忘记密码" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_round_login"
+            android:text="登录"
+            android:textColor="#FAF8F2F2"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/mobileLogin"
+                android:layout_alignParentLeft="true"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_height="35dp"
+                android:textColor="#506090"
+                android:text="短信快捷登录" />
+
+
+            <Button
+                android:id="@+id/overseaMobileLogin"
+                android:layout_alignParentRight="true"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginRight="20dp"
+                android:textColor="#506090"
+                android:text="境外手机登录" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

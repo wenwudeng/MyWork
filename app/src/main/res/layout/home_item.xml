@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="178dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="5dp"
+    android:layout_marginTop="3dp"
+    android:background="@color/white"
+    >
+
+    <ImageView
+        android:id="@+id/userUploadImg"
+        android:layout_width="wrap_content"
+        android:contentDescription="img"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/pic1"/>
+
+    <TextView
+        android:id="@+id/userUpLoadText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"
+        />
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/user_Photo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/pic2" />
+
+        <TextView
+            android:id="@+id/user_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="32dp"
+            android:text="梦想" />
+
+        <Button
+            android:id="@+id/user_favourButton"
+            android:layout_width="73dp"
+            android:layout_height="21dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="65dp"
+            android:gravity="end"
+            android:background="@null"
+            android:text="♡" />
+
+        <TextView
+            android:id="@+id/user_favourCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="140dp"
+            android:text="100" />
+    </RelativeLayout>
+
+</LinearLayout>

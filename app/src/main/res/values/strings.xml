@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name" translatable="false">宠物</string>
+
+    <style name="pt_home">首页</style>
+
+    <string name="framework_home">首页</string>
+    <string name="framework_find">发现</string>
+    <string name="framework_release">发布</string>
+    <string name="framework_message">消息</string>
+    <string name="framework_my">我的</string>
+    <string name="title_activity_login">登录</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <string name="content">1、肉干类  特点：以鸡肉干为主，其次是牛肉的居多，还有鸭肉的。肉干通常是被烘干的，水分含量不同，也分许多种类。  采购要点：水分含量少的肉干储存时间比较长，吃起来比较硬，适合年轻力壮牙口好的狗狗;水分含量高的肉干比较软，闻起来很香，但容易变质，不宜一次买得太多。  　　  2、奶制品　　  特点：奶酪类零食，对于调节狗狗的肠胃是有好处的，但不是所有的狗狗都喜欢这个味道。奶片、奶酪条之类的零食有许多种。  采购要点：如果你家狗狗的肠胃对牛奶敏感，那最好不要尝试，以免引起拉稀。  3、咬胶类  特点：通常是用猪皮或是牛皮做的，专门为了狗狗磨牙和消磨时间用的。  采购要点：要根据狗狗的大小来决定给狗狗买多大个儿的咬胶，太大了狗狗会失去咬的兴趣，太小了又容易被狗狗整吞下去。  4、洁齿类  特点：洁齿类零食通常是人工合成的，比较硬，添加了肉香可以引起狗狗啃咬的食欲，或是添加薄荷香料，让狗狗在咬的时候可以除口臭。  采购要点：这类狗狗零食的种类非常多，有的形状相当可爱。采购时要注意选适合狗狗嘴巴尺寸的。  5、香肠类  特点：类似人吃的包着红塑料纸的方便香肠，里面有小量的肉和淀粉，闻起来也很香，价格便宜，喂着方便。  采购要点：要买有正式品牌的产品，因为这种香肠你完全看不出里面的成分，而且价格又很便宜，对于产品的质量真是不好把握。</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
