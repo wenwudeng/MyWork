@@ -1,5 +1,6 @@
 package com.wenwu.pm.mine.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.next.easynavigation.utils.NavigationUtil;
+import com.next.easynavigation.view.EasyNavigationBar;
 import com.wenwu.pm.R;
+import com.wenwu.pm.mine.activity.EditPersonalInfoActivity;
+import com.wenwu.pm.mine.activity.SettingActivity;
 import com.wenwu.pm.mine.adapter.MyPagerAdapter;
 
 
@@ -27,6 +33,8 @@ public class MyFragment extends Fragment {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private List<Fragment> fragmentList;
+    private Button btn_edit;
+    private Button btn_setting;
 
 
     @Nullable
@@ -44,23 +52,28 @@ public class MyFragment extends Fragment {
         tabLayout = view.findViewById(R.id.tab_layoutMy);
         tabLayout.setupWithViewPager(viewPager);
 
-        Button button = view.findViewById(R.id.edit_myInfo);
-        button.setOnClickListener(new View.OnClickListener() {
+        btn_edit = view.findViewById(R.id.edit_myInfo);
+        btn_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(),"编辑资料",Toast.LENGTH_SHORT).show();
-              /*  replaceFragment(new MyPInfoEditFragment());*/
+                v.getContext().startActivity(new Intent(v.getContext(), EditPersonalInfoActivity.class));
+
             }
         });
+
+        btn_setting = view.findViewById(R.id.setting);
+        btn_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(),"编辑资料",Toast.LENGTH_SHORT).show();
+                v.getContext().startActivity(new Intent(v.getContext(), SettingActivity.class));
+
+            }
+        });
+
+
     }
-
-
-    /*public void replaceFragment(Fragment fragment) {
-        FragmentManager manager = getActivity().getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.my_fragment_container, fragment);
-        transaction.commit();
-    }*/
 
 
     /**

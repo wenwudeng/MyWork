@@ -1,11 +1,13 @@
 package com.wenwu.pm.message.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.wenwu.pm.R;
+import com.wenwu.pm.message.activity.MsgAddNewConcernActivity;
+import com.wenwu.pm.message.activity.MsgCollectPraiseActivity;
+import com.wenwu.pm.message.activity.MsgReViewActivity;
 import com.wenwu.pm.message.adapter.MsgListItemAdapter;
 import com.wenwu.pm.message.bean.MessageListItem;
 
@@ -26,6 +31,9 @@ public class MessageFragment extends Fragment {
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private List<MessageListItem> listItems = new ArrayList<>();
+    private Button btn_follow;
+    private Button btn_like;
+    private Button btn_review;
 
     @Nullable
     @Override
@@ -55,6 +63,36 @@ public class MessageFragment extends Fragment {
                 },200);
             }
         });
+
+        //赞和收藏button
+        btn_like = view.findViewById(R.id.btn_like);
+        btn_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.getContext().startActivity(new Intent(v.getContext(), MsgCollectPraiseActivity.class));
+            }
+        });
+
+        //新增关注button
+        btn_like = view.findViewById(R.id.btn_follow);
+        btn_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.getContext().startActivity(new Intent(v.getContext(), MsgAddNewConcernActivity.class));
+            }
+        });
+
+        //评论button
+        btn_review = view.findViewById(R.id.btn_comment);
+        btn_review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.getContext().startActivity(new Intent(v.getContext(), MsgReViewActivity.class));
+            }
+        });
+
+
+
     }
 
     @Nullable

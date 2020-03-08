@@ -9,6 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".message.activity.MsgReViewActivity"></activity>
+        <activity android:name=".message.activity.MsgCollectPraiseActivity" />
+        <activity android:name=".message.activity.MsgAddNewConcernActivity" />
+        <activity android:name=".mine.activity.SettingActivity" />
+        <activity android:name=".mine.activity.EditPersonalInfoActivity" />
         <activity android:name=".home.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

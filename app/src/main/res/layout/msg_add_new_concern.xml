@@ -11,6 +11,18 @@
         android:layout_height="wrap_content"
         app:navigationIcon="@mipmap/arrow_left"
         app:title="新增关注"
-        app:titleMarginStart="100dp" />
+        app:titleMarginStart="90dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="7dp"
+        android:background="@color/gray" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_msg_concern"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
 
 </FrameLayout>

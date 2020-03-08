@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * @author:wenwudeng
  * @date:20:35 2020/2/18
- * 信息功能的聊天界面
+ * 私信聊天界面
  */
 public class MsgActivity extends AppCompatActivity {
     private List<Msg> msgList = new ArrayList<>();
