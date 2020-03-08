@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -20,7 +22,7 @@ import com.wenwu.pm.mine.adapter.MyPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyInfoFragment extends Fragment {
+public class MyFragment extends Fragment {
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -47,9 +49,18 @@ public class MyInfoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(),"编辑资料",Toast.LENGTH_SHORT).show();
+              /*  replaceFragment(new MyPInfoEditFragment());*/
             }
         });
     }
+
+
+    /*public void replaceFragment(Fragment fragment) {
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.my_fragment_container, fragment);
+        transaction.commit();
+    }*/
 
 
     /**

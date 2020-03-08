@@ -23,7 +23,7 @@ import com.wenwu.pm.R;
 import com.wenwu.pm.find.fragment.FindFragment;
 import com.wenwu.pm.home.fragment.HomeFragment;
 import com.wenwu.pm.message.fragment.MessageFragment;
-import com.wenwu.pm.mine.fragment.MyInfoFragment;
+import com.wenwu.pm.mine.fragment.MyFragment;
 import com.wenwu.pm.widget.KickBackAnimator;
 
 
@@ -60,7 +60,7 @@ public class NavigationActivity extends AppCompatActivity {
         fragments.add(new HomeFragment());
         fragments.add(new FindFragment());
         fragments.add(new MessageFragment());
-        fragments.add(new MyInfoFragment());
+        fragments.add(new MyFragment());
 
         navigationBar.titleItems(tabText)
                 .normalIconItems(normalIcon)
