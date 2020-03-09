@@ -3,6 +3,7 @@ package com.wenwu.pm.message.bean;
 /**
  * @author:wenwudeng
  * @date:11:18 PM 3/8/2020
+ * 赞和收藏item bean
  */
 public class MsgCollectPraise {
     private int userImage;

@@ -19,10 +19,16 @@
         android:layout_height="7dp"
         android:background="@color/gray" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_msg_collect"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/swipe_refresh_msg_collect"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_msg_collect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
 
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>
