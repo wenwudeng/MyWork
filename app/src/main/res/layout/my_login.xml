@@ -63,7 +63,7 @@
             android:layout_marginRight="18dp"
             android:theme="@style/MyEditText"
             android:hint="手机号/用户名/邮箱"
-            android:textCursorDrawable="@drawable/selfedit_text_forlogin"
+            android:textCursorDrawable="@drawable/self_edit_cursor"
             android:textColorHint="#cccccc"
             android:ems="10"
             android:inputType="textPersonName" />
@@ -78,7 +78,7 @@
             android:layout_marginRight="18dp"
             android:hint="请输入密码"
             android:ems="10"
-            android:textCursorDrawable="@drawable/selfedit_text_forlogin"
+            android:textCursorDrawable="@drawable/self_edit_cursor"
             android:inputType="textPassword" />
 
         <RelativeLayout

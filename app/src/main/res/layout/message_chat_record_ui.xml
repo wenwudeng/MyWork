@@ -31,7 +31,7 @@
                 android:background="@null"
                 android:hint="发私信"
                 android:maxLines="2"
-                android:textCursorDrawable="@drawable/selfedit_text_formessage" />
+                android:textCursorDrawable="@drawable/self_edit_text_formessage" />
 
             <Button
                 android:id="@+id/send"

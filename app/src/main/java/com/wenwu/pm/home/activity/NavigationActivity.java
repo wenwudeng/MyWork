@@ -7,6 +7,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.os.Handler;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -23,7 +24,9 @@ import com.wenwu.pm.R;
 import com.wenwu.pm.find.fragment.FindFragment;
 import com.wenwu.pm.home.fragment.HomeFragment;
 import com.wenwu.pm.message.fragment.MessageFragment;
+import com.wenwu.pm.mine.activity.LoginActivity;
 import com.wenwu.pm.mine.fragment.MyFragment;
+import com.wenwu.pm.publish.activity.QuestionActivity;
 import com.wenwu.pm.widget.KickBackAnimator;
 
 
@@ -73,8 +76,8 @@ public class NavigationActivity extends AppCompatActivity {
                     @Override
                     public boolean onTabClickEvent(View view, int position) {
                         if (position == 4) {
-                            /*Intent intent = new Intent(NavigationActivity.this, LoginActivity.class);
-                            startActivity(intent);*/
+                            Intent intent = new Intent(NavigationActivity.this, LoginActivity.class);
+                            startActivity(intent);
                             Toast.makeText(NavigationActivity.this, "请先登录", Toast.LENGTH_SHORT).show();
                             //return true则拦截事件、不进行页面切换
                             return false;
@@ -107,9 +110,18 @@ public class NavigationActivity extends AppCompatActivity {
             View itemView = View.inflate(NavigationActivity.this, R.layout.add_item_icon, null);
             ImageView menuImage = itemView.findViewById(R.id.menu_icon_iv);
             TextView menuText = itemView.findViewById(R.id.menu_text_tv);
-
             menuImage.setImageResource(menuIconItems[i]);
             menuText.setText(menuTextItems[i]);
+
+            menuImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    startActivity(new Intent(NavigationActivity.this, QuestionActivity.class));
+                    }
+                });
+
+
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             params.weight = 1;

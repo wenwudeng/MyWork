@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".message.activity.MsgReViewActivity"></activity>
+        <activity android:name=".publish.activity.QuestionActivity"></activity>
+        <activity android:name=".message.activity.MsgReViewActivity" />
         <activity android:name=".message.activity.MsgCollectPraiseActivity" />
         <activity android:name=".message.activity.MsgAddNewConcernActivity" />
         <activity android:name=".mine.activity.SettingActivity" />

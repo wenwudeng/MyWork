@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single" >
+        <item
+            android:id="@+id/nav_draft"
+            android:icon="@mipmap/ic_draft"
+            android:title="我的草稿"/>
+
+        <item
+            android:id="@+id/nav_balance"
+            android:icon="@mipmap/ic_mine_balance"
+            android:title="我的余额"/>
+
+        <item
+            android:id="@+id/nav_car"
+            android:icon="@mipmap/ic_cart"
+            android:title="购物车"/>
+
+        <item
+            android:id="@+id/nav_order"
+            android:icon="@mipmap/ic_order"
+            android:title="我的订单"/>
+
+        <item
+            android:id="@+id/nav_service"
+            android:icon="@mipmap/ic_service_order"
+            android:title="服务订单"/>
+
+
+        <item
+            android:id="@+id/nav_bargainCard"
+            android:icon="@mipmap/ic_coupon"
+            android:title="我的优惠卷"/>
+
+
+        <item
+            android:id="@+id/nav_vip"
+            android:icon="@mipmap/my_vip_card"
+            android:title="我的会员卡"/>
+
+
+        <item
+            android:id="@+id/nav_bargain"
+            android:icon="@mipmap/my_bargin"
+            android:title="我的砍价"/>
+
+        <item
+            android:id="@+id/nav_inviteCard"
+            android:icon="@mipmap/ic_invite"
+            android:title="我的邀请券"/>
+
+        <item
+            android:id="@+id/nav_identify"
+            android:icon="@mipmap/ic_auth"
+            android:title="身份认证"/>
+
+
+    </group>
+
+</menu>

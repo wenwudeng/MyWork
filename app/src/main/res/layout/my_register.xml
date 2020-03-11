@@ -51,9 +51,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"
             android:layout_marginRight="18dp"
-            android:theme="@style/MyEditText"
             android:hint="请输入手机号"
-            android:textCursorDrawable="@drawable/selfedit_text_forlogin"
+            android:textCursorDrawable="@drawable/self_edit_cursor"
             android:textColorHint="#cccccc"
             android:ems="10"
             android:inputType="textPersonName" />
@@ -72,7 +71,7 @@
                 android:layout_marginRight="18dp"
                 android:theme="@style/MyEditText"
                 android:hint="请输入验证码"
-                android:textCursorDrawable="@drawable/selfedit_text_forlogin"
+                android:textCursorDrawable="@drawable/self_edit_cursor"
                 android:textColorHint="#cccccc"
                 android:ems="10"
                 android:inputType="textPassword" />
@@ -94,9 +93,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="18dp"
                 android:layout_marginRight="18dp"
-                android:theme="@style/MyEditText"
                 android:hint="6-16位数字和字母的组合"
-                android:textCursorDrawable="@drawable/selfedit_text_forlogin"
+                android:textCursorDrawable="@drawable/self_edit_cursor"
                 android:textColorHint="#cccccc"
                 android:ems="10"
                 android:inputType="number" />
