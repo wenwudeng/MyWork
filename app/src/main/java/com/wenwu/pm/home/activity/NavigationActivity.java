@@ -39,9 +39,9 @@ public class NavigationActivity extends AppCompatActivity {
 
     private String[] tabText = {"首页", "发现", "", "消息", "我的"};
     //未选中icon
-    private int[] normalIcon = {R.mipmap.tab_home_normal, R.mipmap.tab_pic_normal, R.mipmap.tab_add, R.mipmap.tab_shop_normal, R.mipmap.tab_mine_normal};
+    private int[] normalIcon = {R.mipmap.tab_home_normal, R.mipmap.tab_pic_normal, R.mipmap.btn_pai, R.mipmap.tab_shop_normal, R.mipmap.tab_mine_normal};
     //选中时icon
-    private int[] selectIcon = {R.mipmap.tab_home_pressed, R.mipmap.tab_pic_pressed, R.mipmap.tab_add, R.mipmap.tab_shop_pressed, R.mipmap.tab_mine_pressed};
+    private int[] selectIcon = {R.mipmap.tab_home_pressed, R.mipmap.tab_pic_pressed, R.mipmap.btn_pai, R.mipmap.tab_shop_pressed, R.mipmap.tab_mine_pressed};
     private List<Fragment> fragments = new ArrayList<>();
 
     //图片和文字集合

@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,12 +30,13 @@ import com.wenwu.pm.mine.adapter.MyPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MyFragment extends Fragment {
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private List<Fragment> fragmentList;
-    private Button btn_edit;
     private Button btn_setting;
 
 
@@ -52,15 +55,6 @@ public class MyFragment extends Fragment {
         tabLayout = view.findViewById(R.id.tab_layoutMy);
         tabLayout.setupWithViewPager(viewPager);
 
-        btn_edit = view.findViewById(R.id.edit_myInfo);
-        btn_edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(),"编辑资料",Toast.LENGTH_SHORT).show();
-                v.getContext().startActivity(new Intent(v.getContext(), EditPersonalInfoActivity.class));
-
-            }
-        });
 
         btn_setting = view.findViewById(R.id.setting);
         btn_setting.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +62,14 @@ public class MyFragment extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getContext(),"编辑资料",Toast.LENGTH_SHORT).show();
                 v.getContext().startActivity(new Intent(v.getContext(), SettingActivity.class));
+            }
+        });
 
+        CircleImageView imageView = view.findViewById(R.id.mine_photo);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),EditPersonalInfoActivity.class));
             }
         });
 

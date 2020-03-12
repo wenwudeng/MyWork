@@ -5,35 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/my_edit_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:text="返回" />
+        app:navigationIcon="@mipmap/arrow_left"
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
             android:text="个人资料"
-            android:gravity="center"
-            android:layout_gravity="center_vertical"
-            android:textSize="20dp" />
+            android:textStyle="bold"
+            android:layout_gravity="center" />
+
 
         <Button
-            android:id="@+id/my_edit_save"
-            android:layout_marginStart="80dp"
+            android:id="@+id/mine_save_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:text="保存" />
-    </LinearLayout>
+            android:layout_gravity="right"
+            android:text="保存"
+            android:background="@null" />
+    </androidx.appcompat.widget.Toolbar>
+
 
     <View
         android:layout_width="match_parent"
@@ -44,7 +38,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -56,13 +50,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="30dp"
                 android:text="头像" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/my_edit_photo"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:src="@drawable/img"
                 android:layout_marginStart="70dp"
                 app:civ_border_width="2dp"
@@ -86,16 +80,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:text="昵称" />
 
             <EditText
                 android:id="@+id/my_edit_id"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
                 android:background="@null"
                 android:text="留白"
+                android:layout_gravity="center"
                 android:layout_marginStart="70dp"
                 />
 
@@ -214,6 +209,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="留下你的简介吧"
+            android:textSize="15dp"
             android:background="@null"
             android:maxLength="15"
             android:layout_marginStart="70dp"
@@ -229,53 +225,59 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:text="等级" />
+            android:layout_gravity="center"
+            android:text="宠物" />
 
         <TextView
             android:id="@+id/my_edit_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="初级狗民"
+            android:text="狗"
+            android:layout_gravity="center"
             android:layout_marginStart="70dp"
-            android:layout_marginTop="20dp" />
+         />
 
     </LinearLayout>
 
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="10dp"
         android:layout_marginTop="10dp"
         android:background="@color/gray" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
             android:text="注册时间" />
 
         <TextView
             android:id="@+id/my_edit_register_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="2020年1月1日"
-            android:layout_marginStart="43dp"
-            android:layout_marginTop="20dp" />
+            android:layout_marginStart="43dp" />
 
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray" />
 
 </LinearLayout>

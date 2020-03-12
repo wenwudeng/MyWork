@@ -30,13 +30,13 @@ public class ForgetActivity extends AppCompatActivity {
             }
         });
 
-        backButton = findViewById(R.id.back2);
+       /* backButton = findViewById(R.id.back2);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
-        });
+        });*/
 
     }
 }

@@ -51,7 +51,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp">
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp">
 
         <EditText
             android:id="@+id/question_title"
@@ -91,7 +92,7 @@
         android:background="@color/gray" />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="40dp">
 
         <Button
             android:layout_marginStart="10dp"

@@ -9,11 +9,6 @@
         <!--<item name="android:windowTranslucentStatus">true</item>-->
     </style>
 
-    <!--editText自定义下划线-->
-    <style name="MyEditText" parent="Theme.AppCompat.Light">
-        <item name="colorControlNormal">#aaaaaa</item>
-        <item name="colorControlActivated">#aaaaaa</item>
-    </style>
 
     <style name="MyTablayoutstyle" parent="Base.Widget.Design.TabLayout">
         <item name="tabBackground">@color/white</item>

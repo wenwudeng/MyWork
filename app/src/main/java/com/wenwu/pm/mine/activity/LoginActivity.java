@@ -40,14 +40,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        cancelToLogin = findViewById(R.id.cancel);
+        /*cancelToLogin = findViewById(R.id.cancel);
         cancelToLogin.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                finish();
             }
-        });
+        });*/
 
         forgetPassword = findViewById(R.id.forgotPassword);
         forgetPassword.setOnClickListener(new View.OnClickListener() {

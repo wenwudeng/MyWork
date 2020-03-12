@@ -26,12 +26,12 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        backButton = findViewById(R.id.back);
+/*        backButton = findViewById(R.id.back);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
-        });
+        });*/
     }
 }
