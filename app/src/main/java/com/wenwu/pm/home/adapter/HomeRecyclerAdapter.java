@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -17,12 +18,15 @@ import com.wenwu.pm.home.bean.UserEditInfo;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * RecyclerView适配器
  */
 public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapter.ViewHolder> {
 
     private List<UserEditInfo> userEditInfoList;
+    private  UserEditInfo userEditInfo;
 
 
     public HomeRecyclerAdapter(List<UserEditInfo> userEditInfo) {
@@ -35,17 +39,18 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
         View userEditView;
         ImageView userUploadImg;
         TextView userUploadText;
-        ImageView userPhoto;
+        CircleImageView userPhoto;
         TextView userId;
+        CardView cardView;
         Button userFavourButton;
         TextView userFavourCount;
 
         private ViewHolder( View itemView) {
             super(itemView);
-            userEditView = itemView;
+            cardView = (CardView) itemView;
             userUploadImg = itemView.findViewById(R.id.userUploadImg);
             userUploadText = itemView.findViewById(R.id.userUpLoadText);
-            userPhoto = itemView.findViewById(R.id.user_Photo);
+            userPhoto = itemView.findViewById(R.id.user_photo);
             userId = itemView.findViewById(R.id.user_id);
             userFavourButton = itemView.findViewById(R.id.user_favourButton);
             userFavourCount =  itemView.findViewById(R.id.user_favourCount);
@@ -65,7 +70,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_item, parent, false);
         //将获得的concern_item视图实例作为ViewHolder获取实例的参数
         final ViewHolder holder = new ViewHolder(view);
-        holder.userEditView.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
@@ -78,12 +83,18 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                UserEditInfo userEditInfo = userEditInfoList.get(position);
+                userEditInfo = userEditInfoList.get(position);
                 if (v.getId() == R.id.user_favourButton) {
                    int count =  userEditInfo.getAcceptFavourCount();
-                    userEditInfo.setAcceptFavourCount(count+1);
-                    holder.userFavourButton.setText("♥");
+                    holder.userFavourButton.setBackgroundResource(R.mipmap.icon_upvoted);
                 }
+            }
+        });
+
+        holder.userFavourCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.userFavourCount.setText(Integer.toString(userEditInfo.getAcceptFavourCount()+1));
             }
         });
         return holder;
@@ -98,13 +109,12 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         UserEditInfo userEditInfo = userEditInfoList.get(position);
+        int count = userEditInfo.getAcceptFavourCount();
         holder.userUploadImg.setImageResource(userEditInfo.getSendImageId());
         holder.userUploadText.setText(userEditInfo.getContent());
         holder.userPhoto.setImageResource(userEditInfo.getUserPhoto());
         holder.userId.setText(userEditInfo.getUserId());
-        holder.userFavourButton.setText("♡");
-        holder.userFavourCount.setText(Integer.toString(userEditInfo.getAcceptFavourCount()));
-
+        holder.userFavourCount.setText(Integer.toString(count));
     }
 
     @Override

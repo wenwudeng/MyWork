@@ -101,10 +101,8 @@ public class MessageFragment extends Fragment {
         return super.getContext();
     }
 
-    private void init() {
-        for (int i = 0; i < 2; i++) {
+    public void init() {
             MessageListItem listItem = new MessageListItem(R.drawable.ic_invite_more, "系统消息", "喜大普奔TT,您的用户等级从Lv1升级到Lv2!我的世界世界", "15分钟前");
             listItems.add(listItem);
-        }
     }
 }
