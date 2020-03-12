@@ -9,14 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".mine.activity.DrawerActivity"></activity>
+        <activity android:name=".publish.activity.LongArticleActivity"></activity>
+        <activity android:name=".mine.activity.DrawerActivity" />
         <activity android:name=".publish.activity.QuestionActivity" />
         <activity android:name=".message.activity.MsgReViewActivity" />
         <activity android:name=".message.activity.MsgCollectPraiseActivity" />
         <activity android:name=".message.activity.MsgAddNewConcernActivity" />
         <activity android:name=".mine.activity.SettingActivity" />
         <activity android:name=".mine.activity.EditPersonalInfoActivity" />
-        <activity android:name=".home.activity.MainActivity">
+        <activity android:name=".mine.activity.SetNewPasswordActivity" />
+        <activity android:name=".mine.activity.ForgetActivity" />
+        <activity android:name=".mine.activity.RegisterActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -24,10 +28,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mine.activity.SetNewPasswordActivity" />
-        <activity android:name=".mine.activity.ForgetActivity" />
-        <activity android:name=".mine.activity.RegisterActivity" />
-        <activity android:name=".home.activity.NavigationActivity" />
         <activity android:name=".mine.activity.LoginActivity" />
         <activity android:name=".message.activity.MsgActivity" />
     </application>

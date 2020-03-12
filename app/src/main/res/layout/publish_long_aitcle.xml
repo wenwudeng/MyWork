@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".publish.activity.LongArticleActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/cancel_article"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:text="取消"
+            android:layout_gravity="left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发帖"
+            android:layout_gravity="center" />
+
+        <Button
+            android:id="@+id/publish_article"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:text="发表"
+            android:layout_gravity="right" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray" />
+
+    <EditText
+        android:id="@+id/article_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="添加标题"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:background="@null"
+        android:maxLength="25"
+        android:maxLines="2"
+        android:textCursorDrawable="@drawable/self_edit_cursor" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray" />
+
+    <EditText
+        android:id="@+id/article_content"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:autofillHints=""
+        android:paddingBottom="350dp"
+        android:background="@null"
+        android:textCursorDrawable="@drawable/self_edit_cursor"
+        android:maxLines="10"
+        android:hint="请描述你的内容" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/article_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableLeft="@mipmap/icon_img"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="-20dp" />
+
+        <Button
+            android:id="@+id/article_content_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/article_img"
+            android:layout_marginEnd="20dp"
+            android:drawableRight="@mipmap/reply_txt_bold_normal"
+            android:background="@null" />
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>
