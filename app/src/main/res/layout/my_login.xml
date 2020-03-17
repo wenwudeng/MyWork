@@ -52,7 +52,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/loginName"
+            android:id="@+id/loginPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"

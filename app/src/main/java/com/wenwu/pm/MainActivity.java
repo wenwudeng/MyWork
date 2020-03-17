@@ -63,11 +63,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onTabClickEvent(View view, int position) {
                         if (position == 4) {
-                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            /*Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                             startActivity(intent);
                             Toast.makeText(MainActivity.this, "请先登录", Toast.LENGTH_SHORT).show();
                             //return true则拦截事件、不进行页面切换
-                            return false;
+                            return false;*/
                         } else if (position == 2) {
                             //跳转页面
                             // showMunu();

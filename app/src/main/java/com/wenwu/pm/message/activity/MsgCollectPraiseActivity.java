@@ -48,10 +48,12 @@ public class MsgCollectPraiseActivity extends AppCompatActivity {
     }
 
     private void init() {
-        for (int i = 0; i < 16; i++) {
-            MsgCollectPraise collect = new MsgCollectPraise(R.mipmap.btn_comment, "武汉加油", "一周前", R.drawable.timg);
-            list.add(collect);
-        }
+        MsgCollectPraise collect = new MsgCollectPraise(R.drawable.li, "李易峰", "一周前", R.drawable.timg);
+        list.add(collect);
+
+        MsgCollectPraise collect1 = new MsgCollectPraise(R.drawable.chen, "陈瑶", "一周前", R.drawable.timg);
+        list.add(collect1);
+
 
     }
 }

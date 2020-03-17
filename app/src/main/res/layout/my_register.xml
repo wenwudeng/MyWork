@@ -120,7 +120,7 @@
             android:background="@null"
             android:ems="10"
             android:hint="6-16位数字和字母的组合"
-            android:inputType="number"
+            android:inputType="textPassword"
             android:textColorHint="#cccccc"
             android:textCursorDrawable="@drawable/self_edit_cursor"
             android:textSize="15dp" />

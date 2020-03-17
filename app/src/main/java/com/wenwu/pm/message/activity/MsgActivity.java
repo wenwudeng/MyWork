@@ -70,11 +70,21 @@ public class MsgActivity extends AppCompatActivity {
     }
 
         private void initMsg () {
-            Msg msg1 = new Msg("Hello guy!", Msg.TYPE_RECEIVED, R.drawable.timg);
+            Msg msg1 = new Msg("你好吗？", Msg.TYPE_RECEIVED, R.drawable.timg);
             msgList.add(msg1);
 
-            Msg msg2 = new Msg("Hello,who is that?", Msg.TYPE_SEND, R.drawable.img);
+            Msg msg2 = new Msg("我一点也不好", Msg.TYPE_SEND, R.drawable.img);
             msgList.add(msg2);
+
+            Msg msg3 = new Msg("为什么？", Msg.TYPE_RECEIVED, R.drawable.timg);
+            msgList.add(msg3);
+
+            Msg msg4 = new Msg("因为毕业设计", Msg.TYPE_SEND, R.drawable.img);
+            msgList.add(msg4);
+
+            Msg msg5 = new Msg("......", Msg.TYPE_RECEIVED, R.drawable.timg);
+            msgList.add(msg5);
+
 
         /*Msg msg3 = new Msg("This is Tom.Nice talking to you", Msg.TYPE_RECEIVED);
         msgList.add(msg3);*/

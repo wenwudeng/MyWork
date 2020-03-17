@@ -36,9 +36,9 @@ public class HomeDynamicFragment extends Fragment {
 
     public void init() {
         for (int i = 0; i < 8; i++) {
-            UserEditInfo userEditInfo = new UserEditInfo("抗战疫情", R.mipmap.pic3, "中国加油,武汉加油!", "梦想", R.mipmap.pic4,100);
+            UserEditInfo userEditInfo = new UserEditInfo("抗战疫情", R.drawable.cat, "中国加油,武汉加油!", "喵星人", R.mipmap.pic4,100);
             userEditInfoList.add(userEditInfo);
-            UserEditInfo userEditInfo1 = new UserEditInfo("抗战疫情", R.mipmap.pic1, "中国加油,武汉加油!", "梦想", R.mipmap.pic2,100);
+            UserEditInfo userEditInfo1 = new UserEditInfo("抗战疫情", R.drawable.chen, "中国加油,武汉加油!", "陈瑶", R.mipmap.pic2,100);
             userEditInfoList.add(userEditInfo1);
         }
     }

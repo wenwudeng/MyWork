@@ -64,9 +64,13 @@ public class MsgAddNewConcernActivity extends AppCompatActivity {
     }
 
     private void init() {
-        for (int i = 0; i < 14; i++) {
-            MsgAddNewConcern concern = new MsgAddNewConcern(R.drawable.img, "令狐冲", "3天前");
-            list.add(concern);
-        }
+        MsgAddNewConcern concern = new MsgAddNewConcern(R.drawable.img, "蒙眼丽莎", "3天前");
+        list.add(concern);
+
+        MsgAddNewConcern concern1 = new MsgAddNewConcern(R.drawable.li, "李易峰", "3天前");
+        list.add(concern1);
+
+        MsgAddNewConcern concern2 = new MsgAddNewConcern(R.drawable.chen, "陈瑶", "3天前");
+        list.add(concern2);
     }
 }
