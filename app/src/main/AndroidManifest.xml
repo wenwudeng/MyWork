@@ -16,11 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-       <!-- <activity android:name=".test.OkHttpTestActivity"/>-->
-
-        <activity android:name=".test.HttpConnectionActivity">
-
-        </activity>
+        <activity android:name=".mine.activity.FansActivity"></activity>
+        <activity android:name=".mine.activity.ConcernActivity" /> <!-- <activity android:name=".test.OkHttpTestActivity"/> -->
+        <activity android:name=".test.HttpConnectionActivity" />
         <activity android:name=".publish.activity.LongArticleActivity" />
         <activity android:name=".mine.activity.DrawerActivity" />
         <activity android:name=".publish.activity.QuestionActivity" />
@@ -33,16 +31,14 @@
         <activity android:name=".mine.activity.ForgetActivity" />
         <activity android:name=".mine.activity.RegisterActivity" />
         <activity android:name=".MainActivity">
-
-        </activity>
-
-        <activity android:name=".mine.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".mine.activity.LoginActivity" />
         <activity android:name=".message.activity.MsgActivity" />
     </application>
 

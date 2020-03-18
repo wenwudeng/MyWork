@@ -15,6 +15,11 @@ public class MsgAddNewConcern {
         this.userTime = userTime;
     }
 
+    public MsgAddNewConcern(int userImage, String userId) {
+        this.userImage = userImage;
+        this.userId = userId;
+    }
+
     public int getUserImage() {
 
         return userImage;

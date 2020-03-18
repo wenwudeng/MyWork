@@ -90,6 +90,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@null"
                 android:text="留白"
+                android:textSize="15dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="70dp"
                 />
@@ -165,23 +166,17 @@
             android:layout_marginTop="20dp"
             android:text="城市" />
 
-        <TextView
+        <EditText
             android:id="@+id/my_edit_province"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="贵州省"
+            android:text="贵州省 铜仁市"
+            android:textSize="15dp"
+            android:background="@null"
             android:layout_marginStart="70dp"
             android:layout_marginTop="20dp"
             />
 
-        <TextView
-            android:id="@+id/my_edit_city"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="铜仁市"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            />
 
     </LinearLayout>
 
@@ -236,13 +231,15 @@
             android:layout_gravity="center"
             android:text="宠物" />
 
-        <TextView
-            android:id="@+id/my_edit_level"
+        <EditText
+            android:id="@+id/my_edit_pet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="狗"
             android:layout_gravity="center"
+            android:textSize="15dp"
+            android:background="@null"
             android:layout_marginStart="70dp"
+            android:text="狗"
          />
 
     </LinearLayout>

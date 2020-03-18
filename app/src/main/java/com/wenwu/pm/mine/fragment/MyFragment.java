@@ -7,37 +7,44 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
-import com.next.easynavigation.utils.NavigationUtil;
-import com.next.easynavigation.view.EasyNavigationBar;
 import com.wenwu.pm.R;
+import com.wenwu.pm.message.activity.MsgCollectPraiseActivity;
+import com.wenwu.pm.mine.activity.ConcernActivity;
 import com.wenwu.pm.mine.activity.EditPersonalInfoActivity;
+import com.wenwu.pm.mine.activity.FansActivity;
 import com.wenwu.pm.mine.activity.SettingActivity;
 import com.wenwu.pm.mine.adapter.MyPagerAdapter;
 
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MyFragment extends Fragment {
+public class MyFragment extends Fragment implements View.OnClickListener{
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private List<Fragment> fragmentList;
+
     private Button btn_setting;
+
+    private TextView tex_concern;
+    private TextView tex_fans;
+    private TextView tex_collect;
 
 
     @Nullable
@@ -55,26 +62,47 @@ public class MyFragment extends Fragment {
         tabLayout = view.findViewById(R.id.tab_layoutMy);
         tabLayout.setupWithViewPager(viewPager);
 
+        tex_concern = view.findViewById(R.id.my_concern);
+        tex_concern.setOnClickListener(this);
+
+        tex_fans = view.findViewById(R.id.my_fans);
+        tex_fans.setOnClickListener(this);
+
+        tex_collect = view.findViewById(R.id.my_collect);
+        tex_collect.setOnClickListener(this);
 
         btn_setting = view.findViewById(R.id.setting);
-        btn_setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(),"编辑资料",Toast.LENGTH_SHORT).show();
-                v.getContext().startActivity(new Intent(v.getContext(), SettingActivity.class));
-            }
-        });
+        btn_setting.setOnClickListener(this);
 
         CircleImageView imageView = view.findViewById(R.id.mine_photo);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(),EditPersonalInfoActivity.class));
-            }
-        });
-
+        imageView.setOnClickListener(this);
 
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.setting:
+                startActivity(new Intent(v.getContext(), SettingActivity.class));
+                break;
+            case R.id.mine_photo:
+                startActivity(new Intent(getActivity(), EditPersonalInfoActivity.class));
+                break;
+            case R.id.my_concern:
+                Toast.makeText(v.getContext(),"关注",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(v.getContext(), ConcernActivity.class));
+                break;
+            case R.id.my_fans:
+                Toast.makeText(v.getContext(),"粉丝",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(v.getContext(), FansActivity.class));
+                break;
+            case R.id.my_collect:
+                Toast.makeText(v.getContext(),"收藏",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(v.getContext(), MsgCollectPraiseActivity.class));
+                break;
+        }
+    }
+
 
 
     /**
@@ -87,7 +115,9 @@ public class MyFragment extends Fragment {
         fragmentList.add(new MyQuestionFragment());
         fragmentList.add(new MyCollectFragment());
         fragmentList.add(new MyReviewFragment());
-        fragmentList.add(new MyPraiseFragment());
+        //fragmentList.add(new MyPraiseFragment());
         return fragmentList;
     }
+
+
 }

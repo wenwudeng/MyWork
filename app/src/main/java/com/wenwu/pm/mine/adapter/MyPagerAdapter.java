@@ -46,8 +46,6 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
                 return "收藏";
             case 3:
                 return "评论";
-            case 4:
-                return "赞过";
         }
         return null;
     }
