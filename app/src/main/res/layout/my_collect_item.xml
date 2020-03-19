@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="80dp"
     android:layout_margin="10dp"
     app:cardCornerRadius="4dp">
 
@@ -38,7 +38,6 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:layout_marginTop="20dp"
             android:layout_height="wrap_content">
@@ -63,8 +62,9 @@
 
             <Button
                 android:id="@+id/my_collect_recommend_button"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="3dp"
                 android:layout_toLeftOf="@id/my_collect_review_count"
                 android:background="@mipmap/icon_comment_sm"
                 />
@@ -82,8 +82,9 @@
             <Button
                 android:id="@+id/my_collect_favour_button"
                 android:layout_marginStart="30dp"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="3dp"
                 android:layout_toLeftOf="@id/my_collect_favour_count"
                 android:background="@mipmap/icon_upvote"
                 />
@@ -96,9 +97,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginStart="5dp"
                 android:text="0" />
-
-            />
-
 
         </RelativeLayout>
 
