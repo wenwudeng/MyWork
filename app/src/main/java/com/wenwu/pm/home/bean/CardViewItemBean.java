@@ -3,7 +3,7 @@ package com.wenwu.pm.home.bean;
 /**
  * 此类用于用户发布信息bean
  */
-public class UserEditInfo {
+public class CardViewItemBean {
     private String title;
     private int sendImageId;
     private String content;
@@ -11,7 +11,7 @@ public class UserEditInfo {
     private int userPhoto;
     private int acceptFavourCount ;
 
-    public UserEditInfo(String title, int sendImage, String content, String userId, int userPhoto,int acceptFavourCount) {
+    public CardViewItemBean(String title, int sendImage, String content, String userId, int userPhoto, int acceptFavourCount) {
         this.title = title;
         this.sendImageId = sendImage;
         this.content = content;

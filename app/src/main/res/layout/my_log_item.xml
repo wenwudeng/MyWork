@@ -20,7 +20,7 @@
             android:src="@drawable/li" />
 
         <TextView
-            android:id="@+id/my_log_title"
+            android:id="@+id/my_log_title_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -38,7 +38,7 @@
             android:layout_marginStart="10dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/user_photo"
+                android:id="@+id/my_logo_user_photo"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
@@ -47,7 +47,7 @@
                 app:civ_border_color="#0000" />
 
             <TextView
-                android:id="@+id/user_id"
+                android:id="@+id/my_log_user_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -66,7 +66,7 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/user_favourButton"
+                        android:id="@+id/my_log_favour"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
@@ -74,10 +74,11 @@
                         />
 
                     <TextView
-                        android:id="@+id/user_favourCount"
+                        android:id="@+id/my_log_favour_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:drawablePadding="2dp"
                         android:layout_marginStart="5dp"
                         android:text="1000" />
                 </LinearLayout>

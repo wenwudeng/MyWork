@@ -17,14 +17,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.wenwu.pm.R;
 import com.wenwu.pm.home.adapter.HomeRecyclerAdapter;
-import com.wenwu.pm.home.bean.UserEditInfo;
+import com.wenwu.pm.home.bean.CardViewItemBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeRecommendFragment extends Fragment {
     //用于用户头像
-    private List<UserEditInfo> userEditInfoList = new ArrayList<>();
+    private List<CardViewItemBean> cardViewItemBeanList = new ArrayList<>();
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
@@ -35,10 +35,10 @@ public class HomeRecommendFragment extends Fragment {
 
     public void init() {
         for (int i = 0; i < 8; i++) {
-            UserEditInfo userEditInfo = new UserEditInfo("抗战疫情", R.drawable.dog, "中国加油,武汉加油!", "梦想", R.mipmap.pic4,100);
-            userEditInfoList.add(userEditInfo);
-            UserEditInfo userEditInfo1 = new UserEditInfo("抗战疫情", R.drawable.dog1, "中国加油,武汉加油!", "梦想", R.mipmap.pic2,100);
-            userEditInfoList.add(userEditInfo1);
+            CardViewItemBean cardViewItemBean = new CardViewItemBean("抗战疫情", R.drawable.dog, "中国加油,武汉加油!", "梦想", R.mipmap.pic4,100);
+            cardViewItemBeanList.add(cardViewItemBean);
+            CardViewItemBean cardViewItemBean1 = new CardViewItemBean("抗战疫情", R.drawable.dog1, "中国加油,武汉加油!", "梦想", R.mipmap.pic2,100);
+            cardViewItemBeanList.add(cardViewItemBean1);
         }
     }
 
@@ -49,7 +49,7 @@ public class HomeRecommendFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view1);
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        HomeRecyclerAdapter userEditIRecyclerAdapter = new HomeRecyclerAdapter(userEditInfoList);
+        HomeRecyclerAdapter userEditIRecyclerAdapter = new HomeRecyclerAdapter(cardViewItemBeanList);
         recyclerView.setAdapter(userEditIRecyclerAdapter);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_recommend);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

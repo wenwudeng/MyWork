@@ -1,4 +1,4 @@
-package com.wenwu.pm.home.adapter;
+package com.wenwu.pm.mine.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.wenwu.pm.R;
 import com.wenwu.pm.home.bean.CardViewItemBean;
 
@@ -21,38 +20,39 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * RecyclerView适配器
+ * @author:wenwudeng
+ * @date:9:41 AM 3/19/2020
  */
-public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapter.ViewHolder> {
+public class LogRecyclerAdapter extends RecyclerView.Adapter<LogRecyclerAdapter.ViewHolder>{
 
     private List<CardViewItemBean> cardViewItemBeanList;
-    private CardViewItemBean cardViewItemBean ;
+    private CardViewItemBean cardViewItemBean;
 
 
-    public HomeRecyclerAdapter(List<CardViewItemBean> cardViewItemBean) {
+    public LogRecyclerAdapter(List<CardViewItemBean> cardViewItemBean) {
         this.cardViewItemBeanList = cardViewItemBean;
     }
 
 
-   // ViewHolder对控件实例进行缓存,避免每次都去每次都去通过id去获得控件实例句柄.*/
+    // ViewHolder对控件实例进行缓存,避免每次都去每次都去通过id去获得控件实例句柄.*/
     static  class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView userUploadImg;
-        TextView userUploadText;
-        CircleImageView userPhoto;
-        TextView userId;
         CardView cardView;
-        Button userFavourButton;
-        TextView userFavourCount;
+        ImageView showImg;
+        TextView title_content;
+        CircleImageView photo;
+        TextView userName;
+        Button favourButton;
+        TextView favourCount;
 
         private ViewHolder( View itemView) {
             super(itemView);
             cardView = (CardView) itemView;
-            userUploadImg = itemView.findViewById(R.id.userUploadImg);
-            userUploadText = itemView.findViewById(R.id.userUpLoadText);
-            userPhoto = itemView.findViewById(R.id.user_photo);
-            userId = itemView.findViewById(R.id.user_id);
-            userFavourButton = itemView.findViewById(R.id.user_favourButton);
-            userFavourCount =  itemView.findViewById(R.id.user_favourCount);
+            showImg = itemView.findViewById(R.id.my_log_show_img);
+            title_content = itemView.findViewById(R.id.my_log_title_content);
+            photo = itemView.findViewById(R.id.my_logo_user_photo);
+            userName = itemView.findViewById(R.id.my_log_user_id);
+            favourButton = itemView.findViewById(R.id.my_log_favour);
+            favourCount =  itemView.findViewById(R.id.my_log_favour_count);
         }
     }
 
@@ -64,11 +64,11 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
      */
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LogRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //获得R.layout.concern_item视图view实例
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_log_item, parent, false);
         //将获得的concern_item视图实例作为ViewHolder获取实例的参数
-        final ViewHolder holder = new ViewHolder(view);
+        final LogRecyclerAdapter.ViewHolder holder = new LogRecyclerAdapter.ViewHolder(view);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,22 +78,22 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
             }
         });
 
-        holder.userFavourButton.setOnClickListener(new View.OnClickListener(){
+        holder.favourButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 cardViewItemBean = cardViewItemBeanList.get(position);
                 if (v.getId() == R.id.user_favourButton) {
-                   int count =  cardViewItemBean.getAcceptFavourCount();
-                    holder.userFavourButton.setBackgroundResource(R.mipmap.icon_upvoted);
+                    int count =  cardViewItemBean.getAcceptFavourCount();
+                    holder.favourButton.setBackgroundResource(R.mipmap.icon_upvoted);
                 }
             }
         });
 
-        holder.userFavourCount.setOnClickListener(new View.OnClickListener() {
+        holder.favourCount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.userFavourCount.setText(Integer.toString(cardViewItemBean.getAcceptFavourCount()+1));
+                holder.favourCount.setText("23");
             }
         });
         return holder;
@@ -106,20 +106,19 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
      * @param position 根据position获取各个实例
      */
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull LogRecyclerAdapter.ViewHolder holder, int position) {
         CardViewItemBean cardViewItemBean = cardViewItemBeanList.get(position);
         int count = cardViewItemBean.getAcceptFavourCount();
-        holder.userUploadImg.setImageResource(cardViewItemBean.getSendImageId());
-        holder.userUploadText.setText(cardViewItemBean.getContent());
-        holder.userPhoto.setImageResource(cardViewItemBean.getUserPhoto());
-        holder.userId.setText(cardViewItemBean.getUserId());
-        holder.userFavourCount.setText(Integer.toString(count));
+        holder.showImg.setImageResource(cardViewItemBean.getSendImageId());
+        holder.title_content.setText(cardViewItemBean.getContent());
+        holder.photo.setImageResource(cardViewItemBean.getUserPhoto());
+        holder.userName.setText(cardViewItemBean.getUserId());
+        holder.favourCount.setText(Integer.toString(count));
     }
 
     @Override
     public int getItemCount() {
         return cardViewItemBeanList.size();
     }
-
 
 }

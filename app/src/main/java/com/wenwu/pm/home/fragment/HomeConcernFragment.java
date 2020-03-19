@@ -12,13 +12,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
 import com.wenwu.pm.R;
 import com.wenwu.pm.home.adapter.HomeRecyclerAdapter;
-import com.wenwu.pm.home.bean.UserEditInfo;
+import com.wenwu.pm.home.bean.CardViewItemBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +28,7 @@ import java.util.List;
 public class HomeConcernFragment extends Fragment {
 
     //用于用户头像
-    private List<UserEditInfo> userEditInfoList = new ArrayList<>();
+    private List<CardViewItemBean> cardViewItemBeanList = new ArrayList<>();
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -44,10 +43,10 @@ public class HomeConcernFragment extends Fragment {
      */
     public void init() {
         for (int i = 0; i < 8; i++) {
-            UserEditInfo userEditInfo = new UserEditInfo("抗战疫情", R.drawable.li, "中国加油,武汉加油!", "梦想", R.mipmap.pic2,100);
-            userEditInfoList.add(userEditInfo);
-            UserEditInfo userEditInfo1 = new UserEditInfo("抗战疫情", R.drawable.chen, "中国加油,武汉加油!", "梦想", R.mipmap.pic4,100);
-            userEditInfoList.add(userEditInfo1);
+            CardViewItemBean cardViewItemBean = new CardViewItemBean("抗战疫情", R.drawable.li, "中国加油,武汉加油!", "梦想", R.mipmap.pic2,100);
+            cardViewItemBeanList.add(cardViewItemBean);
+            CardViewItemBean cardViewItemBean1 = new CardViewItemBean("抗战疫情", R.drawable.chen, "中国加油,武汉加油!", "梦想", R.mipmap.pic4,100);
+            cardViewItemBeanList.add(cardViewItemBean1);
         }
     }
 
@@ -58,7 +57,7 @@ public class HomeConcernFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         GridLayoutManager layoutManager = new GridLayoutManager(view.getContext(), 2);
         recyclerView.setLayoutManager(layoutManager);
-        HomeRecyclerAdapter userEditIRecyclerAdapter = new HomeRecyclerAdapter(userEditInfoList);
+        HomeRecyclerAdapter userEditIRecyclerAdapter = new HomeRecyclerAdapter(cardViewItemBeanList);
         recyclerView.setAdapter(userEditIRecyclerAdapter);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_concern);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
