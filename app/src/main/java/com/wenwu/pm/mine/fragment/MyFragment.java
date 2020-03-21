@@ -1,15 +1,15 @@
 package com.wenwu.pm.mine.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,15 +19,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.wenwu.pm.R;
+import com.wenwu.pm.goson.ShowReturnJson;
 import com.wenwu.pm.message.activity.MsgCollectPraiseActivity;
 import com.wenwu.pm.mine.activity.ConcernActivity;
 import com.wenwu.pm.mine.activity.EditPersonalInfoActivity;
 import com.wenwu.pm.mine.activity.FansActivity;
 import com.wenwu.pm.mine.activity.SettingActivity;
 import com.wenwu.pm.mine.adapter.MyPagerAdapter;
-
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +44,9 @@ public class MyFragment extends Fragment implements View.OnClickListener{
     private TextView tex_fans;
     private TextView tex_collect;
 
+    public interface callbackValue{
+        public void sendJson(ShowReturnJson json);
+    }
 
     @Nullable
     @Override
@@ -74,7 +75,7 @@ public class MyFragment extends Fragment implements View.OnClickListener{
         btn_setting = view.findViewById(R.id.setting);
         btn_setting.setOnClickListener(this);
 
-        CircleImageView imageView = view.findViewById(R.id.mine_photo);
+        CircleImageView imageView = view.findViewById(R.id.my_user_photo);
         imageView.setOnClickListener(this);
 
     }
@@ -85,17 +86,22 @@ public class MyFragment extends Fragment implements View.OnClickListener{
             case R.id.setting:
                 startActivity(new Intent(v.getContext(), SettingActivity.class));
                 break;
-            case R.id.mine_photo:
-                startActivity(new Intent(getActivity(), EditPersonalInfoActivity.class));
+
+            case R.id.my_user_photo:
+                Intent intent = new Intent(getActivity(), EditPersonalInfoActivity.class);
+                startActivity(intent);
                 break;
+
             case R.id.my_concern:
                 Toast.makeText(v.getContext(),"关注",Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(v.getContext(), ConcernActivity.class));
                 break;
+
             case R.id.my_fans:
                 Toast.makeText(v.getContext(),"粉丝",Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(v.getContext(), FansActivity.class));
                 break;
+
             case R.id.my_collect:
                 Toast.makeText(v.getContext(),"收藏",Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(v.getContext(), MsgCollectPraiseActivity.class));
@@ -104,11 +110,11 @@ public class MyFragment extends Fragment implements View.OnClickListener{
     }
 
 
-
     /**
      * 初始化ListFragment,将三个Fragment加入list
      * @return List<Fragment>集合
      */
+
     public List<Fragment> initViewPager() {
         fragmentList = new ArrayList<>();
         fragmentList.add(new MyLogFragment());
@@ -118,6 +124,5 @@ public class MyFragment extends Fragment implements View.OnClickListener{
         //fragmentList.add(new MyPraiseFragment());
         return fragmentList;
     }
-
 
 }

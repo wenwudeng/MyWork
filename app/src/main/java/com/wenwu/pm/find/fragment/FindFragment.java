@@ -36,7 +36,9 @@ public class FindFragment extends Fragment {
         viewPager.setAdapter(findPagerAdapter);
 
         tabLayout = view.findViewById(R.id.tab_layoutFind);
+
         tabLayout.setupWithViewPager(viewPager);
+
 
     }
 

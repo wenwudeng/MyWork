@@ -59,8 +59,8 @@
             android:layout_marginRight="18dp"
             android:background="@null"
             android:ems="10"
-            android:hint="手机号/用户名/邮箱"
-            android:inputType="textPersonName"
+            android:hint="手机号/邮箱"
+            android:inputType="text"
             android:textColorHint="#cccccc"
             android:textCursorDrawable="@drawable/self_edit_cursor"
             android:textSize="15dp" />

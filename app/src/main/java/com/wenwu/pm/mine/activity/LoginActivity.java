@@ -3,7 +3,6 @@ package com.wenwu.pm.mine.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,9 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.wenwu.pm.MainActivity;
 import com.wenwu.pm.R;
-import com.wenwu.pm.goson.Msg;
-import com.wenwu.pm.modle.User;
-import com.wenwu.pm.modle.UserImpl;
+import com.wenwu.pm.goson.LRReturnJson;
+
 import com.wenwu.pm.utils.OkHttpUtil;
 
 import java.io.IOException;
@@ -78,13 +76,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+
     /*实现登录*/
-    public void loginWithOkHttp(String mapping, String account, String password) {
+    public void loginWithOkHttp(String mapping, final String account, String password) {
         OkHttpUtil.loginWithOkHttp(mapping, account, password, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 //在这里对异常情况进行处理
-
+                e.printStackTrace();
             }
 
             @Override
@@ -93,15 +92,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 final String responseData = response.body().string();
                 System.out.println("===="+responseData);
-                Msg msg = new Gson().fromJson(responseData, Msg.class);
-                if (msg.getCode().equals("200")) {
+                LRReturnJson LRReturnJson = new Gson().fromJson(responseData, LRReturnJson.class);
+
+                if (LRReturnJson.getCode().equals("3000")) {
                     Looper.prepare();
-                    Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    Toast.makeText(LoginActivity.this,LRReturnJson.getMsg(),Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("account", account);
+                    startActivity(intent);
                     Looper.loop();
                 }else {
                     Looper.prepare();
-                    Toast.makeText(LoginActivity.this,"登录失败",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,LRReturnJson.getMsg(),Toast.LENGTH_SHORT).show();
                     Looper.loop();
                 }
             }

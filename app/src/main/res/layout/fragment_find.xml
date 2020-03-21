@@ -5,10 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="wrap_content"
@@ -19,116 +18,129 @@
             android:textSize="15dp"
             android:textStyle="bold" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray" />
+    </androidx.appcompat.widget.Toolbar>
 
-        <TableLayout
-            android:id="@+id/tableLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
 
-            <TableRow
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="snap|scroll|enterAlways">
 
-                <Button
-                    android:id="@+id/sign_inButton"
-                    android:layout_width="wrap_content"
+
+                <TableLayout
+                    android:id="@+id/tableLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@drawable/ic_btn_attendance"
-                    android:text="签到"
-                    android:drawablePadding="5dp"
-                    android:background="@null" />
+                    android:layout_marginTop="8dp">
 
-                <Button
-                    android:id="@+id/useful_discussion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:drawableTop="@drawable/ic_btn_topic"
-                    android:background="@null"
-                    android:text="讨论"
-                    android:drawablePadding="5dp" />
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                <Button
-                    android:id="@+id/isEnableEat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableTop="@drawable/ic_btn_eat"
-                    android:layout_marginStart="3dp"
-                    android:drawablePadding="5dp"
-                    android:background="@null"
-                    android:text="食物" />
+                        <Button
+                            android:id="@+id/sign_inButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/ic_btn_attendance"
+                            android:text="签到"
+                            android:drawablePadding="5dp"
+                            android:background="@null" />
 
-                <Button
-                    android:id="@+id/alarm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableTop="@drawable/ic_btn_reminder"
-                    android:drawablePadding="5dp"
-                    android:layout_marginStart="3dp"
-                    android:background="@null"
-                    android:text="提醒" />
-            </TableRow>
+                        <Button
+                            android:id="@+id/useful_discussion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="3dp"
+                            android:drawableTop="@drawable/ic_btn_topic"
+                            android:background="@null"
+                            android:text="讨论"
+                            android:drawablePadding="5dp" />
 
+                        <Button
+                            android:id="@+id/isEnableEat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/ic_btn_eat"
+                            android:layout_marginStart="3dp"
+                            android:drawablePadding="5dp"
+                            android:background="@null"
+                            android:text="食物" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp">
-
-                <Button
-                    android:id="@+id/lottery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableTop="@drawable/ic_btn_lottery"
-                    android:drawablePadding="5dp"
-                    android:background="@null"
-                    android:text="抽奖" />
-
-                <Button
-                    android:id="@+id/encyclopedia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableTop="@drawable/ic_btn_encyclopedia"
-                    android:drawablePadding="5dp"
-                    android:background="@null"
-                    android:text="百科" />
-
-                <Button
-                    android:id="@+id/store"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableTop="@drawable/ic_btn_store"
-                    android:drawablePadding="5dp"
-                    android:background="@null"
-                    android:text="商城" />
-
-                <Button
-                    android:id="@+id/personalShow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableTop="@drawable/ic_btn_expert"
-                    android:drawablePadding="5dp"
-                    android:background="@null"
-                    android:text="达人" />
-            </TableRow>
-        </TableLayout>
+                        <Button
+                            android:id="@+id/alarm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/ic_btn_reminder"
+                            android:drawablePadding="5dp"
+                            android:layout_marginStart="3dp"
+                            android:background="@null"
+                            android:text="提醒" />
+                    </TableRow>
 
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@color/gray" />
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp">
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/view_pagerFind"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                        <Button
+                            android:id="@+id/lottery"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/ic_btn_lottery"
+                            android:drawablePadding="5dp"
+                            android:background="@null"
+                            android:text="抽奖" />
 
+                        <Button
+                            android:id="@+id/encyclopedia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/ic_btn_encyclopedia"
+                            android:drawablePadding="5dp"
+                            android:background="@null"
+                            android:text="百科" />
+
+                        <Button
+                            android:id="@+id/store"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/ic_btn_store"
+                            android:drawablePadding="5dp"
+                            android:background="@null"
+                            android:text="商城" />
+
+                        <Button
+                            android:id="@+id/personalShow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/ic_btn_expert"
+                            android:drawablePadding="5dp"
+                            android:background="@null"
+                            android:text="达人" />
+                    </TableRow>
+                </TableLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@color/gray" />
+
+            </LinearLayout>
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layoutFind"
                 android:layout_width="match_parent"
@@ -139,7 +151,11 @@
                 app:tabIndicatorColor="@color/red"
                 app:tabMaxWidth="-10dp"
                 app:tabSelectedTextColor="@color/red" />
-        </androidx.viewpager.widget.ViewPager>
-
-    </LinearLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pagerFind"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

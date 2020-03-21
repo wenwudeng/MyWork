@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wenwu.pm.R;
-import com.wenwu.pm.message.adapter.MsgANConcernRecyclerAdapter;
 import com.wenwu.pm.message.bean.MsgAddNewConcern;
 
 import java.util.List;
@@ -40,6 +39,7 @@ public class ConcernRecyclerAdapter extends RecyclerView.Adapter<ConcernRecycler
             userId = itemView.findViewById(R.id.my_concern_user_id);
             follow = itemView.findViewById(R.id.my_concern_follow);
         }
+
     }
 
     public ConcernRecyclerAdapter(List<MsgAddNewConcern> list) {

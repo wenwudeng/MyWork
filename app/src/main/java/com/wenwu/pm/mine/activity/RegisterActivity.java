@@ -8,13 +8,12 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.wenwu.pm.MainActivity;
 import com.wenwu.pm.R;
-import com.wenwu.pm.goson.Msg;
+import com.wenwu.pm.goson.LRReturnJson;
 import com.wenwu.pm.utils.OkHttpUtil;
 
 import java.io.IOException;
@@ -74,17 +73,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         OkHttpUtil.registerWithOkHttp(mapping, code, account, password, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                e.printStackTrace();
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String responseData = response.body().string();
-                Msg msg = new Gson().fromJson(responseData, Msg.class);
-                if (msg.getCode().equals("200")) {
+                LRReturnJson LRReturnJson = new Gson().fromJson(responseData, LRReturnJson.class);
+                System.out.println(LRReturnJson);;
+                if (LRReturnJson.getCode().equals("3003")) {
                     Looper.prepare();
                     Toast.makeText(RegisterActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                     Looper.loop();
                 }else {
                     Looper.prepare();

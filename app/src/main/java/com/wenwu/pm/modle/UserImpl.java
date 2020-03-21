@@ -1,12 +1,8 @@
 package com.wenwu.pm.modle;
 
 import com.google.gson.Gson;
-import com.wenwu.pm.goson.Msg;
-import com.wenwu.pm.utils.OkHttpUtil;
 
 import java.io.IOException;
-
-import okhttp3.RequestBody;
 
 /**
  * @author:wenwudeng

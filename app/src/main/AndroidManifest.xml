@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wenwu.pm">
+    package="com.wenwu.pm" >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,8 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".mine.activity.FansActivity"></activity>
+        android:usesCleartextTraffic="true" >
+        <activity android:name=".mine.activity.TestActivity" />
+        <activity android:name=".mine.activity.FansActivity" />
         <activity android:name=".mine.activity.ConcernActivity" /> <!-- <activity android:name=".test.OkHttpTestActivity"/> -->
         <activity android:name=".test.HttpConnectionActivity" />
         <activity android:name=".publish.activity.LongArticleActivity" />
@@ -30,7 +31,7 @@
         <activity android:name=".mine.activity.SetNewPasswordActivity" />
         <activity android:name=".mine.activity.ForgetActivity" />
         <activity android:name=".mine.activity.RegisterActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -38,7 +39,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mine.activity.LoginActivity" />
+        <activity android:name=".mine.activity.LoginActivity" >
+
+        </activity>
         <activity android:name=".message.activity.MsgActivity" />
     </application>
 
