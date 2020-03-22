@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                             profile = findViewById(R.id.my_profile);
                             //显示个人信息
                             Intent intent = getIntent();
-                            showInfoWithOkHttp("showInfo", intent.getStringExtra("account"));
+                           // showInfoWithOkHttp("showInfo", intent.getStringExtra("account"));
 
                         } else if (position == 2) {
                             PopMenu mPopMenu = new PopMenu.Builder().attachToActivity(MainActivity.this)

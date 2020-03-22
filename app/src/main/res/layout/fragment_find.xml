@@ -148,8 +148,8 @@
                 app:tabGravity="center"
                 app:tabIndicatorFullWidth="false"
                 app:tabIndicatorHeight="3dp"
+                app:tabTextAppearance="@style/tabLayoutStyle"
                 app:tabIndicatorColor="@color/red"
-                app:tabMaxWidth="-10dp"
                 app:tabSelectedTextColor="@color/red" />
         </com.google.android.material.appbar.AppBarLayout>
         <androidx.viewpager.widget.ViewPager

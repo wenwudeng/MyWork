@@ -10,12 +10,10 @@
     </style>
 
 
-    <style name="MyTablayoutstyle" parent="Base.Widget.Design.TabLayout">
-        <item name="tabBackground">@color/white</item>
-        <item name="tabIndicatorColor">@color/green</item>
-        <item name="tabIndicatorHeight">2dp</item>
-        <item name="tabSelectedTextColor">@color/red</item>
+    <!--自定义TabLayout字体样式-->
+    <style name="tabLayoutStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title" >
         <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 

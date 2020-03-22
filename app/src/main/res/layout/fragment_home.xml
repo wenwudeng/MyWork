@@ -17,6 +17,7 @@
             app:tabGravity="center"
             app:tabIndicatorFullWidth="false"
             app:tabIndicatorHeight="0dp"
+            app:tabTextAppearance="@style/tabLayoutStyle"
             app:tabSelectedTextColor="@color/red" />
 
     </androidx.viewpager.widget.ViewPager>

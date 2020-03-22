@@ -27,175 +27,187 @@
             android:layout_gravity="center" />
     </androidx.appcompat.widget.Toolbar>
 
-
-
-    <RelativeLayout
-        android:id="@+id/l1"
-        android:layout_marginLeft="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
-            android:id="@+id/l0"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/my_user_photo"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/li"
-                app:civ_border_width="2dp"
-                app:civ_border_color="#0000" />
-
-            <LinearLayout
-                android:layout_marginLeft="120dp"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/my_concern_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="14"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/my_fans_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="60dp"
-                        android:text="12"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/my_collect_count"
-                        android:layout_width="wrap_content"
-                        android:layout_marginStart="60dp"
-                        android:layout_height="wrap_content"
-                        android:text="39"
-                        android:textStyle="bold"/>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/my_concern"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="关注" />
-
-                    <TextView
-                        android:id="@+id/my_fans"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="50dp"
-                        android:text="粉丝" />
-
-                    <TextView
-                        android:id="@+id/my_collect"
-                        android:layout_width="wrap_content"
-                        android:layout_marginStart="45dp"
-                        android:layout_height="wrap_content"
-                        android:text="获赞" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="63dp">
-
-                </LinearLayout>
-            </LinearLayout>
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/l2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/l0"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/my_sex"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:background="@null"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/sex_girl_p" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" |  "
-                android:textColor="@color/gray" />
-
-            <TextView
-                android:id="@+id/my_city"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="10dp"
-                android:text="铜仁市" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" | "
-                android:textColor="@color/gray" />
-
-            <TextView
-                android:id="@+id/my_pet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="10dp"
-                android:text="中华田园犬" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/my_profile"
-            android:layout_below="@id/l2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="12dp"
-            android:text="就让一切往事随风吧" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/gray" />
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pagerMy"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layoutMy"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabGravity="center"
-            app:tabIndicatorFullWidth="false"
-            app:tabIndicatorHeight="3dp"
-            app:tabIndicatorColor="@color/red"
-            app:tabMaxWidth="-10dp"
-            app:tabSelectedTextColor="@color/red" />
-    </androidx.viewpager.widget.ViewPager>
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/l1"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:layout_scrollFlags="snap|scroll|enterAlways">
+
+                <RelativeLayout
+                    android:id="@+id/l0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/my_user_photo"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/li"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="#0000" />
+
+                    <LinearLayout
+                        android:layout_marginLeft="120dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/my_concern_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="14"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/my_fans_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="60dp"
+                                android:text="12"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/my_collect_count"
+                                android:layout_width="wrap_content"
+                                android:layout_marginStart="60dp"
+                                android:layout_height="wrap_content"
+                                android:text="39"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
 
 
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/my_concern"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:text="关注" />
+
+                            <TextView
+                                android:id="@+id/my_fans"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="50dp"
+                                android:text="粉丝" />
+
+                            <TextView
+                                android:id="@+id/my_collect"
+                                android:layout_width="wrap_content"
+                                android:layout_marginStart="45dp"
+                                android:layout_height="wrap_content"
+                                android:text="获赞" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="63dp">
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/l2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/l0"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/my_sex"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:background="@null"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/sex_girl_p" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" |  "
+                        android:textColor="@color/gray" />
+
+                    <TextView
+                        android:id="@+id/my_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10dp"
+                        android:text="铜仁市" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" | "
+                        android:textColor="@color/gray" />
+
+                    <TextView
+                        android:id="@+id/my_pet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10dp"
+                        android:text="中华田园犬" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/my_profile"
+                    android:layout_below="@id/l2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="12dp"
+                    android:text="就让一切往事随风吧" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layoutMy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabGravity="center"
+                app:tabTextAppearance="@style/tabLayoutStyle"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorHeight="3dp"
+                app:tabIndicatorColor="@color/red"
+                app:tabSelectedTextColor="@color/red" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!--设置TabLayout字体样式-->
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/view_pagerMy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>
