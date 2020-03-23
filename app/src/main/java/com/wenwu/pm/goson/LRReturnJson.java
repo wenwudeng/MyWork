@@ -8,7 +8,7 @@ public class LRReturnJson {
     private boolean success;
     private String code;
     private String msg;
-    private String data;
+    private int data;
 
     public boolean isSuccess() {
         return success;
@@ -34,11 +34,11 @@ public class LRReturnJson {
         this.msg = msg;
     }
 
-    public String getData() {
+    public int getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(int data) {
         this.data = data;
     }
 }

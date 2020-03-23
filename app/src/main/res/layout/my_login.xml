@@ -30,8 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:textSize="15dp"
-            android:layout_gravity="right"
+            android:textSize="15sp"
+            android:layout_gravity="end"
             android:text="注册" />
 
     </androidx.appcompat.widget.Toolbar>

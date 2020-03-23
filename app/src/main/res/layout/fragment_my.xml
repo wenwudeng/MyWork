@@ -13,6 +13,7 @@
             android:id="@+id/setting"
             android:layout_width="17dp"
             android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
             android:background="@null"
             android:drawableLeft="@mipmap/icon_hamburg"
             android:layout_gravity="left" />
@@ -22,8 +23,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="17dp"
+            android:textSize="17sp"
             android:text="留白"
+            android:textColor="#000000"
             android:layout_gravity="center" />
     </androidx.appcompat.widget.Toolbar>
 
@@ -74,6 +76,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="14"
+                                android:textColor="#000000"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -82,6 +85,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="60dp"
                                 android:text="12"
+                                android:textColor="#000000"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -90,6 +94,7 @@
                                 android:layout_marginStart="60dp"
                                 android:layout_height="wrap_content"
                                 android:text="39"
+                                android:textColor="#000000"
                                 android:textStyle="bold" />
 
                         </LinearLayout>

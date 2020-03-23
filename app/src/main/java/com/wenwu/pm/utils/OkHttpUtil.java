@@ -1,6 +1,8 @@
 package com.wenwu.pm.utils;
 
-import java.io.IOException;
+
+import java.util.Map;
+import java.util.Set;
 
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -73,6 +75,33 @@ public class OkHttpUtil {
     }
 
 
+
+     /*// 发送GET请求
+    public static void sendGetRequest(String url, okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient(); // 创建一个client
+        Request request = new Request.Builder().url(url).build(); // 组装一个Request对象
+        client.newCall(request).enqueue(callback); // 发送请求
+    }*/
+
+    // 发送POST请求
+    public static void sendPostRequest(String url, Map<String, Object> map, okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient(); // 创建一个client
+        // POST请求的参数需要放在一个RequestBody对象中，它由FormBody.Builder建造者类来建造（建造者模式）
+        FormBody.Builder builder = new FormBody.Builder();
+        if(map != null){
+            // 不能直接把map转为RequestBody，必须遍历map的key，并逐一地往builder中添加对应的value
+            Set<String> keys = map.keySet();
+            for(String key : keys){ // 注意：RequestBody的参数只能是字符串类型的
+                String value = map.get(key).toString();
+                builder.add(key, value);
+                System.out.println(key+":"+value);
+            }
+        }
+        RequestBody requestBody = builder.build(); // 最后利用builder来生成一个RequestBody实例
+        // 组装一个Request对象（这次有额外传入RequestBody）
+        Request request = new Request.Builder().url(USER_PATH+url).post(requestBody).build();
+        client.newCall(request).enqueue(callback); // 发送请求
+    }
 
 
 
