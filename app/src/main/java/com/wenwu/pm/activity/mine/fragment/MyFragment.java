@@ -86,7 +86,7 @@ public class MyFragment extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.my_user_photo:
-                Intent intent = new Intent(getActivity(), EditPersonalInfoActivity.class);
+                Intent intent = new Intent(v.getContext(), EditPersonalInfoActivity.class);
                 startActivity(intent);
                 break;
 
@@ -119,7 +119,6 @@ public class MyFragment extends Fragment implements View.OnClickListener{
         fragmentList.add(new MyQuestionFragment());
         fragmentList.add(new MyCollectFragment());
         fragmentList.add(new MyReviewFragment());
-        //fragmentList.add(new MyPraiseFragment());
         return fragmentList;
     }
 

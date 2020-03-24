@@ -41,4 +41,14 @@ public class LRReturnJson {
     public void setData(int data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "LRReturnJson{" +
+                "success=" + success +
+                ", code='" + code + '\'' +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                '}';
+    }
 }

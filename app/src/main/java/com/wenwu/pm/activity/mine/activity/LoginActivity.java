@@ -15,6 +15,8 @@ import com.wenwu.pm.R;
 import com.wenwu.pm.activity.MainActivity;
 import com.wenwu.pm.goson.LRReturnJson;
 import com.wenwu.pm.presenter.LoginPresenter;
+import com.wenwu.pm.utils.GsonUtil;
+import com.wenwu.pm.utils.JsonUtil;
 import com.wenwu.pm.view.ILoginView;
 
 import java.io.IOException;
@@ -66,6 +68,18 @@ public class LoginActivity extends AppCompatActivity implements ILoginView,View.
         });
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.register:
+            case R.id.mobileLogin:
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                break;
+            case R.id.forgotPassword:
+                startActivity(new Intent(LoginActivity.this, ForgetActivity.class));
+        }
+    }
+
 
     @Override
     public String getAccount() {
@@ -84,6 +98,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView,View.
         Toast.makeText(getApplicationContext(),json.getMsg(), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.putExtra("user_id", json.getData());
+        System.out.println("测试返回"+intent.putExtra("user_id", json.getData()));
         startActivity(intent);
         Looper.loop();
     }
@@ -91,18 +106,19 @@ public class LoginActivity extends AppCompatActivity implements ILoginView,View.
     @Override
     public void onViewFail(Object json1) {
         json = (LRReturnJson)json1;
+        Looper.prepare();
         Toast.makeText(getApplicationContext(),json.getMsg(), Toast.LENGTH_LONG).show();
+        Looper.loop();
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.register:
-            case R.id.mobileLogin:
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-                break;
-            case R.id.forgotPassword:
-                startActivity(new Intent(LoginActivity.this, ForgetActivity.class));
-        }
+    protected void onDestroy() {
+        super.onDestroy();
+        //记得在销毁的时候断掉引用链，养成良好的习惯
+        this.mPresenter = null;
     }
+
+
+
+
 }

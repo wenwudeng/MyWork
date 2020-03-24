@@ -7,16 +7,25 @@ import java.io.Serializable;
  * @date:12:13 AM 3/20/2020
  */
 public class Data implements Serializable{
+    private int userid;
     private String city;
     private String gender;
     private String photo;
     private String userName;
     private int follow;
     private String time;
-    private int collectLike;
+    private int collect;
     private int fans;
     private String profile;
     private String pet;
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
 
     public String getCity() {
         return city;
@@ -66,12 +75,12 @@ public class Data implements Serializable{
         this.time = time;
     }
 
-    public int getCollectLike() {
-        return collectLike;
+    public int getCollect() {
+        return collect;
     }
 
-    public void setCollectLike(int collectLike) {
-        this.collectLike = collectLike;
+    public void setCollectLike(int collect) {
+        this.collect = collect;
     }
 
     public int getFans() {
@@ -107,7 +116,7 @@ public class Data implements Serializable{
                 ", userName='" + userName + '\'' +
                 ", follow=" + follow +
                 ", time='" + time + '\'' +
-                ", collectLike=" + collectLike +
+                ", collect=" + collect +
                 ", fans=" + fans +
                 ", profile='" + profile + '\'' +
                 ", pet='" + pet + '\'' +

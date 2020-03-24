@@ -2,21 +2,30 @@ package com.wenwu.pm.activity.mine.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.MainActivity;
+import com.wenwu.pm.goson.LRReturnJson;
 import com.wenwu.pm.goson.ShowReturnJson;
+import com.wenwu.pm.presenter.EditInfoPresenter;
 import com.wenwu.pm.utils.JsonUtil;
+import com.wenwu.pm.view.IEditInfoView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class EditPersonalInfoActivity extends AppCompatActivity implements View.OnClickListener{
+public class EditPersonalInfoActivity extends AppCompatActivity implements View.OnClickListener, IEditInfoView {
     private RadioButton boy;
     private RadioButton girl;
     private Button save;
@@ -32,13 +41,45 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
     private TextView profile;
     private TextView time;
 
+    private EditInfoPresenter presenter;
+    private LRReturnJson json;
+    private String genders;
+
+    private int flag;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_personal_info_edit);
 
+       //显示个人信息
+        ShowInfoView();
+
+        //修改个人信息
+        setData();
+        setShowAfterEditView();
+    }
+
+    private void setShowAfterEditView() {
+        genders = flag==0?"男":"女";
+        Log.d(genders, genders);
         save = findViewById(R.id.my_edit_save_info);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("=============================================");
+                presenter.save();
+            }
+        });
+    }
+
+    private void setData() {
+        presenter = new EditInfoPresenter(this);
+    }
+
+    /*显示个人信息*/
+    private void ShowInfoView() {
         //显示数据
         userName = findViewById(R.id.my_edit_id);
         userPhoto = findViewById(R.id.my_edit_photo);
@@ -54,11 +95,12 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
         girlIcon = findViewById(R.id.my_edit_girl_icon);
         boyIcon.setOnClickListener(this);
         girlIcon.setOnClickListener(this);
-        showResponse(JsonUtil.showJson);
 
+        showResponse(JsonUtil.showJson);
     }
 
-    //线程更新
+
+    //显示数据
     public void showResponse(final ShowReturnJson json) {
         runOnUiThread(new Thread(new Runnable() {
             @Override
@@ -84,23 +126,71 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
             case R.id.my_edit_boy_icon:
                 boyIcon.setImageResource(R.mipmap.sex_boy_selected);
                 boy.setChecked(true);
+                flag = 0;
                 girl.setChecked(false);
                 girlIcon.setImageResource(R.mipmap.sex_girl_nomal);
                 break;
             case R.id.my_edit_girl_icon:
                 girlIcon.setImageResource(R.mipmap.sex_girl_selected);
                 girl.setChecked(true);
+                flag = 1;
                 boy.setChecked(false);
                 boyIcon.setImageResource(R.mipmap.sex_boy_nomal);
                 break;
-            case R.id.my_edit_save_info:
-                //updateWithOkHttp(String id, phone, String name, String sex, String live, String introduce, String pt);
-
         }
     }
 
-    public void updateWithOkHttp(String id, String name, String sex, String live, String introduce, String pt){
-        //OkHttpUtil.updateInfo("editInfo",id);
+    @Override
+    public String getPhotoUrl() {
+        return "abc";
+    }
+
+    @Override
+    public String getUserName() {
+        return userName.getText().toString();
+    }
+
+    @Override
+    public String getGenders() {
+        return genders;
+    }
+
+    @Override
+    public String getCity() {
+        return city.getText().toString();
+    }
+
+    @Override
+    public String getProfile() {
+        return profile.getText().toString();
+    }
+
+    @Override
+    public String getPet() {
+        return pet.getText().toString();
+    }
+
+    @Override
+    public void onViewSuccess(Object object) {
+        json = (LRReturnJson) object;
+        Looper.prepare();
+        Toast.makeText(getApplicationContext(), json.getMsg(), Toast.LENGTH_SHORT).show();
+        Looper.loop();
+    }
+
+    @Override
+    public void onViewFail(Object object) {
+        json = (LRReturnJson) object;
+        Looper.prepare();
+        Toast.makeText(getApplicationContext(), json.getMsg(), Toast.LENGTH_SHORT).show();
+        Looper.loop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //记得在销毁的时候断掉引用链，养成良好的习惯
+        this.presenter = null;
     }
 
 }

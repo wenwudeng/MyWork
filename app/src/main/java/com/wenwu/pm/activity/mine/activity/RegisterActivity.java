@@ -101,9 +101,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         json = (LRReturnJson) object;
         Looper.prepare();
         Toast.makeText(getApplicationContext(), json.getMsg()+",请完善你的个人信息", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-        intent.putExtra("userId", json.getData());
-        startActivity(intent);
+        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
         Looper.loop();
     }
 
@@ -114,4 +112,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         Toast.makeText(getApplicationContext(), json.getMsg(), Toast.LENGTH_SHORT).show();
         Looper.loop();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //记得在销毁的时候断掉引用链，养成良好的习惯
+        this.presenter = null;
+    }
+
 }

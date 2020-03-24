@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +25,7 @@ import com.wenwu.pm.activity.mine.fragment.MyFragment;
 import com.wenwu.pm.activity.publish.activity.LongArticleActivity;
 import com.wenwu.pm.activity.publish.activity.QuestionActivity;
 import com.wenwu.pm.presenter.ShowInfoPresenter;
+import com.wenwu.pm.utils.JsonUtil;
 import com.wenwu.pm.view.IShowView;
 
 
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements IShowView {
     //个人信息数据对接
     private ShowReturnJson json;
     private ShowInfoPresenter presenter;
-    private static int userId;
+    private  int userId;
 
 
     private String[] tabText = {"首页", "发现", "", "消息", "我的"};
@@ -87,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements IShowView {
                             //显示个人信息
                             Intent intent = getIntent();
                             userId = intent.getIntExtra("user_id",0);
+                            Log.d("===",""+ userId);
                             setData();
                             setView(userId);
 
@@ -150,13 +154,19 @@ public class MainActivity extends AppCompatActivity implements IShowView {
     @Override
     public void onViewSuccess(Object object) {
         json = (ShowReturnJson) object;
-        System.out.println(json);
+        JsonUtil.showJson = json;
+        Looper.prepare();
+        Toast.makeText(getApplicationContext(),json.getMessage(), Toast.LENGTH_LONG).show();
         showResponse(json);
+        Looper.loop();
     }
 
     @Override
     public void onViewFail(Object object) {
-
+        json = (ShowReturnJson) object;
+        Looper.prepare();
+        Toast.makeText(getApplicationContext(),json.getMessage(), Toast.LENGTH_LONG).show();
+        Looper.loop();
     }
 
     //线程更新
@@ -168,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements IShowView {
                 userName.setText(json.getData().getUserName());
                 fansCount.setText(Integer.toString(json.getData().getFollow()));
                 concernCount.setText(Integer.toString(json.getData().getFollow()));
-                collectCount.setText(Integer.toString(json.getData().getCollectLike()));
+                collectCount.setText(Integer.toString(json.getData().getCollect()));
                 if (json.getData().getGender().equals("男")) {
                     gender.setImageResource(R.drawable.sex_boy_p);
                 }
@@ -178,6 +188,14 @@ public class MainActivity extends AppCompatActivity implements IShowView {
             }
         }));
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //记得在销毁的时候断掉引用链，养成良好的习惯
+        this.presenter = null;
+    }
+
 
 }
 
