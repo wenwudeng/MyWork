@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".test.TakePhotoActivity"></activity>
         <activity android:name=".activity.mine.activity.TestActivity" />
         <activity android:name=".activity.mine.activity.FansActivity" />
         <activity android:name=".activity.mine.activity.ConcernActivity" /> <!-- <activity android:name=".test.OkHttpTestActivity"/> -->
@@ -31,9 +32,7 @@
         <activity android:name=".activity.mine.activity.SetNewPasswordActivity" />
         <activity android:name=".activity.mine.activity.ForgetActivity" />
         <activity android:name=".activity.mine.activity.RegisterActivity" />
-        <activity android:name=".activity.MainActivity">
-
-        </activity>
+        <activity android:name=".activity.MainActivity"></activity>
         <activity android:name=".activity.mine.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
