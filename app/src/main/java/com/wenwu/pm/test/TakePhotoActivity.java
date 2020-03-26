@@ -142,7 +142,7 @@ public class TakePhotoActivity extends AppCompatActivity {
                     mCameraImagePath = photoFile.getAbsolutePath();
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         //适配Android 7.0文件权限，通过FileProvider创建一个content类型的Uri
-                        photoUri = FileProvider.getUriForFile(this, "com.wenwu.test.activity.fileprovider", photoFile);
+                        photoUri = FileProvider.getUriForFile(this, "com.wenwu.pm.test.fileprovider", photoFile);
                     } else {
                         photoUri = Uri.fromFile(photoFile);
                     }

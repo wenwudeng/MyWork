@@ -56,7 +56,7 @@ public class MyQuestionFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         init();
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_my_ques);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_my_ques);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
         QuesRecyclerAdapter adapter = new QuesRecyclerAdapter(cardViewItemBeanList);

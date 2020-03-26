@@ -152,6 +152,7 @@
                 app:tabIndicatorColor="@color/red"
                 app:tabSelectedTextColor="@color/red" />
         </com.google.android.material.appbar.AppBarLayout>
+
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pagerFind"
             android:layout_width="match_parent"

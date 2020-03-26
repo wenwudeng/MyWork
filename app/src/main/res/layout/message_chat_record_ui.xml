@@ -4,7 +4,24 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray">
+    >
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="17sp"
+            android:text="小管家" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_chatRecord"
@@ -26,8 +43,9 @@
 
             <EditText
                 android:id="@+id/input_text"
-                android:layout_width="300dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:background="@null"
                 android:hint="发私信"
                 android:maxLines="2"
@@ -36,8 +54,8 @@
             <Button
                 android:id="@+id/send"
                 android:layout_width="40dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="10dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="30dp"
                 android:background="@drawable/btn_round_msgchat"
                 android:text="发送"
                 android:textColor="@color/white" />

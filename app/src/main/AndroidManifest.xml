@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wenwu.pm">
-
+    <!-- 相机 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -16,7 +19,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".test.TakePhotoActivity"></activity>
+        <activity android:name=".activity.publish.activity.ArticleShowActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".test.TakePhotoActivity" />
         <activity android:name=".activity.mine.activity.TestActivity" />
         <activity android:name=".activity.mine.activity.FansActivity" />
         <activity android:name=".activity.mine.activity.ConcernActivity" /> <!-- <activity android:name=".test.OkHttpTestActivity"/> -->
@@ -32,16 +43,21 @@
         <activity android:name=".activity.mine.activity.SetNewPasswordActivity" />
         <activity android:name=".activity.mine.activity.ForgetActivity" />
         <activity android:name=".activity.mine.activity.RegisterActivity" />
-        <activity android:name=".activity.MainActivity"></activity>
-        <activity android:name=".activity.mine.activity.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
+        <activity android:name=".activity.MainActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+        <activity android:name=".activity.mine.activity.LoginActivity" />
         <activity android:name=".activity.message.activity.MsgActivity" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.wenwu.pm.test.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>
