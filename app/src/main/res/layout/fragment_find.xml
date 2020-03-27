@@ -15,9 +15,8 @@
             android:gravity="center"
             android:layout_gravity="center_horizontal"
             android:text="发现"
-            android:textSize="15dp"
+            android:textSize="17sp"
             android:textStyle="bold" />
-
     </androidx.appcompat.widget.Toolbar>
 
     <View
@@ -44,11 +43,13 @@
                     android:id="@+id/tableLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="5dp">
 
                     <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="15dp">
 
                         <Button
                             android:id="@+id/sign_inButton"
@@ -94,7 +95,8 @@
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="10dp">
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="15dp">
 
                         <Button
                             android:id="@+id/lottery"
@@ -133,14 +135,12 @@
                             android:text="达人" />
                     </TableRow>
                 </TableLayout>
-
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="5dp"
                     android:background="@color/gray" />
-
             </LinearLayout>
+
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layoutFind"
                 android:layout_width="match_parent"

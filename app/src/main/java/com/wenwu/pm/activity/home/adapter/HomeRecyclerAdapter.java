@@ -1,5 +1,6 @@
 package com.wenwu.pm.activity.home.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
+import com.wenwu.pm.activity.publish.activity.ArticleShowActivity;
 
 import java.util.List;
 
@@ -74,6 +76,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 CardViewItemBean cardViewItemBean = cardViewItemBeanList.get(position);
+                v.getContext().startActivity(new Intent(v.getContext(), ArticleShowActivity.class));
                 Toast.makeText(v.getContext(), "you click view" + cardViewItemBean.getContent(), Toast.LENGTH_SHORT).show();
             }
         });

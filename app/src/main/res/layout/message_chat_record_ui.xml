@@ -43,7 +43,7 @@
 
             <EditText
                 android:id="@+id/input_text"
-                android:layout_width="320dp"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:background="@null"

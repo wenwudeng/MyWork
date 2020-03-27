@@ -2,7 +2,7 @@ package com.wenwu.pm.activity.mine.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 
 import android.os.Looper;
@@ -11,12 +11,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wenwu.pm.R;
-import com.wenwu.pm.activity.MainActivity;
 import com.wenwu.pm.goson.LRReturnJson;
 import com.wenwu.pm.goson.ShowReturnJson;
 import com.wenwu.pm.presenter.EditInfoPresenter;
@@ -35,7 +34,8 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
 
     private TextView userName;
     private CircleImageView userPhoto;
-    private ImageView gender;
+    //private ImageView gender;
+    private String gender;
     private TextView city;
     private TextView pet;
     private TextView profile;
@@ -43,9 +43,8 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
 
     private EditInfoPresenter presenter;
     private LRReturnJson json;
-    private String genders;
 
-    private int flag;
+
 
 
     @Override
@@ -53,7 +52,8 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_personal_info_edit);
 
-       //显示个人信息
+
+        //显示个人信息
         ShowInfoView();
 
         //修改个人信息
@@ -62,13 +62,10 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
     }
 
     private void setShowAfterEditView() {
-        genders = flag==0?"男":"女";
-        Log.d(genders, genders);
         save = findViewById(R.id.my_edit_save_info);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("=============================================");
                 presenter.save();
             }
         });
@@ -83,7 +80,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
         //显示数据
         userName = findViewById(R.id.my_edit_id);
         userPhoto = findViewById(R.id.my_edit_photo);
-        gender = findViewById(R.id.my_sex);
+        //gender = findViewById(R.id.my_sex);
         city = findViewById(R.id.my_edit_province);
         pet = findViewById(R.id.my_edit_pet);
         profile = findViewById(R.id.my_edit_introduce);
@@ -95,7 +92,6 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
         girlIcon = findViewById(R.id.my_edit_girl_icon);
         boyIcon.setOnClickListener(this);
         girlIcon.setOnClickListener(this);
-
         showResponse(JsonUtil.showJson);
     }
 
@@ -126,14 +122,14 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
             case R.id.my_edit_boy_icon:
                 boyIcon.setImageResource(R.mipmap.sex_boy_selected);
                 boy.setChecked(true);
-                flag = 0;
+                gender = "男";
                 girl.setChecked(false);
                 girlIcon.setImageResource(R.mipmap.sex_girl_nomal);
                 break;
             case R.id.my_edit_girl_icon:
                 girlIcon.setImageResource(R.mipmap.sex_girl_selected);
                 girl.setChecked(true);
-                flag = 1;
+                gender = "女";
                 boy.setChecked(false);
                 boyIcon.setImageResource(R.mipmap.sex_boy_nomal);
                 break;
@@ -152,7 +148,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
 
     @Override
     public String getGenders() {
-        return genders;
+        return gender;
     }
 
     @Override
@@ -186,11 +182,5 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
         Looper.loop();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //记得在销毁的时候断掉引用链，养成良好的习惯
-        this.presenter = null;
-    }
 
 }

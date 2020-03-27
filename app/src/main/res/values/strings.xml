@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">宠物</string>
+    <string name="app_name" translatable="false">宠物生活</string>
 
     <style name="pt_home">首页</style>
 

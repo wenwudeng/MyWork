@@ -42,9 +42,7 @@ public class MyFragment extends Fragment implements View.OnClickListener{
     private TextView tex_fans;
     private TextView tex_collect;
 
-    public interface callbackValue{
-        public void sendJson(ShowReturnJson json);
-    }
+
 
     @Nullable
     @Override

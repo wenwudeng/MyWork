@@ -1,6 +1,7 @@
 package com.wenwu.pm.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 
@@ -18,6 +19,7 @@ import com.next.easynavigation.constant.Anim;
 import com.next.easynavigation.view.EasyNavigationBar;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.find.fragment.FindFragment;
+import com.wenwu.pm.activity.publish.activity.PublishLogActivity;
 import com.wenwu.pm.goson.ShowReturnJson;
 import com.wenwu.pm.activity.home.fragment.HomeFragment;
 import com.wenwu.pm.activity.message.fragment.MessageFragment;
@@ -99,15 +101,15 @@ public class MainActivity extends AppCompatActivity implements IShowView {
 
                         } else if (position == 2) {
                             PopMenu mPopMenu = new PopMenu.Builder().attachToActivity(MainActivity.this)
-                                    .addMenuItem(new PopMenuItem("发布日志", getResources().getDrawable(R.mipmap.publish_post)))
-                                    .addMenuItem(new PopMenuItem("发长图文", getResources().getDrawable(R.mipmap.post_content)))
-                                    .addMenuItem(new PopMenuItem("提出问题", getResources().getDrawable(R.mipmap.publish_ask)))
-
+                                    .addMenuItem(new PopMenuItem("发布日志", ResourcesCompat.getDrawable(getResources(), R.mipmap.publish_post, null)))
+                                    .addMenuItem(new PopMenuItem("发长图文", ResourcesCompat.getDrawable(getResources(), R.mipmap.post_content, null)))
+                                    .addMenuItem(new PopMenuItem("提出问题", ResourcesCompat.getDrawable(getResources(), R.mipmap.publish_ask, null)))
                                     .setOnItemClickListener(new PopMenuItemListener() {
                                         @Override
                                         public void onItemClick(PopMenu popMenu, int position) {
                                             if (position == 0) {
                                                 Toast.makeText(MainActivity.this, "你点击了第" + position + "个位置", Toast.LENGTH_SHORT).show();
+                                                startActivity(new Intent(MainActivity.this, PublishLogActivity.class));
                                             } else if (position == 1) {
                                                 Toast.makeText(MainActivity.this, "你点击了第" + position + "个位置", Toast.LENGTH_SHORT).show();
                                                 startActivity(new Intent(MainActivity.this, LongArticleActivity.class));
@@ -119,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements IShowView {
                                     })
                                     .build();
 
+                            mPopMenu.setmBackGroundTrasnparent();
                             mPopMenu.setmMarginTopRemainSpace(1.2f);
                             mPopMenu.setmIsmalpositionAnimatOut(true);
                             mPopMenu.setmBackGroundColor(Color.parseColor("#ffffff"));
@@ -181,6 +184,8 @@ public class MainActivity extends AppCompatActivity implements IShowView {
                 collectCount.setText(Integer.toString(json.getData().getCollect()));
                 if (json.getData().getGender().equals("男")) {
                     gender.setImageResource(R.drawable.sex_boy_p);
+                }else {
+                    gender.setImageResource(R.drawable.sex_girl_p);
                 }
                 city.setText(json.getData().getCity());
                 pet.setText(json.getData().getPet());
