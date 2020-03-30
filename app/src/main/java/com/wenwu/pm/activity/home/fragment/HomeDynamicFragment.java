@@ -32,18 +32,6 @@ public class HomeDynamicFragment extends Fragment {
         return inflater.inflate(R.layout.home_dynamic,container,false);
     }
 
-
-
-    public void init() {
-        for (int i = 0; i < 8; i++) {
-            CardViewItemBean cardViewItemBean = new CardViewItemBean("抗战疫情", R.drawable.cat, "中国加油,武汉加油!", "喵星人", R.mipmap.pic4,100);
-            cardViewItemBeanList.add(cardViewItemBean);
-            CardViewItemBean cardViewItemBean1 = new CardViewItemBean("抗战疫情", R.drawable.chen, "中国加油,武汉加油!", "陈瑶", R.mipmap.pic2,100);
-            cardViewItemBeanList.add(cardViewItemBean1);
-        }
-    }
-
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         init();
@@ -67,5 +55,15 @@ public class HomeDynamicFragment extends Fragment {
             }
         });
     }
+
+    public void init() {
+
+        CardViewItemBean cardViewItemBean = new CardViewItemBean("抗战疫情", R.drawable.deng, "小可爱", "留白", R.mipmap.pic4,1);
+        cardViewItemBeanList.add(cardViewItemBean);
+        // CardViewItemBean cardViewItemBean1 = new CardViewItemBean("抗战疫情", R.drawable.chen, "中国加油,武汉加油!", "陈瑶", R.mipmap.pic2,100);
+        // cardViewItemBeanList.add(cardViewItemBean1);
+
+    }
+
 
 }

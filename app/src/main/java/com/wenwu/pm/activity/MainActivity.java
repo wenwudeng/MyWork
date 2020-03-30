@@ -90,13 +90,13 @@ public class MainActivity extends AppCompatActivity implements IShowView {
                     @Override
                     public boolean onTabClickEvent(View view, int position) {
                         if (position == 4) {
+
                             //显示个人信息
                             Intent intent = getIntent();
                             userId = intent.getIntExtra("user_id",0);
                             Log.d("===",""+ userId);
                             setData();
                             setView(userId);
-
 
                            // showInfoWithOkHttp("showInfo", intent.getStringExtra("account"));
 
@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements IShowView {
                 .mode(EasyNavigationBar.MODE_ADD)
                 .anim(Anim.ZoomIn)
                 .build();
+
     }
 
     private void setView(int  userId) {

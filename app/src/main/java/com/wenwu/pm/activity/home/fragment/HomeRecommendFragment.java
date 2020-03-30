@@ -34,10 +34,10 @@ public class HomeRecommendFragment extends Fragment {
     }
 
     public void init() {
-        for (int i = 0; i < 8; i++) {
-            CardViewItemBean cardViewItemBean = new CardViewItemBean("抗战疫情", R.drawable.dog, "中国加油,武汉加油!", "梦想", R.mipmap.pic4,100);
+        for (int i = 0; i < 1; i++) {
+            CardViewItemBean cardViewItemBean = new CardViewItemBean("写得很详细，受教了", R.drawable.dog1, "写得很详细，受教了。", "梦想", R.mipmap.pic4,1);
             cardViewItemBeanList.add(cardViewItemBean);
-            CardViewItemBean cardViewItemBean1 = new CardViewItemBean("抗战疫情", R.drawable.dog1, "中国加油,武汉加油!", "梦想", R.mipmap.pic2,100);
+            CardViewItemBean cardViewItemBean1 = new CardViewItemBean("抗战疫情",R.drawable.dog , "中国加油,武汉加油!", "Jack", R.mipmap.pic2,12);
             cardViewItemBeanList.add(cardViewItemBean1);
         }
     }

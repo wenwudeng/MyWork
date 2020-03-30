@@ -36,7 +36,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
             android:textSize="13sp"
-            android:text="一个月前" />
+            android:text="1天前" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
                 android:layout_below="@id/article_reviewer_like"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="20dp"
-                android:text="21" />
+                android:text="0" />
         </RelativeLayout>
     </LinearLayout>
 

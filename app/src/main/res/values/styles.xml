@@ -16,6 +16,10 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <!--自定义toolbar字体大小-->
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">10sp</item>
+    </style>
 
 
 </resources>
