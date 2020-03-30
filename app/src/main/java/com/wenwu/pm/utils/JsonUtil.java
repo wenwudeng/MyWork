@@ -9,4 +9,5 @@ import com.wenwu.pm.goson.ShowReturnJson;
  */
 public class JsonUtil {
    public static ShowReturnJson showJson;
+   public static String imageUrl;
 }

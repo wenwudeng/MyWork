@@ -57,7 +57,7 @@
             android:id="@+id/help_reply_Count_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="75dp"
+            android:layout_marginStart="90dp"
             android:text="64" />
 
         <TextView
@@ -69,7 +69,7 @@
             android:id="@+id/help_pet_button"
             android:layout_height="25dp"
             android:layout_width="70dp"
-            android:layout_marginStart="100dp"
+            android:layout_marginStart="80dp"
             android:background="@drawable/btn_round_helpet"
             android:text="帮助TA"
             android:textColor="@color/red" />

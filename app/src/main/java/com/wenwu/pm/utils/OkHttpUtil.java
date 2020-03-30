@@ -1,14 +1,25 @@
 package com.wenwu.pm.utils;
 
 
+import android.os.Looper;
+import android.widget.Toast;
+
+import com.wenwu.pm.activity.MainActivity;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
+import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 /**
@@ -16,63 +27,9 @@ import okhttp3.RequestBody;
  * @date:11:20 AM 3/17/2020
  */
 public class OkHttpUtil {
-    private static  OkHttpClient client = new OkHttpClient();
     public static final String USER_PATH = "http://192.168.1.112:8080/api/user/";
-
-    //登录
-    public static void loginWithOkHttp(String address,String account,String password,okhttp3.Callback callback){
-
-        RequestBody body = new FormBody.Builder()
-                .add("phone",account)
-                .add("password",password)
-                .build();
-        Request request = new Request.Builder()
-                .url(USER_PATH+address)
-                .post(body)
-                .build();
-        client.newCall(request).enqueue(callback);
-    }
-    //注册
-   public static void registerWithOkHttp(String address, String code, String account, String password, Callback callback){
-        RequestBody body = new FormBody.Builder()
-                .add("phone",account)
-                .add("password",password)
-                .add("verifyCode",code)
-                .build();
-        Request request = new Request.Builder()
-                .url(USER_PATH+address)
-                .post(body)
-                .build();
-        client.newCall(request).enqueue(callback);
-    }
-
-    public static void showInfoWithOkHttp(String address, String phone, Callback callback) {
-        RequestBody body = new FormBody.Builder()
-                .add("phone",phone)
-                .build();
-        Request request = new Request.Builder()
-                .url(USER_PATH+address)
-                .post(body)
-                .build();
-        client.newCall(request).enqueue(callback);
-    }
-
-    public static void updateInfo(String address, String id,String photo, String userName,String gender,String city,String profile,String pet,Callback callback) {
-        RequestBody body = new FormBody.Builder()
-                .add("userId",id)
-                .add("photo",photo)
-                .add("userName",userName)
-                .add("gender",gender)
-                .add("city",city)
-                .add("profile",profile)
-                .add("pet",pet)
-                .build();
-        Request request = new Request.Builder()
-                .url(USER_PATH+address)
-                .post(body)
-                .build();
-        client.newCall(request).enqueue(callback);
-    }
+    public static final String UPLOAD_IMG_PATH = "http://47.101.171.252:8890/uploadFile";
+    public static final String UPLOAD_URL = "http://47.101.171.252:8890/uploadFile?username=";
 
 
 
@@ -93,8 +50,9 @@ public class OkHttpUtil {
             Set<String> keys = map.keySet();
             for(String key : keys){ // 注意：RequestBody的参数只能是字符串类型的
                 String value = map.get(key).toString();
-                builder.add(key, value);
                 System.out.println(key+":"+value);
+                builder.add(key, value);
+
             }
         }
         RequestBody requestBody = builder.build(); // 最后利用builder来生成一个RequestBody实例
@@ -102,6 +60,29 @@ public class OkHttpUtil {
         Request request = new Request.Builder().url(USER_PATH+url).post(requestBody).build();
         client.newCall(request).enqueue(callback); // 发送请求
     }
+
+
+
+    public static void uploadImage(String username, String imagePath,Callback callback) {
+        final String imageUrl;
+        OkHttpClient okHttpClient = new OkHttpClient();
+        File file = new File(imagePath);
+        if (!file.exists()) {
+            file.mkdir();
+        }
+        RequestBody image = RequestBody.create(MediaType.parse("image/*"), file);
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("file", imagePath, image)
+                .build();
+        Request request = new Request.Builder()
+                .url(UPLOAD_URL+username)
+                .post(requestBody)
+                .build();
+        okHttpClient.newCall(request).enqueue(callback);
+    }
+
+
 
 
 

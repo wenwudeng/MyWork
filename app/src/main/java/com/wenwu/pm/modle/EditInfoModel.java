@@ -2,7 +2,6 @@ package com.wenwu.pm.modle;
 
 import android.util.Log;
 
-import com.google.android.material.animation.ImageMatrixProperty;
 import com.google.gson.Gson;
 import com.wenwu.pm.goson.LRReturnJson;
 import com.wenwu.pm.modle.listener.Listener;
@@ -34,6 +33,7 @@ public class EditInfoModel implements IModel {
         OkHttpUtil.sendPostRequest("editInfo", params, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                System.out.println("=============failure==============");
                 e.printStackTrace();
             }
             @Override

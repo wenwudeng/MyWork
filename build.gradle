@@ -19,6 +19,8 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
+        //Bmob Maven
+        maven {url 'https://dl.bintray.com/chaozhouzhang/maven' }
     }
 }
 

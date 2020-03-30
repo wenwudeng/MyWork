@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.next.easynavigation.constant.Anim;
 import com.next.easynavigation.view.EasyNavigationBar;
 import com.wenwu.pm.R;
@@ -177,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements IShowView {
         runOnUiThread(new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println(json);
+                Glide.with(getBaseContext()).load(json.getData().getPhoto()).into(userPhoto);
                 userName.setText(json.getData().getUserName());
                 fansCount.setText(Integer.toString(json.getData().getFollow()));
                 concernCount.setText(Integer.toString(json.getData().getFollow()));

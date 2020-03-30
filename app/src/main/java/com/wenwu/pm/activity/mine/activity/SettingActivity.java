@@ -16,7 +16,7 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_setting);
 
-        Button loginOut = findViewById(R.id.setting);
+        Button loginOut = findViewById(R.id.login_off);
         loginOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
