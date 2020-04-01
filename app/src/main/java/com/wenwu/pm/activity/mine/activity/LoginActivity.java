@@ -96,9 +96,10 @@ public class LoginActivity extends AppCompatActivity implements ILoginView,View.
         json = (LRReturnJson)json1;
         Looper.prepare();
         Toast.makeText(getApplicationContext(),json.getMsg(), Toast.LENGTH_LONG).show();
+        JsonUtil.userId = json.getData();
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.putExtra("user_id", json.getData());
-        System.out.println("测试返回"+intent.putExtra("user_id", json.getData()));
+       // intent.putExtra("user_id", json.getData());
+       // System.out.println("测试返回"+intent.putExtra("user_id", json.getData()));
         startActivity(intent);
         Looper.loop();
     }

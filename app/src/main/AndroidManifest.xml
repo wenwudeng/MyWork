@@ -23,7 +23,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="q">
-        <activity android:name=".activity.review.ArticleReviewActivity"></activity>
+
+        <activity android:name=".activity.review.ArticleReviewActivity"/>
         <activity android:name=".activity.publish.activity.PublishLogActivity" />
         <activity android:name=".activity.publish.activity.ArticleShowActivity" />
         <activity android:name=".test.TakePhotoActivity" />
@@ -41,15 +42,18 @@
         <activity android:name=".activity.mine.activity.SetNewPasswordActivity" />
         <activity android:name=".activity.mine.activity.ForgetActivity" />
         <activity android:name=".activity.mine.activity.RegisterActivity" />
-        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.MainActivity">
+
+        </activity>
+
         <activity android:name=".activity.mine.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".activity.message.activity.MsgActivity" />
 
         <provider
@@ -61,6 +65,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
     </application>
 
 </manifest>

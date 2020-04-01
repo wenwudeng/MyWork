@@ -24,6 +24,7 @@ import com.wenwu.pm.activity.mine.activity.EditPersonalInfoActivity;
 import com.wenwu.pm.activity.mine.activity.FansActivity;
 import com.wenwu.pm.activity.mine.activity.SettingActivity;
 import com.wenwu.pm.activity.mine.adapter.MyPagerAdapter;
+import com.wenwu.pm.utils.JsonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,8 +85,8 @@ public class MyFragment extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.my_user_photo:
-                Intent intent = new Intent(v.getContext(), EditPersonalInfoActivity.class);
-                startActivity(intent);
+
+                EditPersonalInfoActivity.openEdit(v.getContext(),this);
                 break;
 
             case R.id.my_concern:
@@ -120,4 +121,12 @@ public class MyFragment extends Fragment implements View.OnClickListener{
         return fragmentList;
     }
 
+    public void updateInfo(String userPhoto,String userName,String gender,String city,String profile,String pet) {
+        TextView textView_city = getView().findViewById(R.id.my_city);
+        textView_city.setText(city);//可以了6啊是挺多的，你这个还有一个问题，刚切换的时候，数据加载慢，可以单独开一个线程，慢慢查，登录之后，或者，我先看看
+        JsonUtil.showJson.getData().setCity(city);
+        JsonUtil.showJson.getData().setUserName(userName);
+        JsonUtil.showJson.getData().setProfile(profile);
+        JsonUtil.showJson.getData().setPhoto(userPhoto);
+    }
 }

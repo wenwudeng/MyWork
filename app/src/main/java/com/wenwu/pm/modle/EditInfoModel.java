@@ -30,7 +30,7 @@ public class EditInfoModel implements IModel {
         params.put("city", city);
         params.put("profile", profile);
         params.put("pet", pet);
-        OkHttpUtil.sendPostRequest("editInfo", params, new Callback() {
+        OkHttpUtil.sendPostRequest("user/editInfo", params, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 System.out.println("=============failure==============");

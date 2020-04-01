@@ -25,7 +25,7 @@ public class RegisterModel implements IModel{
         params.put("password", password);
         params.put("verifyCode", verifyCode);
 
-        OkHttpUtil.sendPostRequest("register", params, new Callback() {
+        OkHttpUtil.sendPostRequest("user/register", params, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
 

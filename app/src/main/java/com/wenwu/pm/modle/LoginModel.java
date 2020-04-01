@@ -1,5 +1,7 @@
 package com.wenwu.pm.modle;
 
+import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.wenwu.pm.goson.LRReturnJson;
 import com.wenwu.pm.modle.listener.Listener;
@@ -27,10 +29,10 @@ public class LoginModel implements IModel {
         Map<String, Object> map = new HashMap<>();
         map.put("phone", account);
         map.put("password", password);
-        OkHttpUtil.sendPostRequest("login", map, new Callback() {
+        OkHttpUtil.sendPostRequest("user/login", map, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                e.printStackTrace();
             }
 
             @Override

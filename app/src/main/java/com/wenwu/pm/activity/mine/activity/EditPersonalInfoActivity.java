@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.mine.fragment.MyFragment;
 import com.wenwu.pm.goson.LRReturnJson;
 import com.wenwu.pm.goson.ShowReturnJson;
 import com.wenwu.pm.presenter.EditInfoPresenter;
@@ -69,13 +71,20 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
     private static final int ALBUM_REQUEST_CODE = 2;
     // 申请相册权限的requestCode
     private static final int PERMISSION_ALBUM_REQUEST_CODE = 2;
+    private static MyFragment myFragment;
+    private Activity context;
 
+    public static void openEdit(Context context, MyFragment myFragment1) {
+        Intent intent = new Intent(context, EditPersonalInfoActivity.class);
+        ((Activity) context).startActivity(intent);
+        myFragment = myFragment1;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_personal_info_edit);
-
+        context = this;
         initView();
         showResponse(JsonUtil.showJson);
 
@@ -90,12 +99,13 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
             @Override
             public void onClick(View v) {
                 presenter.save();
+                context.finish();
             }
         });
     }
 
     private void setData() {
-        presenter = new EditInfoPresenter(this);
+        presenter = new EditInfoPresenter(this, myFragment);
     }
 
     /*控件初始化*/
@@ -122,11 +132,11 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
         runOnUiThread(new Thread(new Runnable() {
             @Override
             public void run() {
-                Glide.with(getBaseContext()).load(json.getData().getPhoto()).into(userPhoto);
+                Glide.with(EditPersonalInfoActivity.this).load(json.getData().getPhoto()).into(userPhoto);
                 userName.setText(json.getData().getUserName());
                 if (json.getData().getGender().equals("男")) {
                     boyIcon.setImageResource(R.mipmap.sex_boy_selected);
-                }else {
+                } else {
                     girlIcon.setImageResource(R.mipmap.sex_girl_selected);
                 }
                 city.setText(json.getData().getCity());
@@ -172,7 +182,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
             openAlbum();
         } else {
             //没有权限，申请权限。
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     PERMISSION_ALBUM_REQUEST_CODE);
         }
     }
@@ -180,7 +190,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
     /*调用相册*/
     //激活相册操作
     private void openAlbum() {
-        Intent intent=new Intent();
+        Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, ALBUM_REQUEST_CODE);
@@ -217,8 +227,8 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }*/
-            }else {
-                Toast.makeText(this,"请选择照片",Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "请选择照片", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -268,7 +278,6 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
         Toast.makeText(getApplicationContext(), json.getMsg(), Toast.LENGTH_SHORT).show();
         Looper.loop();
     }
-
 
 
 }

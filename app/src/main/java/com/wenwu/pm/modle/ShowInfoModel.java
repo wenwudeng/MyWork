@@ -23,7 +23,7 @@ public class ShowInfoModel implements IModel {
     public void showInfo(int userId, Listener listener) {
         Map<String,Object> param = new HashMap<>();
         param.put("user_id", userId);
-        OkHttpUtil.sendPostRequest("get", param, new Callback() {
+        OkHttpUtil.sendPostRequest("user/get", param, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
 

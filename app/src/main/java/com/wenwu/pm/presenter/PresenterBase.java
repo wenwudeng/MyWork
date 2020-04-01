@@ -11,6 +11,6 @@ import java.lang.ref.WeakReference;
  */
 public class PresenterBase {
     protected IModel mIModel;
-//若引用
+//引用
     protected WeakReference<IView> mViewReference;
 }

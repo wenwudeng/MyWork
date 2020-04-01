@@ -27,8 +27,7 @@ import okhttp3.Response;
  * @date:11:20 AM 3/17/2020
  */
 public class OkHttpUtil {
-    public static final String USER_PATH = "http://192.168.1.112:8080/api/user/";
-    public static final String UPLOAD_IMG_PATH = "http://47.101.171.252:8890/uploadFile";
+    public static final String API = "http://192.168.1.112:8080/api/";
     public static final String UPLOAD_URL = "http://47.101.171.252:8890/uploadFile?username=";
 
 
@@ -48,16 +47,18 @@ public class OkHttpUtil {
         if(map != null){
             // 不能直接把map转为RequestBody，必须遍历map的key，并逐一地往builder中添加对应的value
             Set<String> keys = map.keySet();
-            for(String key : keys){ // 注意：RequestBody的参数只能是字符串类型的
-                String value = map.get(key).toString();
-                System.out.println(key+":"+value);
-                builder.add(key, value);
-
+            for(String key : keys){
+                if (map.get(key)!=null) { //加了这句话就可以了
+                    // 注意：RequestBody的参数只能是字符串类型的
+                    String value = map.get(key).toString();
+                    //System.out.println(key+":"+value);
+                    builder.add(key, value);
+                }
             }
         }
         RequestBody requestBody = builder.build(); // 最后利用builder来生成一个RequestBody实例
         // 组装一个Request对象（这次有额外传入RequestBody）
-        Request request = new Request.Builder().url(USER_PATH+url).post(requestBody).build();
+        Request request = new Request.Builder().url(API+url).post(requestBody).build();
         client.newCall(request).enqueue(callback); // 发送请求
     }
 

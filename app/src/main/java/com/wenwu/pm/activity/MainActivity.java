@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements IShowView {
     private ShowInfoPresenter presenter;
     private  int userId;
 
-
     private String[] tabText = {"首页", "发现", "", "消息", "我的"};
     private int[] normalIcon = {R.mipmap.tab_home_normal, R.mipmap.tab_pic_normal, R.mipmap.btn_pai, R.mipmap.tab_shop_normal, R.mipmap.tab_mine_normal};
     private int[] selectIcon = {R.mipmap.tab_home_pressed, R.mipmap.tab_pic_pressed, R.mipmap.btn_pai, R.mipmap.tab_shop_pressed, R.mipmap.tab_mine_pressed};
@@ -87,16 +86,18 @@ public class MainActivity extends AppCompatActivity implements IShowView {
                 .addLayoutRule(EasyNavigationBar.RULE_BOTTOM)
                 .addLayoutBottom(100)
                 .onTabClickListener(new EasyNavigationBar.OnTabClickListener() {
+
                     @Override
                     public boolean onTabClickEvent(View view, int position) {
-                        if (position == 4) {
 
+                        if (position == 4) {
                             //显示个人信息
-                            Intent intent = getIntent();
-                            userId = intent.getIntExtra("user_id",0);
-                            Log.d("===",""+ userId);
+                           // Intent intent = getIntent();
+                            //userId = intent.getIntExtra("user_id",0);
+                           // Log.d("===",""+ userId);
                             setData();
-                            setView(userId);
+                            presenter.showInfo(JsonUtil.userId);
+                            setView(JsonUtil.userId);
 
                            // showInfoWithOkHttp("showInfo", intent.getStringExtra("account"));
 
@@ -148,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements IShowView {
         city = findViewById(R.id.my_city);
         pet = findViewById(R.id.my_pet);
         profile = findViewById(R.id.my_profile);
-        presenter.showInfo(userId);
+
     }
 
     private void setData() {
@@ -163,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements IShowView {
         Looper.prepare();
         Toast.makeText(getApplicationContext(),json.getMessage(), Toast.LENGTH_LONG).show();
         showResponse(json);
+
         Looper.loop();
     }
 
@@ -179,7 +181,8 @@ public class MainActivity extends AppCompatActivity implements IShowView {
         runOnUiThread(new Thread(new Runnable() {
             @Override
             public void run() {
-                Glide.with(getBaseContext()).load(json.getData().getPhoto()).into(userPhoto);
+                Log.d("photo", json.getData().getPhoto());
+                Glide.with(MainActivity.this).load(json.getData().getPhoto()).into(userPhoto);
                 userName.setText(json.getData().getUserName());
                 fansCount.setText(Integer.toString(json.getData().getFollow()));
                 concernCount.setText(Integer.toString(json.getData().getFollow()));
@@ -202,7 +205,6 @@ public class MainActivity extends AppCompatActivity implements IShowView {
         //记得在销毁的时候断掉引用链，养成良好的习惯
         this.presenter = null;
     }
-
 
 }
 
