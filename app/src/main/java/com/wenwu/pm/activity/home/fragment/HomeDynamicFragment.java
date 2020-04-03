@@ -1,5 +1,7 @@
 package com.wenwu.pm.activity.home.fragment;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -16,14 +18,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.home.adapter.DynamicRecyclerAdapter;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 import com.wenwu.pm.goson.ShowArticles;
-import com.wenwu.pm.utils.GsonUtil;
 import com.wenwu.pm.utils.OkHttpUtil;
 
 import java.io.IOException;
@@ -35,19 +33,19 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class HomeDynamicFragment extends Fragment {
-    //用于用户头像
     private List<CardViewItemBean> cardViewItemBeanList = new ArrayList<>();
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        init();
         return inflater.inflate(R.layout.home_dynamic,container,false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        init();
+
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view2);
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -61,7 +59,10 @@ public class HomeDynamicFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        //刷新动画
                         swipeRefreshLayout.setRefreshing(false);
+                        swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#FF5a60"));
+                        init();
                         Toast.makeText(getActivity(),"刷新完成", Toast.LENGTH_SHORT).show();
                     }
                 },200);
@@ -78,18 +79,21 @@ public class HomeDynamicFragment extends Fragment {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String data = response.body().string();
-                List<ShowArticles> articlesList = (List<ShowArticles>) GsonUtil.parseJsonWithGson(data,ShowArticles.class);
-                for (ShowArticles article : articlesList) {
-                    CardViewItemBean cardViewItemBean = new CardViewItemBean(article.getData().getTitle(),
-                            article.getData().getImg(), article.getData().getContent(), article.getData().getUserName() ,article.getData().getUserPhoto(),article.getData().getLike());
-                    cardViewItemBeanList.add(cardViewItemBean);
-                }
+                String responseData = response.body().string();
+                initData(responseData);
             }
         });
 
     }
 
-
+    public void initData(String responseData) {
+        ShowArticles showArticles = new Gson().fromJson(responseData, ShowArticles.class);
+        List<ShowArticles.Data> dataList = showArticles.getData();
+        for (ShowArticles.Data data : dataList) {
+            CardViewItemBean cardViewItemBean = new CardViewItemBean(data.getArticleId(),data.getTitle(),
+                    data.getImg(),data.getContent(),data.getUserName(),data.getUserPhoto(),data.getLike());
+            cardViewItemBeanList.add(cardViewItemBean);
+        }
+    }
 
 }

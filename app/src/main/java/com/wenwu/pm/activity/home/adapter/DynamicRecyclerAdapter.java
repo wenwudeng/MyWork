@@ -2,6 +2,7 @@ package com.wenwu.pm.activity.home.adapter;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.wenwu.pm.R;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 import com.wenwu.pm.activity.home.fragment.HomeDynamicFragment;
 import com.wenwu.pm.activity.review.ArticleReviewActivity;
+import com.wenwu.pm.utils.JsonUtil;
 
 import java.util.List;
 
@@ -34,6 +36,7 @@ public class DynamicRecyclerAdapter extends RecyclerView.Adapter<DynamicRecycler
     private CardViewItemBean cardViewItemBean ;
 
     private HomeDynamicFragment dynamicFragment;
+
 
     public DynamicRecyclerAdapter(List<CardViewItemBean> cardViewItemBean, HomeDynamicFragment dynamicFragment) {
         this.cardViewItemBeanList = cardViewItemBean;
@@ -80,13 +83,17 @@ public class DynamicRecyclerAdapter extends RecyclerView.Adapter<DynamicRecycler
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
+                JsonUtil.bean = cardViewItemBeanList.get(position);
+                /*传参*/
                 CardViewItemBean cardViewItemBean = cardViewItemBeanList.get(position);
+
                 v.getContext().startActivity(new Intent(v.getContext(), ArticleReviewActivity.class));
                 Toast.makeText(v.getContext(), "you click view" + cardViewItemBean.getContent(), Toast.LENGTH_SHORT).show();
             }
         });
 
         holder.userFavourButton.setOnClickListener(new View.OnClickListener(){
+
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
@@ -118,18 +125,15 @@ public class DynamicRecyclerAdapter extends RecyclerView.Adapter<DynamicRecycler
         CardViewItemBean cardViewItemBean = cardViewItemBeanList.get(position);
         int count = cardViewItemBean.getAcceptFavourCount();
         Glide.with(dynamicFragment).load(cardViewItemBean.getImgUrl()).into(holder.userUploadImg);
+        holder.userUploadText.setText(cardViewItemBean.getTitle());
         Glide.with(dynamicFragment).load(cardViewItemBean.getUserPhoto()).into(holder.userPhoto);
-        holder.userUploadText.setText(cardViewItemBean.getContent());
-        holder.userId.setText(cardViewItemBean.getUserId());
+        holder.userId.setText(cardViewItemBean.getUserName());
         holder.userFavourCount.setText(Integer.toString(count));
-
     }
-
 
     @Override
     public int getItemCount() {
         return cardViewItemBeanList.size();
     }
-
 
 }

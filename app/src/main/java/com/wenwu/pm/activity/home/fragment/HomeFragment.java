@@ -36,7 +36,6 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_home,container,false);
-
     }
 
 
@@ -55,6 +54,8 @@ public class HomeFragment extends Fragment {
         tabLayout = view.findViewById(R.id.tab_layout);
 //        tabLayout绑定ViewPager
         tabLayout.setupWithViewPager(viewPager);
+
+        viewPager.setOffscreenPageLimit(2);
     }
 
 

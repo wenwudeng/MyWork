@@ -1,5 +1,7 @@
 package com.wenwu.pm.activity.home.adapter;
 
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -43,4 +45,9 @@ public class HomePagerAdapter extends FragmentStatePagerAdapter {
         }
         return null;
     }
+
+  /*  @Override
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        super.destroyItem(container, position, object);
+    }*/
 }

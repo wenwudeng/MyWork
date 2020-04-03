@@ -73,13 +73,13 @@
                     android:background="@mipmap/icon_upvote"
                      />
 
-                <TextView
-                    android:id="@+id/user_favourCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="5dp"
-                    android:text="1000" />
+                    <TextView
+                        android:id="@+id/user_favourCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:text="1000" />
                 </LinearLayout>
 
             </RelativeLayout>

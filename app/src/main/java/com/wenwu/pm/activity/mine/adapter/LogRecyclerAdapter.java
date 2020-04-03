@@ -116,7 +116,7 @@ public class LogRecyclerAdapter extends RecyclerView.Adapter<LogRecyclerAdapter.
         Glide.with(myLogFragment).load(cardViewItemBean.getImgUrl()).into(holder.showImg);
         Glide.with(myLogFragment).load(cardViewItemBean.getUserPhoto()).into(holder.photo);
         holder.title_content.setText(cardViewItemBean.getContent());
-        holder.userName.setText(cardViewItemBean.getUserId());
+        holder.userName.setText(cardViewItemBean.getUserName());
         holder.favourCount.setText(Integer.toString(count));
     }
 

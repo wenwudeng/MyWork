@@ -1,6 +1,7 @@
 package com.wenwu.pm.goson;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author:wenwudeng
@@ -10,7 +11,7 @@ public class ShowArticles {
     private boolean success;
     private String code;
     private String msg;
-    private Data data;
+    private List<Data> data;
 
     public boolean isSuccess() {
         return success;
@@ -36,11 +37,11 @@ public class ShowArticles {
         this.msg = msg;
     }
 
-    public Data getData() {
+    public List<Data> getData() {
         return data;
     }
 
-    public void setData(Data data) {
+    public void setData(List<Data> data) {
         this.data = data;
     }
 

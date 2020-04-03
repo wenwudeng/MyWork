@@ -31,7 +31,7 @@
                 app:expandedTitleMarginEnd="64dp">
 
              <ImageView
-                    android:id="@+id/detail_page_image"
+                    android:id="@+id/article_page_image"
                     android:layout_width="match_parent"
                     android:layout_height="248dp"
                     android:scaleType="centerCrop"
@@ -73,7 +73,7 @@
                         android:layout_marginTop="10dp">
 
                         <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/show_article_photo"
+                            android:id="@+id/article_page_user_photo"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center_vertical"
@@ -82,27 +82,28 @@
                             app:civ_border_width="2dp" />
 
                         <TextView
+                            android:id="@+id/article_page_user_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_toEndOf="@id/show_article_photo"
+                            android:layout_toEndOf="@id/article_page_user_photo"
                             android:text="留白"
                             android:textSize="17dp" />
 
                         <Button
-                            android:id="@+id/show_article_concern"
+                            android:id="@+id/article_page_concern"
                             android:layout_width="55dp"
                             android:layout_height="23dp"
                             android:layout_marginTop="7dp"
                             android:layout_marginEnd="15dp"
-                            android:layout_toStartOf="@id/article_share"
+                            android:layout_toStartOf="@id/article_pager_share"
                             android:background="@drawable/btn_round_helpet"
                             android:text="关注"
                             android:textColor="@color/red" />
 
                         <ImageButton
-                            android:id="@+id/article_share"
+                            android:id="@+id/article_pager_share"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -113,8 +114,8 @@
                             android:src="@mipmap/icon_share_btn" />
                     </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/detail_page_title"
+             <!--       <TextView
+                        android:id="@+id/article_page_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="18dp"
@@ -122,16 +123,15 @@
                         android:layout_marginBottom="6dp"
                         android:text="诗和远方"
                         android:textColor="#363636"
-                        android:textSize="18sp" />
+                        android:textSize="18sp" />-->
 
                     <TextView
-                        android:id="@+id/detail_page_story"
+                        android:id="@+id/article_page_content"
                         android:layout_width="wrap_content"
-                        android:layout_height="47dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="18dp"
                         android:layout_marginRight="10dp"
-                        android:ellipsize="end"
-                        android:maxLines="10"
+                        android:layout_marginTop="10dp"
                         android:text="水光潋滟晴方好，山色空蒙雨亦奇。\n欲把西湖比西子，淡抹浓妆总相宜。"
                         android:textColor="#6e6e6e"
                         android:textSize="14sp" />

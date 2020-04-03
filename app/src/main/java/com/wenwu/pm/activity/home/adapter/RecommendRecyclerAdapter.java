@@ -120,7 +120,7 @@ public class RecommendRecyclerAdapter extends RecyclerView.Adapter<RecommendRecy
         Glide.with(recommendFragment).load(cardViewItemBean.getUserPhoto()).into(holder.userPhoto);
         holder.userUploadImg.setImageResource(cardViewItemBean.getSendImageId());
         holder.userUploadText.setText(cardViewItemBean.getContent());
-        holder.userId.setText(cardViewItemBean.getUserId());
+        holder.userId.setText(cardViewItemBean.getUserName());
         holder.userFavourCount.setText(Integer.toString(count));
 
 

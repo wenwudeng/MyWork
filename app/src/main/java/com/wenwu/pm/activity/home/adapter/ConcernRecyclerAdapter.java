@@ -118,9 +118,9 @@ public class ConcernRecyclerAdapter extends RecyclerView.Adapter<ConcernRecycler
         int count = cardViewItemBean.getAcceptFavourCount();
         Glide.with(concernFragment).load(cardViewItemBean.getImgUrl()).into(holder.userUploadImg);
         Glide.with(concernFragment).load(cardViewItemBean.getUserPhoto()).into(holder.userPhoto);
-        holder.userUploadImg.setImageResource(cardViewItemBean.getSendImageId());
+       // holder.userUploadImg.setImageResource(cardViewItemBean.getSendImageId());
         holder.userUploadText.setText(cardViewItemBean.getContent());
-        holder.userId.setText(cardViewItemBean.getUserId());
+        holder.userId.setText(cardViewItemBean.getUserName());
         holder.userFavourCount.setText(Integer.toString(count));
 
 

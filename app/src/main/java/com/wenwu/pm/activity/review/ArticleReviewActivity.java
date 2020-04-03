@@ -15,9 +15,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -27,13 +30,27 @@ import com.wenwu.pm.activity.review.adapter.CommentExpandAdapter;
 import com.wenwu.pm.activity.review.bean.CommentBean;
 import com.wenwu.pm.activity.review.bean.CommentDetailBean;
 import com.wenwu.pm.activity.review.bean.ReplyDetailBean;
+import com.wenwu.pm.utils.JsonUtil;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ArticleReviewActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "MainActivity";
     private Toolbar toolbar;
     private TextView bt_comment;
+
+    private ImageView article_page_img;
+    private CircleImageView article_page_user_photo;
+    private TextView article_user_name;
+    private TextView article_page_title;
+    private TextView article_page_content;
+    private ImageButton article_page_share;
+    private Button article_page_concern;
+
+    private JsonUtil jsonUtil = new JsonUtil();
+
     private CommentExpandableListView expandableListView;
     private CommentExpandAdapter adapter;
     private CommentBean commentBean;
@@ -105,13 +122,32 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
         expandableListView = findViewById(R.id.detail_page_lv_comment);
         bt_comment = findViewById(R.id.detail_page_do_comment);
         bt_comment.setOnClickListener(this);
+
+        article_page_img = findViewById(R.id.article_page_image);
+        article_page_user_photo = findViewById(R.id.article_page_user_photo);
+        article_user_name = findViewById(R.id.article_page_user_name);
+        article_page_content = findViewById(R.id.article_page_content);
+        article_page_share = findViewById(R.id.article_pager_share);
+        article_page_concern = findViewById(R.id.article_page_concern);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
        CollapsingToolbarLayout collapsingToolbar =
                findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle("我国之民一向朴实无比这与其他");
+        collapsingToolbar.setTitle(jsonUtil.bean.getTitle());
+
+        initArticle();
+
         commentsList = generateTestData();
         initExpandableListView(commentsList);
+
+    }
+
+   public void initArticle() {
+       Glide.with(this).load(jsonUtil.bean.getImgUrl()).into(article_page_img);
+       Glide.with(this).load(jsonUtil.bean.getUserPhoto()).into(article_page_user_photo);
+       article_user_name.setText(jsonUtil.bean.getUserName());
+       article_page_content.setText(JsonUtil.bean.getContent());
     }
 
     /**
@@ -284,7 +320,7 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
                 if(!TextUtils.isEmpty(charSequence) && charSequence.length()>2){
                     bt_comment.setBackgroundColor(getColor(R.color.red));
                 }else {
-                    bt_comment.setBackgroundColor(Color.parseColor("#00000"));
+                    bt_comment.setBackgroundColor(Color.parseColor("#D8D8D8"));
                 }
             }
 

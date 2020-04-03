@@ -1,6 +1,8 @@
 package com.wenwu.pm.utils;
 
+import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 import com.wenwu.pm.goson.LRReturnJson;
+import com.wenwu.pm.goson.ShowArticles;
 import com.wenwu.pm.goson.ShowReturnJson;
 
 /**
@@ -9,6 +11,7 @@ import com.wenwu.pm.goson.ShowReturnJson;
  */
 public class JsonUtil {
    public static ShowReturnJson showJson;
-   public static String imageUrl;
    public static int userId;
+   public static int articleId;
+   public static CardViewItemBean bean;
 }

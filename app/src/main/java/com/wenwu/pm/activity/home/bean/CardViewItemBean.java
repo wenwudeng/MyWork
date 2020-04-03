@@ -4,22 +4,32 @@ package com.wenwu.pm.activity.home.bean;
  * 此类用于用户发布信息bean
  */
 public class CardViewItemBean {
+    private int articleId;
     private String title;
     private int sendImageId;
     private String imgUrl;
     private String content;
-    private String userId;
+    private String userName;
     private String userPhoto;
     private int acceptFavourCount;
 
-    public CardViewItemBean(String title, String imgUrl, String content,
-                            String userId, String userPhoto, int acceptFavourCount) {
+    public CardViewItemBean(int articleId,String title, String imgUrl, String content,
+                            String userName, String userPhoto, int acceptFavourCount) {
+        this.articleId = articleId;
         this.title = title;
         this.imgUrl = imgUrl;
         this.content = content;
-        this.userId = userId;
+        this.userName = userName;
         this.userPhoto = userPhoto;
         this.acceptFavourCount = acceptFavourCount;
+    }
+
+    public int getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(int articleId) {
+        this.articleId = articleId;
     }
 
     public String getImgUrl() {
@@ -54,12 +64,12 @@ public class CardViewItemBean {
         this.content = content;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserName(String userId) {
+        this.userName = userId;
     }
 
     public String getUserPhoto() {
@@ -76,5 +86,18 @@ public class CardViewItemBean {
 
     public void setAcceptFavourCount(int acceptFavourCount) {
         this.acceptFavourCount = acceptFavourCount;
+    }
+
+    @Override
+    public String toString() {
+        return "CardViewItemBean{" +
+                "title='" + title + '\'' +
+                ", sendImageId=" + sendImageId +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", content='" + content + '\'' +
+                ", userId='" + userName + '\'' +
+                ", userPhoto='" + userPhoto + '\'' +
+                ", acceptFavourCount=" + acceptFavourCount +
+                '}';
     }
 }
