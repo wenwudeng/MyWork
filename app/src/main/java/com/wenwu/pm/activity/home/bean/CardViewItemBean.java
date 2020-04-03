@@ -6,18 +6,28 @@ package com.wenwu.pm.activity.home.bean;
 public class CardViewItemBean {
     private String title;
     private int sendImageId;
+    private String imgUrl;
     private String content;
     private String userId;
-    private int userPhoto;
-    private int acceptFavourCount ;
+    private String userPhoto;
+    private int acceptFavourCount;
 
-    public CardViewItemBean(String title, int sendImage, String content, String userId, int userPhoto, int acceptFavourCount) {
+    public CardViewItemBean(String title, String imgUrl, String content,
+                            String userId, String userPhoto, int acceptFavourCount) {
         this.title = title;
-        this.sendImageId = sendImage;
+        this.imgUrl = imgUrl;
         this.content = content;
         this.userId = userId;
         this.userPhoto = userPhoto;
         this.acceptFavourCount = acceptFavourCount;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public String getTitle() {
@@ -52,11 +62,11 @@ public class CardViewItemBean {
         this.userId = userId;
     }
 
-    public int getUserPhoto() {
+    public String getUserPhoto() {
         return userPhoto;
     }
 
-    public void setUserPhoto(int userPhoto) {
+    public void setUserPhoto(String userPhoto) {
         this.userPhoto = userPhoto;
     }
 

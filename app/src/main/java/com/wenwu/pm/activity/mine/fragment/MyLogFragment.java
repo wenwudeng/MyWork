@@ -41,12 +41,12 @@ public class MyLogFragment extends Fragment {
      * 初始化数据
      */
     public void init() {
-        for (int i = 0; i < 3; i++) {
+/*        for (int i = 0; i < 3; i++) {
             CardViewItemBean cardViewItemBean = new CardViewItemBean("抗战疫情", R.drawable.li, "中国加油,武汉加油!", "梦想", R.mipmap.pic2,100);
             cardViewItemBeanList.add(cardViewItemBean);
             CardViewItemBean cardViewItemBean1 = new CardViewItemBean("抗战疫情", R.drawable.chen, "中国加油,武汉加油!", "梦想", R.mipmap.pic4,100);
             cardViewItemBeanList.add(cardViewItemBean1);
-        }
+        }*/
     }
 
 
@@ -56,7 +56,7 @@ public class MyLogFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_my_log);
         GridLayoutManager layoutManager = new GridLayoutManager(view.getContext(), 2);
         recyclerView.setLayoutManager(layoutManager);
-        LogRecyclerAdapter adapter = new LogRecyclerAdapter(cardViewItemBeanList);
+        LogRecyclerAdapter adapter = new LogRecyclerAdapter(cardViewItemBeanList,this);
         recyclerView.setAdapter(adapter);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_my_log);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

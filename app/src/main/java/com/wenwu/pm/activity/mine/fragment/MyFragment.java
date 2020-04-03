@@ -77,6 +77,20 @@ public class MyFragment extends Fragment implements View.OnClickListener{
 
     }
 
+    /**
+     * 初始化ListFragment,将三个Fragment加入list
+     * @return List<Fragment>集合
+     */
+
+    public List<Fragment> initViewPager() {
+        fragmentList = new ArrayList<>();
+        fragmentList.add(new MyLogFragment());
+        fragmentList.add(new MyQuestionFragment());
+        fragmentList.add(new MyCollectFragment());
+        fragmentList.add(new MyReviewFragment());
+        return fragmentList;
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -85,7 +99,6 @@ public class MyFragment extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.my_user_photo:
-
                 EditPersonalInfoActivity.openEdit(v.getContext(),this);
                 break;
 
@@ -106,27 +119,15 @@ public class MyFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-
-    /**
-     * 初始化ListFragment,将三个Fragment加入list
-     * @return List<Fragment>集合
-     */
-
-    public List<Fragment> initViewPager() {
-        fragmentList = new ArrayList<>();
-        fragmentList.add(new MyLogFragment());
-        fragmentList.add(new MyQuestionFragment());
-        fragmentList.add(new MyCollectFragment());
-        fragmentList.add(new MyReviewFragment());
-        return fragmentList;
-    }
-
     public void updateInfo(String userPhoto,String userName,String gender,String city,String profile,String pet) {
-        TextView textView_city = getView().findViewById(R.id.my_city);
-        textView_city.setText(city);//可以了6啊是挺多的，你这个还有一个问题，刚切换的时候，数据加载慢，可以单独开一个线程，慢慢查，登录之后，或者，我先看看
         JsonUtil.showJson.getData().setCity(city);
         JsonUtil.showJson.getData().setUserName(userName);
         JsonUtil.showJson.getData().setProfile(profile);
         JsonUtil.showJson.getData().setPhoto(userPhoto);
     }
+
+
+
+
+
 }

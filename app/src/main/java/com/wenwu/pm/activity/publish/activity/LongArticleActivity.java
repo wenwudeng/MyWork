@@ -155,7 +155,6 @@ public class LongArticleActivity extends AppCompatActivity implements IArticleVi
 
     @Override
     public void onViewSuccess(Object object) {
-
       LRReturnJson  json = (LRReturnJson)object;
         Looper.prepare();
         Toast.makeText(LongArticleActivity.this,json.getMsg(), Toast.LENGTH_LONG).show();

@@ -33,7 +33,6 @@ public class EditInfoModel implements IModel {
         OkHttpUtil.sendPostRequest("user/editInfo", params, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                System.out.println("=============failure==============");
                 e.printStackTrace();
             }
             @Override

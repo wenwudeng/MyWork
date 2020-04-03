@@ -15,17 +15,30 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import com.wenwu.pm.R;
-import com.wenwu.pm.activity.home.adapter.HomeRecyclerAdapter;
+import com.wenwu.pm.activity.home.adapter.DynamicRecyclerAdapter;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
+import com.wenwu.pm.goson.ShowArticles;
+import com.wenwu.pm.utils.GsonUtil;
+import com.wenwu.pm.utils.OkHttpUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class HomeDynamicFragment extends Fragment {
     //用于用户头像
     private List<CardViewItemBean> cardViewItemBeanList = new ArrayList<>();
     private SwipeRefreshLayout swipeRefreshLayout;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,8 +51,8 @@ public class HomeDynamicFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view2);
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        HomeRecyclerAdapter userEditIRecyclerAdapter = new HomeRecyclerAdapter(cardViewItemBeanList);
-        recyclerView.setAdapter(userEditIRecyclerAdapter);
+        DynamicRecyclerAdapter adapter = new DynamicRecyclerAdapter(cardViewItemBeanList,this);
+        recyclerView.setAdapter(adapter);
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_dynamic);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -57,13 +70,26 @@ public class HomeDynamicFragment extends Fragment {
     }
 
     public void init() {
+        OkHttpUtil.sendPostRequest("article/getArticles", null, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
 
-        CardViewItemBean cardViewItemBean = new CardViewItemBean("抗战疫情", R.drawable.deng, "小可爱", "留白", R.mipmap.pic4,1);
-        cardViewItemBeanList.add(cardViewItemBean);
-        // CardViewItemBean cardViewItemBean1 = new CardViewItemBean("抗战疫情", R.drawable.chen, "中国加油,武汉加油!", "陈瑶", R.mipmap.pic2,100);
-        // cardViewItemBeanList.add(cardViewItemBean1);
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String data = response.body().string();
+                List<ShowArticles> articlesList = (List<ShowArticles>) GsonUtil.parseJsonWithGson(data,ShowArticles.class);
+                for (ShowArticles article : articlesList) {
+                    CardViewItemBean cardViewItemBean = new CardViewItemBean(article.getData().getTitle(),
+                            article.getData().getImg(), article.getData().getContent(), article.getData().getUserName() ,article.getData().getUserPhoto(),article.getData().getLike());
+                    cardViewItemBeanList.add(cardViewItemBean);
+                }
+            }
+        });
 
     }
+
 
 
 }

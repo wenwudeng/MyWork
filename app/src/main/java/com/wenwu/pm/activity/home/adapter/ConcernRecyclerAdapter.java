@@ -13,10 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-
+import com.bumptech.glide.Glide;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
-import com.wenwu.pm.activity.publish.activity.ArticleShowActivity;
+import com.wenwu.pm.activity.home.fragment.HomeConcernFragment;
+import com.wenwu.pm.activity.home.fragment.HomeDynamicFragment;
 import com.wenwu.pm.activity.review.ArticleReviewActivity;
 
 import java.util.List;
@@ -26,14 +27,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * RecyclerView适配器
  */
-public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapter.ViewHolder> {
+public class ConcernRecyclerAdapter extends RecyclerView.Adapter<ConcernRecyclerAdapter.ViewHolder> {
 
     private List<CardViewItemBean> cardViewItemBeanList;
     private CardViewItemBean cardViewItemBean ;
 
+    private HomeConcernFragment concernFragment;
 
-    public HomeRecyclerAdapter(List<CardViewItemBean> cardViewItemBean) {
+    public ConcernRecyclerAdapter(List<CardViewItemBean> cardViewItemBean, HomeConcernFragment concernFragment) {
         this.cardViewItemBeanList = cardViewItemBean;
+        this.concernFragment = concernFragment;
     }
 
 
@@ -113,15 +116,15 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CardViewItemBean cardViewItemBean = cardViewItemBeanList.get(position);
         int count = cardViewItemBean.getAcceptFavourCount();
+        Glide.with(concernFragment).load(cardViewItemBean.getImgUrl()).into(holder.userUploadImg);
+        Glide.with(concernFragment).load(cardViewItemBean.getUserPhoto()).into(holder.userPhoto);
         holder.userUploadImg.setImageResource(cardViewItemBean.getSendImageId());
         holder.userUploadText.setText(cardViewItemBean.getContent());
-        holder.userPhoto.setImageResource(cardViewItemBean.getUserPhoto());
         holder.userId.setText(cardViewItemBean.getUserId());
         holder.userFavourCount.setText(Integer.toString(count));
 
 
     }
-
 
     @Override
     public int getItemCount() {

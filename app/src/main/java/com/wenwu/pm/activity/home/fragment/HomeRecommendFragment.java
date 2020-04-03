@@ -16,7 +16,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
 import com.wenwu.pm.R;
-import com.wenwu.pm.activity.home.adapter.HomeRecyclerAdapter;
+import com.wenwu.pm.activity.home.adapter.DynamicRecyclerAdapter;
+import com.wenwu.pm.activity.home.adapter.RecommendRecyclerAdapter;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 
 import java.util.ArrayList;
@@ -35,10 +36,10 @@ public class HomeRecommendFragment extends Fragment {
 
     public void init() {
         for (int i = 0; i < 1; i++) {
-            CardViewItemBean cardViewItemBean = new CardViewItemBean("写得很详细，受教了", R.drawable.dog1, "写得很详细，受教了。", "梦想", R.mipmap.pic4,1);
+/*            CardViewItemBean cardViewItemBean = new CardViewItemBean("写得很详细，受教了", R.drawable.dog1, "写得很详细，受教了。", "梦想", R.mipmap.pic4,1);
             cardViewItemBeanList.add(cardViewItemBean);
             CardViewItemBean cardViewItemBean1 = new CardViewItemBean("抗战疫情",R.drawable.dog , "中国加油,武汉加油!", "Jack", R.mipmap.pic2,12);
-            cardViewItemBeanList.add(cardViewItemBean1);
+            cardViewItemBeanList.add(cardViewItemBean1);*/
         }
     }
 
@@ -49,8 +50,8 @@ public class HomeRecommendFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view1);
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        HomeRecyclerAdapter userEditIRecyclerAdapter = new HomeRecyclerAdapter(cardViewItemBeanList);
-        recyclerView.setAdapter(userEditIRecyclerAdapter);
+        RecommendRecyclerAdapter adapter = new RecommendRecyclerAdapter(cardViewItemBeanList, this);
+        recyclerView.setAdapter(adapter);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_recommend);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

@@ -20,6 +20,7 @@ public class SettingActivity extends AppCompatActivity {
         loginOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 startActivity(new Intent(SettingActivity.this, LoginActivity.class));
             }
         });

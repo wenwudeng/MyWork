@@ -72,7 +72,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
     // 申请相册权限的requestCode
     private static final int PERMISSION_ALBUM_REQUEST_CODE = 2;
     private static MyFragment myFragment;
-    private Activity context;
+    //private Activity context;
 
     public static void openEdit(Context context, MyFragment myFragment1) {
         Intent intent = new Intent(context, EditPersonalInfoActivity.class);
@@ -84,7 +84,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_personal_info_edit);
-        context = this;
+       // context = this;
         initView();
         showResponse(JsonUtil.showJson);
 
@@ -99,7 +99,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
             @Override
             public void onClick(View v) {
                 presenter.save();
-                context.finish();
+                finish();
             }
         });
     }
@@ -210,23 +210,13 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
                     OkHttpUtil.uploadImage(getUserName(), path, new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-
                         }
-
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             photoUrl = response.body().string();
                         }
                     });
                 }
-
-                //方法2
-                     /* try {
-                    Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
-                    ivPhoto.setImageBitmap(bitmap);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }*/
             } else {
                 Toast.makeText(this, "请选择照片", Toast.LENGTH_SHORT).show();
             }

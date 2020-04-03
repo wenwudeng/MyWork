@@ -12,8 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
+import com.wenwu.pm.activity.mine.fragment.MyLogFragment;
 
 import java.util.List;
 
@@ -28,9 +30,11 @@ public class LogRecyclerAdapter extends RecyclerView.Adapter<LogRecyclerAdapter.
     private List<CardViewItemBean> cardViewItemBeanList;
     private CardViewItemBean cardViewItemBean;
 
+    private MyLogFragment myLogFragment;
 
-    public LogRecyclerAdapter(List<CardViewItemBean> cardViewItemBean) {
+    public LogRecyclerAdapter(List<CardViewItemBean> cardViewItemBean, MyLogFragment myLogFragment) {
         this.cardViewItemBeanList = cardViewItemBean;
+        this.myLogFragment = myLogFragment;
     }
 
 
@@ -109,9 +113,9 @@ public class LogRecyclerAdapter extends RecyclerView.Adapter<LogRecyclerAdapter.
     public void onBindViewHolder(@NonNull LogRecyclerAdapter.ViewHolder holder, int position) {
         CardViewItemBean cardViewItemBean = cardViewItemBeanList.get(position);
         int count = cardViewItemBean.getAcceptFavourCount();
-        holder.showImg.setImageResource(cardViewItemBean.getSendImageId());
+        Glide.with(myLogFragment).load(cardViewItemBean.getImgUrl()).into(holder.showImg);
+        Glide.with(myLogFragment).load(cardViewItemBean.getUserPhoto()).into(holder.photo);
         holder.title_content.setText(cardViewItemBean.getContent());
-        holder.photo.setImageResource(cardViewItemBean.getUserPhoto());
         holder.userName.setText(cardViewItemBean.getUserId());
         holder.favourCount.setText(Integer.toString(count));
     }

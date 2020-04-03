@@ -1,5 +1,6 @@
 package com.wenwu.pm.activity.mine.adapter;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.message.bean.MsgAddNewConcern;
+import com.wenwu.pm.activity.mine.activity.PersonShowActivity;
 
 import java.util.List;
 
@@ -58,6 +60,7 @@ public class ConcernRecyclerAdapter extends RecyclerView.Adapter<ConcernRecycler
                 int position = holder.getAdapterPosition();
                 MsgAddNewConcern concern = list.get(position);
                 Toast.makeText(v.getContext(), "you click view" + concern.getUserId(),Toast.LENGTH_SHORT).show();
+                v.getContext().startActivity(new Intent(v.getContext(), PersonShowActivity.class));
             }
         });
 

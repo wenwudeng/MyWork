@@ -7,13 +7,15 @@ import java.util.List;
  */
 
 public class CommentBean {
-    private int code;
+    private String success;
+    private String code;
     private String message;
     private Data data;
-    public void setCode(int code) {
+
+    public void setCode(String code) {
         this.code = code;
     }
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
@@ -31,8 +33,11 @@ public class CommentBean {
         return data;
     }
 
-    public class Data {
+    public String getSuccess() { return success; }
 
+    public void setSuccess(String success) { this.success = success; }
+
+    public class Data {
         private int total;
         private List<CommentDetailBean> list;
         public void setTotal(int total) {
@@ -48,7 +53,8 @@ public class CommentBean {
         public List<CommentDetailBean> getList() {
             return list;
         }
-
     }
+
+
 
 }
