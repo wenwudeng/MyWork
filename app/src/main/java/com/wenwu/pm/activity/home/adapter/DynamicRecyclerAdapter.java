@@ -23,6 +23,7 @@ import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 import com.wenwu.pm.activity.home.fragment.HomeDynamicFragment;
 import com.wenwu.pm.activity.review.ArticleReviewActivity;
 import com.wenwu.pm.activity.review.bean.CommentBean;
+import com.wenwu.pm.goson.MyLogJson;
 import com.wenwu.pm.utils.JsonUtil;
 import com.wenwu.pm.utils.OkHttpUtil;
 
@@ -104,6 +105,7 @@ public class DynamicRecyclerAdapter extends RecyclerView.Adapter<DynamicRecycler
                 initCommentData();
                 v.getContext().startActivity(new Intent(v.getContext(), ArticleReviewActivity.class));
                 Toast.makeText(v.getContext(), "you click view" + cardViewItemBean.getContent(), Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -158,8 +160,8 @@ public class DynamicRecyclerAdapter extends RecyclerView.Adapter<DynamicRecycler
     }
 
 
-    /*提前获取指定文章文章评论*/
-    public void initCommentData() {
+    /*提前获取指定文章评论数据*/
+    public static void initCommentData() {
         Map<String, Object> param = new HashMap<>();
         param.put("articleId", JsonUtil.bean.getArticleId());
         OkHttpUtil.sendPostRequest("comment/getAll", param, new Callback() {
@@ -176,6 +178,5 @@ public class DynamicRecyclerAdapter extends RecyclerView.Adapter<DynamicRecycler
             }
         });
     }
-
 
 }

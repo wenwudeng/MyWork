@@ -4,6 +4,7 @@ import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 import com.wenwu.pm.activity.review.bean.CommentBean;
 import com.wenwu.pm.goson.LRReturnJson;
 import com.wenwu.pm.goson.LoginReturnJson;
+import com.wenwu.pm.goson.MyLogJson;
 import com.wenwu.pm.goson.ShowReturnJson;
 
 import java.util.List;
@@ -19,12 +20,15 @@ public class JsonUtil {
    //DynamicRecyclerViewAdapter item点击监听器中处传入，
     public static ShowReturnJson showJson;
 
-   //public static int userId;
-
+   //item数据初始化
    public static CardViewItemBean bean;//文章初始化
 
+   //未经Gson解析的String型Json数据
    public static String commentJson;//评论初始化
 
-
+   //获取评论Id
    public static int commentId;
+
+   //获取Gson解析的个人日志数据
+   public static MyLogJson myLogJson;
 }

@@ -22,7 +22,7 @@ import com.google.gson.Gson;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.home.adapter.DynamicRecyclerAdapter;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
-import com.wenwu.pm.goson.ShowArticles;
+import com.wenwu.pm.goson.ShowArticlesJson;
 import com.wenwu.pm.utils.OkHttpUtil;
 
 import java.io.IOException;
@@ -71,7 +71,7 @@ public class HomeDynamicFragment extends Fragment {
         });
     }
 
-    /*加载recycler数据数据*/
+    /*加载所有文章数据*/
     public void init() {
         OkHttpUtil.sendPostRequest("article/getArticles", null, new Callback() {
             @Override
@@ -89,9 +89,9 @@ public class HomeDynamicFragment extends Fragment {
     }
 
     public void initData(String responseData) {
-        ShowArticles showArticles = new Gson().fromJson(responseData, ShowArticles.class);
-        List<ShowArticles.Data> dataList = showArticles.getData();
-        for (ShowArticles.Data data : dataList) {
+        ShowArticlesJson showArticlesJson = new Gson().fromJson(responseData, ShowArticlesJson.class);
+        List<ShowArticlesJson.Data> dataList = showArticlesJson.getData();
+        for (ShowArticlesJson.Data data : dataList) {
             CardViewItemBean cardViewItemBean = new CardViewItemBean(data.getArticleId(),data.getTitle(),
                     data.getImg(),data.getContent(),data.getUserName(),data.getUserPhoto(),data.getLike());
             cardViewItemBeanList.add(cardViewItemBean);

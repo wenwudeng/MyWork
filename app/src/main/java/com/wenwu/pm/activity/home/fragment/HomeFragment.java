@@ -12,11 +12,22 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import com.google.gson.Gson;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.home.adapter.HomePagerAdapter;
+import com.wenwu.pm.goson.MyLogJson;
+import com.wenwu.pm.utils.JsonUtil;
+import com.wenwu.pm.utils.OkHttpUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class HomeFragment extends Fragment {
     private ViewPager viewPager;
@@ -56,6 +67,7 @@ public class HomeFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
 
         viewPager.setOffscreenPageLimit(2);
+        initMyLogData();
     }
 
 
@@ -70,5 +82,26 @@ public class HomeFragment extends Fragment {
         fragmentList.add(new HomeDynamicFragment());
         return fragmentList;
     }
+
+
+    /*预加载我的模块的日志数据*/
+    public void initMyLogData() {
+        Map<String, Object> param = new HashMap<>();
+        param.put("userid", JsonUtil.loginJson.getData().getId());
+        OkHttpUtil.sendPostRequest("article/getAllArticle", param, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String data = response.body().string();
+                MyLogJson json = new Gson().fromJson(data, MyLogJson.class);
+                JsonUtil.myLogJson = json;
+            }
+        });
+    }
+
 
 }

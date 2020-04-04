@@ -17,6 +17,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 import com.wenwu.pm.activity.mine.adapter.LogRecyclerAdapter;
+import com.wenwu.pm.goson.MyLogJson;
+import com.wenwu.pm.utils.JsonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,19 +42,22 @@ public class MyLogFragment extends Fragment {
     /**
      * 初始化数据
      */
-    public void init() {
-/*        for (int i = 0; i < 3; i++) {
-            CardViewItemBean cardViewItemBean = new CardViewItemBean("抗战疫情", R.drawable.li, "中国加油,武汉加油!", "梦想", R.mipmap.pic2,100);
+    public void initData() {
+        System.out.println(JsonUtil.myLogJson);
+        List<MyLogJson.Data> dataList = JsonUtil.myLogJson.getData();
+
+        for (MyLogJson.Data data : dataList) {
+            System.out.println(data);
+            CardViewItemBean cardViewItemBean = new CardViewItemBean(data.getId(),data.getTitle(),
+                    data.getImg(),data.getContent(),JsonUtil.loginJson.getData().getUserName(),JsonUtil.loginJson.getData().getPhoto(),data.getLike());
             cardViewItemBeanList.add(cardViewItemBean);
-            CardViewItemBean cardViewItemBean1 = new CardViewItemBean("抗战疫情", R.drawable.chen, "中国加油,武汉加油!", "梦想", R.mipmap.pic4,100);
-            cardViewItemBeanList.add(cardViewItemBean1);
-        }*/
+        }
     }
 
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        init();
+        initData();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_my_log);
         GridLayoutManager layoutManager = new GridLayoutManager(view.getContext(), 2);
         recyclerView.setLayoutManager(layoutManager);

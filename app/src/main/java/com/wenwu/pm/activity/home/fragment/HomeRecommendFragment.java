@@ -17,10 +17,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.gson.Gson;
 import com.wenwu.pm.R;
-import com.wenwu.pm.activity.home.adapter.DynamicRecyclerAdapter;
 import com.wenwu.pm.activity.home.adapter.RecommendRecyclerAdapter;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
-import com.wenwu.pm.goson.ShowArticles;
+import com.wenwu.pm.goson.ShowArticlesJson;
 import com.wenwu.pm.utils.OkHttpUtil;
 
 import java.io.IOException;
@@ -86,16 +85,16 @@ public class HomeRecommendFragment extends Fragment {
 
     public void initData(String responseData) {
         int i = 0;
-        ShowArticles showArticles = new Gson().fromJson(responseData, ShowArticles.class);
-        List<ShowArticles.Data> dataList = showArticles.getData();
-        for (ShowArticles.Data data : dataList) {
+        ShowArticlesJson showArticlesJson = new Gson().fromJson(responseData, ShowArticlesJson.class);
+        List<ShowArticlesJson.Data> dataList = showArticlesJson.getData();
+        for (ShowArticlesJson.Data data : dataList) {
             if (i % 2 == 0) {
-                CardViewItemBean cardViewItemBean = new CardViewItemBean(data.getArticleId(),data.getTitle(),
-                        data.getImg(),data.getContent(),data.getUserName(),data.getUserPhoto(),data.getLike());
-                cardViewItemBeanList.add(cardViewItemBean);
-                i++;
-            }
 
+                CardViewItemBean cardViewItemBean = new CardViewItemBean(data.getArticleId(), data.getTitle(),
+                        data.getImg(), data.getContent(), data.getUserName(), data.getUserPhoto(), data.getLike());
+                cardViewItemBeanList.add(cardViewItemBean);
+            }
+            i++;
         }
 
     }

@@ -59,6 +59,8 @@ public class MyFragment extends Fragment implements View.OnClickListener{
         tabLayout = view.findViewById(R.id.tab_layoutMy);
         tabLayout.setupWithViewPager(viewPager);
 
+        viewPager.setOffscreenPageLimit(2);
+
         tex_concern = view.findViewById(R.id.my_concern);
         tex_concern.setOnClickListener(this);
 

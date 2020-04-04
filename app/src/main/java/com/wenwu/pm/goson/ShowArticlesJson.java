@@ -7,7 +7,7 @@ import java.util.List;
  * @author:wenwudeng
  * @date:15:26 2020/4/3
  */
-public class ShowArticles {
+public class ShowArticlesJson {
     private boolean success;
     private String code;
     private String msg;

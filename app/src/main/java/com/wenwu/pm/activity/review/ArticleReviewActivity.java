@@ -271,6 +271,7 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
                     //评论
                     Map<String, Object> params = new HashMap<>();
                     params.put("userid", JsonUtil.loginJson.getData().getId());
+                    System.out.println(JsonUtil.bean.getArticleId());
                     params.put("articleId", JsonUtil.bean.getArticleId());
                     params.put("content", commentContent);
                     OkHttpUtil.sendPostRequest("comment/add", params, new Callback() {

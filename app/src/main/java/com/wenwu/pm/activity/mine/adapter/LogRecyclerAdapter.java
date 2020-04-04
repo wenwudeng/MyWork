@@ -1,5 +1,6 @@
 package com.wenwu.pm.activity.mine.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.home.adapter.DynamicRecyclerAdapter;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 import com.wenwu.pm.activity.mine.fragment.MyLogFragment;
+import com.wenwu.pm.activity.review.ArticleReviewActivity;
+import com.wenwu.pm.utils.JsonUtil;
 
 import java.util.List;
 
@@ -24,6 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * @author:wenwudeng
  * @date:9:41 AM 3/19/2020
+ * 数据在HomeFragment中加载
  */
 public class LogRecyclerAdapter extends RecyclerView.Adapter<LogRecyclerAdapter.ViewHolder>{
 
@@ -31,6 +36,8 @@ public class LogRecyclerAdapter extends RecyclerView.Adapter<LogRecyclerAdapter.
     private CardViewItemBean cardViewItemBean;
 
     private MyLogFragment myLogFragment;
+
+    private boolean flag = false;
 
     public LogRecyclerAdapter(List<CardViewItemBean> cardViewItemBean, MyLogFragment myLogFragment) {
         this.cardViewItemBeanList = cardViewItemBean;
@@ -73,11 +80,21 @@ public class LogRecyclerAdapter extends RecyclerView.Adapter<LogRecyclerAdapter.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_log_item, parent, false);
         //将获得的concern_item视图实例作为ViewHolder获取实例的参数
         final LogRecyclerAdapter.ViewHolder holder = new LogRecyclerAdapter.ViewHolder(view);
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
+                /*传参*/
+                JsonUtil.bean = cardViewItemBeanList.get(position);
+                System.out.println(JsonUtil.bean);
+
                 CardViewItemBean cardViewItemBean = cardViewItemBeanList.get(position);
+
+                /*加载评论数据*/
+                DynamicRecyclerAdapter.initCommentData();
+
+                v.getContext().startActivity(new Intent(v.getContext(), ArticleReviewActivity.class));
                 Toast.makeText(v.getContext(), "you click view" + cardViewItemBean.getContent(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -88,18 +105,22 @@ public class LogRecyclerAdapter extends RecyclerView.Adapter<LogRecyclerAdapter.
                 int position = holder.getAdapterPosition();
                 cardViewItemBean = cardViewItemBeanList.get(position);
                 if (v.getId() == R.id.user_favourButton) {
-                    int count =  cardViewItemBean.getAcceptFavourCount();
-                    holder.favourButton.setBackgroundResource(R.mipmap.icon_upvoted);
+                    int count =  cardViewItemBean.getAcceptFavourCount()+1;
+                    int count1 = count-1;
+                    if (!flag) {
+                        holder.favourButton.setBackgroundResource(R.mipmap.icon_upvoted);
+                        holder.favourCount.setText(Integer.toString(count));
+                        flag = true;
+                    }else {
+                        holder.favourButton.setBackgroundResource(R.mipmap.icon_upvote);
+                        holder.favourCount.setText(Integer.toString(count1));
+                        flag =false;
+                    }
                 }
             }
         });
 
-        holder.favourCount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.favourCount.setText("23");
-            }
-        });
+
         return holder;
     }
 
