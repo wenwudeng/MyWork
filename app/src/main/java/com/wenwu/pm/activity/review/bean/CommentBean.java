@@ -1,15 +1,16 @@
 package com.wenwu.pm.activity.review.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by moos on 2018/4/20.
  */
 
-public class CommentBean {
-    private String success;
+public class CommentBean implements Serializable {
+    private boolean success;
     private String code;
-    private String message;
+    private String msg;
     private Data data;
 
     public void setCode(String code) {
@@ -19,11 +20,20 @@ public class CommentBean {
         return code;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public boolean isSuccess() {
+        return success;
     }
-    public String getMessage() {
-        return message;
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public void setData(Data data) {
@@ -33,13 +43,11 @@ public class CommentBean {
         return data;
     }
 
-    public String getSuccess() { return success; }
 
-    public void setSuccess(String success) { this.success = success; }
-
-    public class Data {
+    public class Data implements Serializable{
         private int total;
         private List<CommentDetailBean> list;
+
         public void setTotal(int total) {
             this.total = total;
         }
@@ -55,6 +63,13 @@ public class CommentBean {
         }
     }
 
-
-
+    @Override
+    public String toString() {
+        return "CommentBean{" +
+                "success=" + success +
+                ", code='" + code + '\'' +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                '}';
+    }
 }

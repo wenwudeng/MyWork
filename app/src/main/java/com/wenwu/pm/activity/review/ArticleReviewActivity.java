@@ -36,6 +36,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+
 public class ArticleReviewActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "MainActivity";
     private Toolbar toolbar;
@@ -44,18 +45,21 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
     private ImageView article_page_img;
     private CircleImageView article_page_user_photo;
     private TextView article_user_name;
-    private TextView article_page_title;
+   private TextView article_comment_count;
     private TextView article_page_content;
     private ImageButton article_page_share;
     private Button article_page_concern;
 
-    private JsonUtil jsonUtil = new JsonUtil();
+    private int total;
+
+    //private JsonUtil jsonUtil = new JsonUtil();
 
     private CommentExpandableListView expandableListView;
     private CommentExpandAdapter adapter;
     private CommentBean commentBean;
     private List<CommentDetailBean> commentsList;
     private BottomSheetDialog dialog;
+    private String testJson1;
     private String testJson = "{\n" +
             "\t\"code\": 1000,\n" +
             "\t\"message\": \"查看评论成功\",\n" +
@@ -129,25 +133,39 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
         article_page_content = findViewById(R.id.article_page_content);
         article_page_share = findViewById(R.id.article_pager_share);
         article_page_concern = findViewById(R.id.article_page_concern);
+        article_comment_count = findViewById(R.id.article_page_comment_count);//评论数
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
        CollapsingToolbarLayout collapsingToolbar =
                findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(jsonUtil.bean.getTitle());
-
-        initArticle();
-
+        collapsingToolbar.setTitle(JsonUtil.bean.getTitle());//文章标题
         commentsList = generateTestData();
         initExpandableListView(commentsList);
-
+        initArticle();
+    }
+    /*初始化文章内容*/
+   public void initArticle() {
+       Glide.with(this).load(JsonUtil.bean.getImgUrl()).into(article_page_img);
+       Glide.with(this).load(JsonUtil.bean.getUserPhoto()).into(article_page_user_photo);
+      // article_comment_count.setText(total);
+       article_user_name.setText(JsonUtil.bean.getUserName());
+       article_page_content.setText(JsonUtil.bean.getContent());
     }
 
-   public void initArticle() {
-       Glide.with(this).load(jsonUtil.bean.getImgUrl()).into(article_page_img);
-       Glide.with(this).load(jsonUtil.bean.getUserPhoto()).into(article_page_user_photo);
-       article_user_name.setText(jsonUtil.bean.getUserName());
-       article_page_content.setText(JsonUtil.bean.getContent());
+    /**
+     * by moos on 2018/04/20
+     * func:生成数据
+     * @return 评论数据
+     */
+    private List<CommentDetailBean> generateTestData(){
+        //while (testJson1==null);
+        Gson gson = new Gson();
+        commentBean = gson.fromJson(JsonUtil.commentJson, CommentBean.class);
+        //System.out.println(commentBean.getData());
+       //total = commentBean.getData().getTotal();
+        List<CommentDetailBean> commentList = commentBean.getData().getList();
+        return commentList;
     }
 
     /**
@@ -194,17 +212,7 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    /**
-     * by moos on 2018/04/20
-     * func:生成测试数据
-     * @return 评论数据
-     */
-    private List<CommentDetailBean> generateTestData(){
-        Gson gson = new Gson();
-        commentBean = gson.fromJson(testJson, CommentBean.class);
-        List<CommentDetailBean> commentList = commentBean.getData().getList();
-        return commentList;
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -251,6 +259,7 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
                     //commentOnWork(commentContent);
                     dialog.dismiss();
                     CommentDetailBean detailBean = new CommentDetailBean("小明", commentContent,"刚刚");
+
                     adapter.addTheCommentData(detailBean);
                     Toast.makeText(ArticleReviewActivity.this,"评论成功",Toast.LENGTH_SHORT).show();
 
@@ -293,6 +302,7 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
         final Button bt_comment = commentView.findViewById(R.id.dialog_comment_bt);
         commentText.setHint("回复 " + commentsList.get(position).getNickName() + " 的评论:");
         dialog.setContentView(commentView);
+        //回复框
         bt_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

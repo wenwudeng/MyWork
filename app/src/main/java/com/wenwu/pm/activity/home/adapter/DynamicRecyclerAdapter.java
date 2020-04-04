@@ -22,10 +22,17 @@ import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 import com.wenwu.pm.activity.home.fragment.HomeDynamicFragment;
 import com.wenwu.pm.activity.review.ArticleReviewActivity;
 import com.wenwu.pm.utils.JsonUtil;
+import com.wenwu.pm.utils.OkHttpUtil;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * RecyclerView适配器
@@ -36,6 +43,8 @@ public class DynamicRecyclerAdapter extends RecyclerView.Adapter<DynamicRecycler
     private CardViewItemBean cardViewItemBean ;
 
     private HomeDynamicFragment dynamicFragment;
+
+    private boolean flag = false;
 
 
     public DynamicRecyclerAdapter(List<CardViewItemBean> cardViewItemBean, HomeDynamicFragment dynamicFragment) {
@@ -79,16 +88,23 @@ public class DynamicRecyclerAdapter extends RecyclerView.Adapter<DynamicRecycler
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_item, parent, false);
         //将获得的concern_item视图实例作为ViewHolder获取实例的参数
         final ViewHolder holder = new ViewHolder(view);
+
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                JsonUtil.bean = cardViewItemBeanList.get(position);
+
                 /*传参*/
+                JsonUtil.bean = cardViewItemBeanList.get(position);
+
                 CardViewItemBean cardViewItemBean = cardViewItemBeanList.get(position);
 
                 v.getContext().startActivity(new Intent(v.getContext(), ArticleReviewActivity.class));
                 Toast.makeText(v.getContext(), "you click view" + cardViewItemBean.getContent(), Toast.LENGTH_SHORT).show();
+
+                /*提前加载文章评论数据*/
+                initCommentData();
             }
         });
 
@@ -99,18 +115,21 @@ public class DynamicRecyclerAdapter extends RecyclerView.Adapter<DynamicRecycler
                 int position = holder.getAdapterPosition();
                 cardViewItemBean = cardViewItemBeanList.get(position);
                 if (v.getId() == R.id.user_favourButton) {
-                   int count =  cardViewItemBean.getAcceptFavourCount();
-                    holder.userFavourButton.setBackgroundResource(R.mipmap.icon_upvoted);
+                   int count =  cardViewItemBean.getAcceptFavourCount()+1;
+                   int count1 = count-1;
+                    if (!flag) {
+                        holder.userFavourButton.setBackgroundResource(R.mipmap.icon_upvoted);
+                        holder.userFavourCount.setText(Integer.toString(count));
+                        flag = true;
+                    }else {
+                        holder.userFavourButton.setBackgroundResource(R.mipmap.icon_upvote);
+                        holder.userFavourCount.setText(Integer.toString(count1));
+                        flag =false;
+                    }
                 }
             }
         });
 
-        holder.userFavourCount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.userFavourCount.setText(Integer.toString(cardViewItemBean.getAcceptFavourCount()+1));
-            }
-        });
         return holder;
     }
 
@@ -135,5 +154,24 @@ public class DynamicRecyclerAdapter extends RecyclerView.Adapter<DynamicRecycler
     public int getItemCount() {
         return cardViewItemBeanList.size();
     }
+
+
+    /*提前获取指定文章文章评论*/
+    public void initCommentData() {
+        Map<String, Object> param = new HashMap<>();
+        param.put("articleId", JsonUtil.bean.getArticleId());
+        OkHttpUtil.sendPostRequest("comment/getAll", param, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                JsonUtil.commentJson = response.body().string();
+            }
+        });
+    }
+
 
 }

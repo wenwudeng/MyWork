@@ -15,13 +15,21 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
+import com.google.gson.Gson;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.home.adapter.DynamicRecyclerAdapter;
 import com.wenwu.pm.activity.home.adapter.RecommendRecyclerAdapter;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
+import com.wenwu.pm.goson.ShowArticles;
+import com.wenwu.pm.utils.OkHttpUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class HomeRecommendFragment extends Fragment {
     //用于用户头像
@@ -34,18 +42,10 @@ public class HomeRecommendFragment extends Fragment {
         return inflater.inflate(R.layout.home_recommend,container,false);
     }
 
-    public void init() {
-        for (int i = 0; i < 1; i++) {
-/*            CardViewItemBean cardViewItemBean = new CardViewItemBean("写得很详细，受教了", R.drawable.dog1, "写得很详细，受教了。", "梦想", R.mipmap.pic4,1);
-            cardViewItemBeanList.add(cardViewItemBean);
-            CardViewItemBean cardViewItemBean1 = new CardViewItemBean("抗战疫情",R.drawable.dog , "中国加油,武汉加油!", "Jack", R.mipmap.pic2,12);
-            cardViewItemBeanList.add(cardViewItemBean1);*/
-        }
-    }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        //数据初始化
         init();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view1);
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
@@ -65,5 +65,38 @@ public class HomeRecommendFragment extends Fragment {
                 }, 200);
             }
         });
+    }
+
+    /*加载recycler数据数据*/
+    public void init() {
+        OkHttpUtil.sendPostRequest("article/getArticles", null, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseData = response.body().string();
+                initData(responseData);
+            }
+        });
+
+    }
+
+    public void initData(String responseData) {
+        int i = 0;
+        ShowArticles showArticles = new Gson().fromJson(responseData, ShowArticles.class);
+        List<ShowArticles.Data> dataList = showArticles.getData();
+        for (ShowArticles.Data data : dataList) {
+            if (i % 2 == 0) {
+                CardViewItemBean cardViewItemBean = new CardViewItemBean(data.getArticleId(),data.getTitle(),
+                        data.getImg(),data.getContent(),data.getUserName(),data.getUserPhoto(),data.getLike());
+                cardViewItemBeanList.add(cardViewItemBean);
+                i++;
+            }
+
+        }
+
     }
 }

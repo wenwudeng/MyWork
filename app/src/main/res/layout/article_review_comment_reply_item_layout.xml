@@ -2,17 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="40dp">
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="5dp"
         android:layout_marginLeft="48dp"
         android:layout_marginRight="32dp"
         android:background="#F6F6F6"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
         android:layout_marginLeft="48dp"
         android:layout_marginRight="32dp"
         android:orientation="horizontal"
@@ -21,9 +23,9 @@
             android:id="@+id/reply_item_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:textStyle="bold"
             android:text="沐风:"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="#626262"/>
         <TextView
             android:id="@+id/reply_item_content"
@@ -34,7 +36,7 @@
             android:maxLines="10"
             android:ellipsize="end"
             android:textColor="#949494"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:text="世上本没有路，走的人多了，也就成了路"/>
     </LinearLayout>
     <View

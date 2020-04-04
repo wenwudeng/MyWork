@@ -16,6 +16,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.review.bean.CommentDetailBean;
 import com.wenwu.pm.activity.review.bean.ReplyDetailBean;
+import com.wenwu.pm.utils.JsonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,11 +104,12 @@ public class CommentExpandAdapter extends BaseExpandableListAdapter {
         }else {
             groupHolder = (GroupHolder) convertView.getTag();
         }
-        Glide.with(context).load(R.drawable.user_other)
+        Glide.with(context).load(commentBeanList.get(groupPosition).getUserLogo())
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .error(R.mipmap.ic_launcher)
                 .centerCrop()
                 .into(groupHolder.logo);
+
         groupHolder.tv_name.setText(commentBeanList.get(groupPosition).getNickName());
         groupHolder.tv_time.setText(commentBeanList.get(groupPosition).getCreateDate());
         groupHolder.tv_content.setText(commentBeanList.get(groupPosition).getContent());
@@ -163,11 +165,11 @@ public class CommentExpandAdapter extends BaseExpandableListAdapter {
         private TextView tv_name, tv_content, tv_time;
         private ImageView iv_like;
         public GroupHolder(View view) {
-            logo = (CircleImageView) view.findViewById(R.id.comment_item_logo);
-            tv_content = (TextView) view.findViewById(R.id.comment_item_content);
-            tv_name = (TextView) view.findViewById(R.id.comment_item_userName);
-            tv_time = (TextView) view.findViewById(R.id.comment_item_time);
-            iv_like = (ImageView) view.findViewById(R.id.comment_item_like);
+            logo = view.findViewById(R.id.comment_item_logo);
+            tv_content =  view.findViewById(R.id.comment_item_content);
+            tv_name =  view.findViewById(R.id.comment_item_userName);
+            tv_time =  view.findViewById(R.id.comment_item_time);
+            iv_like =  view.findViewById(R.id.comment_item_like);
         }
     }
 

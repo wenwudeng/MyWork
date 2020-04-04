@@ -1,14 +1,16 @@
 package com.wenwu.pm.activity.review.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by moos on 2018/4/20.
  */
 
-public class ReplyDetailBean {
+public class ReplyDetailBean implements Serializable {
     private String nickName;
     private String userLogo;
     private int id;
-    private String commentId;
+    private int commentId;
     private String content;
     private String status;
     private String createDate;
@@ -39,10 +41,10 @@ public class ReplyDetailBean {
         return id;
     }
 
-    public void setCommentId(String commentId) {
+    public void setCommentId(int commentId) {
         this.commentId = commentId;
     }
-    public String getCommentId() {
+    public int getCommentId() {
         return commentId;
     }
 

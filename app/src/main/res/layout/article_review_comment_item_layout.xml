@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#5B595A"
                 android:textSize="14sp"
+                android:textStyle="bold"
                 android:text="沐风" />
             <TextView
                 android:id="@+id/comment_item_time"
@@ -49,6 +50,7 @@
             android:padding="8dp"/>
 
     </LinearLayout>
+
     <TextView
         android:id="@+id/comment_item_content"
         android:layout_width="wrap_content"

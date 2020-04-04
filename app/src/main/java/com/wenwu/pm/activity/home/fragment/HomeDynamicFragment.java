@@ -1,9 +1,10 @@
 package com.wenwu.pm.activity.home.fragment;
 
-import android.content.Context;
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,6 +71,7 @@ public class HomeDynamicFragment extends Fragment {
         });
     }
 
+    /*加载recycler数据数据*/
     public void init() {
         OkHttpUtil.sendPostRequest("article/getArticles", null, new Callback() {
             @Override
@@ -94,6 +96,8 @@ public class HomeDynamicFragment extends Fragment {
                     data.getImg(),data.getContent(),data.getUserName(),data.getUserPhoto(),data.getLike());
             cardViewItemBeanList.add(cardViewItemBean);
         }
+
     }
+
 
 }

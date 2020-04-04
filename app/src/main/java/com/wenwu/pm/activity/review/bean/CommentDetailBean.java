@@ -1,12 +1,14 @@
 package com.wenwu.pm.activity.review.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by moos on 2018/4/20.
  */
 
-public class CommentDetailBean {
+public class CommentDetailBean implements Serializable {
+
     private int id;
     private String nickName;
     private String userLogo;

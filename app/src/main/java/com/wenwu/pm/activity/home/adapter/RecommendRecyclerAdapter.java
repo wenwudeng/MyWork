@@ -19,10 +19,18 @@ import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 import com.wenwu.pm.activity.home.fragment.HomeDynamicFragment;
 import com.wenwu.pm.activity.home.fragment.HomeRecommendFragment;
 import com.wenwu.pm.activity.review.ArticleReviewActivity;
+import com.wenwu.pm.utils.JsonUtil;
+import com.wenwu.pm.utils.OkHttpUtil;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * RecyclerView适配器
@@ -33,6 +41,8 @@ public class RecommendRecyclerAdapter extends RecyclerView.Adapter<RecommendRecy
     private CardViewItemBean cardViewItemBean ;
 
     private HomeRecommendFragment recommendFragment;
+
+    private boolean flag = false;
 
     public RecommendRecyclerAdapter(List<CardViewItemBean> cardViewItemBean, HomeRecommendFragment recommendFragment) {
         this.cardViewItemBeanList = cardViewItemBean;
@@ -79,9 +89,14 @@ public class RecommendRecyclerAdapter extends RecyclerView.Adapter<RecommendRecy
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
+                //点击item时传入文章内容
+                JsonUtil.bean = cardViewItemBeanList.get(position);
                 CardViewItemBean cardViewItemBean = cardViewItemBeanList.get(position);
                 v.getContext().startActivity(new Intent(v.getContext(), ArticleReviewActivity.class));
                 Toast.makeText(v.getContext(), "you click view" + cardViewItemBean.getContent(), Toast.LENGTH_SHORT).show();
+
+                /*提前加载文章评论数据*/
+                initCommentData();
             }
         });
 
@@ -91,18 +106,22 @@ public class RecommendRecyclerAdapter extends RecyclerView.Adapter<RecommendRecy
                 int position = holder.getAdapterPosition();
                 cardViewItemBean = cardViewItemBeanList.get(position);
                 if (v.getId() == R.id.user_favourButton) {
-                   int count =  cardViewItemBean.getAcceptFavourCount();
-                    holder.userFavourButton.setBackgroundResource(R.mipmap.icon_upvoted);
+                    int count =  cardViewItemBean.getAcceptFavourCount()+1;
+                    int count1 = count-1;
+                    if (!flag) {
+                        holder.userFavourButton.setBackgroundResource(R.mipmap.icon_upvoted);
+                        holder.userFavourCount.setText(Integer.toString(count));
+                        flag = true;
+                    }else {
+                        holder.userFavourButton.setBackgroundResource(R.mipmap.icon_upvote);
+                        holder.userFavourCount.setText(Integer.toString(count1));
+                        flag =false;
+                    }
                 }
             }
         });
 
-        holder.userFavourCount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.userFavourCount.setText(Integer.toString(cardViewItemBean.getAcceptFavourCount()+1));
-            }
-        });
+
         return holder;
     }
 
@@ -133,4 +152,20 @@ public class RecommendRecyclerAdapter extends RecyclerView.Adapter<RecommendRecy
     }
 
 
+    /*提前获取指定文章文章评论*/
+    public void initCommentData() {
+        Map<String, Object> param = new HashMap<>();
+        param.put("articleId", JsonUtil.bean.getArticleId());
+        OkHttpUtil.sendPostRequest("comment/getAll", param, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                JsonUtil.commentJson = response.body().string();
+            }
+        });
+    }
 }
