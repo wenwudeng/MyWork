@@ -17,7 +17,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.wenwu.pm.R;
-import com.wenwu.pm.goson.ShowReturnJson;
 import com.wenwu.pm.activity.message.activity.MsgCollectPraiseActivity;
 import com.wenwu.pm.activity.mine.activity.ConcernActivity;
 import com.wenwu.pm.activity.mine.activity.EditPersonalInfoActivity;
@@ -120,10 +119,11 @@ public class MyFragment extends Fragment implements View.OnClickListener{
     }
 
     public void updateInfo(String userPhoto,String userName,String gender,String city,String profile,String pet) {
-        JsonUtil.showJson.getData().setCity(city);
-        JsonUtil.showJson.getData().setUserName(userName);
-        JsonUtil.showJson.getData().setProfile(profile);
-        JsonUtil.showJson.getData().setPhoto(userPhoto);
+        JsonUtil.loginJson.getData().setCity(city);
+        JsonUtil.loginJson.getData().setUserName(userName);
+        JsonUtil.loginJson.getData().setProfile(profile);
+        JsonUtil.loginJson.getData().setPhoto(userPhoto);
+
     }
 
 

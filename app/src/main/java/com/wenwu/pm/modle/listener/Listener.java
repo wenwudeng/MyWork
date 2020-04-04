@@ -1,6 +1,7 @@
 package com.wenwu.pm.modle.listener;
 
 import com.wenwu.pm.goson.LRReturnJson;
+import com.wenwu.pm.goson.LoginReturnJson;
 
 /**
  * @author:wenwudeng
@@ -10,4 +11,5 @@ public interface Listener {
     public void onSuccess(Object json);
 
     public void onFail(Object json);
+
 }

@@ -21,12 +21,14 @@ import com.next.easynavigation.view.EasyNavigationBar;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.find.fragment.FindFragment;
 import com.wenwu.pm.activity.publish.activity.PublishLogActivity;
-import com.wenwu.pm.goson.ShowReturnJson;
+import com.wenwu.pm.goson.LRReturnJson;
+import com.wenwu.pm.goson.LoginReturnJson;
 import com.wenwu.pm.activity.home.fragment.HomeFragment;
 import com.wenwu.pm.activity.message.fragment.MessageFragment;
 import com.wenwu.pm.activity.mine.fragment.MyFragment;
 import com.wenwu.pm.activity.publish.activity.LongArticleActivity;
 import com.wenwu.pm.activity.publish.activity.QuestionActivity;
+import com.wenwu.pm.goson.ShowReturnJson;
 import com.wenwu.pm.presenter.ShowInfoPresenter;
 import com.wenwu.pm.utils.JsonUtil;
 import com.wenwu.pm.view.IShowView;
@@ -42,14 +44,14 @@ import lrq.com.addpopmenu.PopMenuItem;
 import lrq.com.addpopmenu.PopMenuItemListener;
 
 
-public class MainActivity extends AppCompatActivity implements IShowView {
+public class MainActivity extends AppCompatActivity  {
 
     private EasyNavigationBar navigationBar;
 
     //个人信息数据对接
-    private ShowReturnJson json;
-    private ShowInfoPresenter presenter;
-    private  int userId;
+
+  /*  private ShowInfoPresenter presenter;
+    private  int userId;*/
 
     private String[] tabText = {"首页", "发现", "", "消息", "我的"};
     private int[] normalIcon = {R.mipmap.tab_home_normal, R.mipmap.tab_pic_normal, R.mipmap.btn_pai, R.mipmap.tab_shop_normal, R.mipmap.tab_mine_normal};
@@ -89,18 +91,12 @@ public class MainActivity extends AppCompatActivity implements IShowView {
 
                     @Override
                     public boolean onTabClickEvent(View view, int position) {
-
                         if (position == 4) {
-                            //显示个人信息
-                           // Intent intent = getIntent();
-                            //userId = intent.getIntExtra("user_id",0);
-                           // Log.d("===",""+ userId);
-                            setData();
-                            presenter.showInfo(JsonUtil.userId);
-                            setView(JsonUtil.userId);
 
-                           // showInfoWithOkHttp("showInfo", intent.getStringExtra("account"));
-
+                            //setData();
+                            //setView(JsonUtil.userId);
+                            // showInfoWithOkHttp("showInfo", intent.getStringExtra("account"));
+                            initView();
                         } else if (position == 2) {
                             PopMenu mPopMenu = new PopMenu.Builder().attachToActivity(MainActivity.this)
                                     .addMenuItem(new PopMenuItem("发布日志", ResourcesCompat.getDrawable(getResources(), R.mipmap.publish_post, null)))
@@ -137,9 +133,10 @@ public class MainActivity extends AppCompatActivity implements IShowView {
                 .anim(Anim.ZoomIn)
                 .build();
 
+
     }
 
-    private void setView(int  userId) {
+    private void initView() {
         userName = findViewById(R.id.my_user_name);
         userPhoto = findViewById(R.id.my_user_photo);
         concernCount = findViewById(R.id.my_concern_count);
@@ -150,38 +147,38 @@ public class MainActivity extends AppCompatActivity implements IShowView {
         pet = findViewById(R.id.my_pet);
         profile = findViewById(R.id.my_profile);
 
+        showResponse(JsonUtil.loginJson);
+
+       // presenter.showInfo(JsonUtil.userId);
     }
 
-    private void setData() {
+   /* private void setData() {
         this.presenter = new ShowInfoPresenter(this);
-    }
+    }*/
 
-
+/*
     @Override
     public void onViewSuccess(Object object) {
-        json = (ShowReturnJson) object;
-        JsonUtil.showJson = json;
+        ShowReturnJson json = (ShowReturnJson) object;
         Looper.prepare();
-        Toast.makeText(getApplicationContext(),json.getMessage(), Toast.LENGTH_LONG).show();
-        showResponse(json);
-
+        Toast.makeText(getApplicationContext(),json.getMsg(), Toast.LENGTH_LONG).show();
+        showResponse(JsonUtil.showJson);
         Looper.loop();
     }
 
     @Override
     public void onViewFail(Object object) {
-        json = (ShowReturnJson) object;
+        ShowReturnJson json = (ShowReturnJson) object;
         Looper.prepare();
-        Toast.makeText(getApplicationContext(),json.getMessage(), Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),json.getMsg(), Toast.LENGTH_LONG).show();
         Looper.loop();
-    }
+    }*/
 
     //线程更新
-    public void showResponse(final ShowReturnJson json) {
+    public void showResponse(final LoginReturnJson json) {
         runOnUiThread(new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d("photo", json.getData().getPhoto());
                 Glide.with(MainActivity.this).load(json.getData().getPhoto()).into(userPhoto);
                 userName.setText(json.getData().getUserName());
                 fansCount.setText(Integer.toString(json.getData().getFollow()));
@@ -199,12 +196,12 @@ public class MainActivity extends AppCompatActivity implements IShowView {
         }));
     }
 
-    @Override
+/*    @Override
     protected void onDestroy() {
         super.onDestroy();
         //记得在销毁的时候断掉引用链，养成良好的习惯
         this.presenter = null;
-    }
+    }*/
 
 }
 

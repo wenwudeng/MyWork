@@ -29,12 +29,12 @@ public class ShowReturnJson implements Serializable {
         this.code = code;
     }
 
-    public String getMessage() {
+    public String getMsg() {
         return msg;
     }
 
-    public void setMessage(String message) {
-        this.msg = message;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public Data getData() {

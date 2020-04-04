@@ -1,6 +1,5 @@
 package com.wenwu.pm.presenter;
 
-import android.content.Context;
 
 import com.wenwu.pm.activity.mine.fragment.MyFragment;
 import com.wenwu.pm.modle.EditInfoModel;
@@ -17,18 +16,18 @@ import java.lang.ref.WeakReference;
  */
 public class EditInfoPresenter extends PresenterBase {
 
-    private MyFragment context;
+    private MyFragment myFragment;
 
     public EditInfoPresenter(IEditInfoView editInfoView, MyFragment myFragment) {
         this.mIModel = new EditInfoModel();
         this.mViewReference = new WeakReference<IView>(editInfoView);
-        context = myFragment;
+        this.myFragment = myFragment;
     }
 
     public void save() {
 
         if (mIModel != null && mViewReference != null && mViewReference.get() != null) {
-            int userId = JsonUtil.showJson.getData().getUserid();
+            int userId = JsonUtil.loginJson.getData().getId();
             IEditInfoView editInfoView = (IEditInfoView) mViewReference.get();
             String userPhoto = editInfoView.getPhotoUrl();
             String userName = editInfoView.getUserName();
@@ -36,7 +35,9 @@ public class EditInfoPresenter extends PresenterBase {
             String city = editInfoView.getCity();
             String profile = editInfoView.getProfile();
             String pet = editInfoView.getPet();
-            context.updateInfo(userPhoto,userName,gender,city,profile,pet);
+
+            myFragment.updateInfo(userPhoto,userName,gender,city,profile,pet);
+
             ((EditInfoModel)mIModel).save(userId, userPhoto, userName, gender, city, profile, pet, new Listener() {
                 @Override
                 public void onSuccess(Object json) {

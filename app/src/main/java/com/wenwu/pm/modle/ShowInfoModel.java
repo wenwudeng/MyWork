@@ -1,9 +1,10 @@
 package com.wenwu.pm.modle;
 
 import com.google.gson.Gson;
-import com.wenwu.pm.goson.LRReturnJson;
+import com.wenwu.pm.goson.LoginReturnJson;
 import com.wenwu.pm.goson.ShowReturnJson;
 import com.wenwu.pm.modle.listener.Listener;
+import com.wenwu.pm.utils.JsonUtil;
 import com.wenwu.pm.utils.OkHttpUtil;
 
 import java.io.IOException;
@@ -32,6 +33,7 @@ public class ShowInfoModel implements IModel {
             public void onResponse(Call call, Response response) throws IOException {
                 final String responseData = response.body().string();
                 ShowReturnJson json = new Gson().fromJson(responseData, ShowReturnJson.class);
+                JsonUtil.showJson = json;
                 if (json.getCode().equals("0000")) {
                     listener.onSuccess(json);
                 } else {

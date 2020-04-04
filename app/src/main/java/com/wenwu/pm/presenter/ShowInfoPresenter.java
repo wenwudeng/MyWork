@@ -20,6 +20,7 @@ public class ShowInfoPresenter extends PresenterBase {
 
     public void showInfo(int userId) {
         if (mViewReference != null && mIModel != null && mViewReference.get() != null) {
+
             ((ShowInfoModel)mIModel).showInfo(userId, new Listener() {
                 @Override
                 public void onSuccess(Object json) {

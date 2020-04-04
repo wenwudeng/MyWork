@@ -8,17 +8,13 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
 import android.os.Looper;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -31,6 +27,7 @@ import com.bumptech.glide.Glide;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.mine.fragment.MyFragment;
 import com.wenwu.pm.goson.LRReturnJson;
+import com.wenwu.pm.goson.LoginReturnJson;
 import com.wenwu.pm.goson.ShowReturnJson;
 import com.wenwu.pm.presenter.EditInfoPresenter;
 import com.wenwu.pm.utils.GetPhotoFromPhotoAlbumPathUtil;
@@ -38,7 +35,6 @@ import com.wenwu.pm.utils.JsonUtil;
 import com.wenwu.pm.utils.OkHttpUtil;
 import com.wenwu.pm.view.IEditInfoView;
 
-import java.io.File;
 import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -84,32 +80,29 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_personal_info_edit);
-       // context = this;
         initView();
-        showResponse(JsonUtil.showJson);
 
+      // showResponse(JsonUtil.showJson);
         //修改个人信息
-        setData();
         setEditView();
     }
 
     private void setEditView() {
-        save = findViewById(R.id.my_edit_save_info);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 presenter.save();
-                finish();
             }
         });
     }
 
-    private void setData() {
-        presenter = new EditInfoPresenter(this, myFragment);
-    }
+
 
     /*控件初始化*/
     private void initView() {
+        presenter = new EditInfoPresenter(this, myFragment);
+
+        save = findViewById(R.id.my_edit_save_info);
         userName = findViewById(R.id.my_edit_id);
         userPhoto = findViewById(R.id.my_edit_photo);
         city = findViewById(R.id.my_edit_province);
@@ -124,11 +117,16 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
         boyIcon.setOnClickListener(this);
         girlIcon.setOnClickListener(this);
         userPhoto.setOnClickListener(this);
+
+        //显示个人信息
+        showResponse(JsonUtil.loginJson);
+
+
     }
 
 
     //显示数据
-    public void showResponse(final ShowReturnJson json) {
+    public void showResponse(final LoginReturnJson json) {
         runOnUiThread(new Thread(new Runnable() {
             @Override
             public void run() {
@@ -258,6 +256,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
         json = (LRReturnJson) object;
         Looper.prepare();
         Toast.makeText(getApplicationContext(), json.getMsg(), Toast.LENGTH_SHORT).show();
+        finish();
         Looper.loop();
     }
 

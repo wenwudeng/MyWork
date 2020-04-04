@@ -1,10 +1,13 @@
 package com.wenwu.pm.modle;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.wenwu.pm.goson.LRReturnJson;
+import com.wenwu.pm.goson.LoginReturnJson;
 import com.wenwu.pm.modle.listener.Listener;
+import com.wenwu.pm.utils.JsonUtil;
 import com.wenwu.pm.utils.OkHttpUtil;
 
 import java.io.IOException;
@@ -38,11 +41,14 @@ public class LoginModel implements IModel {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String responseData = response.body().string();
-                LRReturnJson LRReturnJson = new Gson().fromJson(responseData, LRReturnJson.class);
-                if (LRReturnJson.getCode().equals("3000")) {
-                    listener.onSuccess(LRReturnJson);
+              //  LRReturnJson LRReturnJson = new Gson().fromJson(responseData, LRReturnJson.class);
+                LoginReturnJson loginReturnJson = new Gson().fromJson(responseData, LoginReturnJson.class);
+                Log.e("json", loginReturnJson+"");
+                JsonUtil.loginJson =loginReturnJson;
+                if (loginReturnJson.getCode().equals("3000")) {
+                    listener.onSuccess(loginReturnJson);
                 }else {
-                    listener.onFail(LRReturnJson);
+                    listener.onFail(loginReturnJson);
                 }
             }
         });
