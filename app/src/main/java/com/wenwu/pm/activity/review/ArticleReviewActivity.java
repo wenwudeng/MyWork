@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -30,11 +31,19 @@ import com.wenwu.pm.activity.review.adapter.CommentExpandAdapter;
 import com.wenwu.pm.activity.review.bean.CommentBean;
 import com.wenwu.pm.activity.review.bean.CommentDetailBean;
 import com.wenwu.pm.activity.review.bean.ReplyDetailBean;
+import com.wenwu.pm.goson.LRReturnJson;
 import com.wenwu.pm.utils.JsonUtil;
+import com.wenwu.pm.utils.OkHttpUtil;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 
 public class ArticleReviewActivity extends AppCompatActivity implements View.OnClickListener{
@@ -50,15 +59,12 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
     private ImageButton article_page_share;
     private Button article_page_concern;
 
-    private int total;
-
-    //private JsonUtil jsonUtil = new JsonUtil();
-
     private CommentExpandableListView expandableListView;
     private CommentExpandAdapter adapter;
     private CommentBean commentBean;
     private List<CommentDetailBean> commentsList;
     private BottomSheetDialog dialog;
+    private int total;
     private String testJson1;
     private String testJson = "{\n" +
             "\t\"code\": 1000,\n" +
@@ -140,15 +146,17 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
        CollapsingToolbarLayout collapsingToolbar =
                findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(JsonUtil.bean.getTitle());//文章标题
+
         commentsList = generateTestData();
         initExpandableListView(commentsList);
+
         initArticle();
     }
     /*初始化文章内容*/
    public void initArticle() {
        Glide.with(this).load(JsonUtil.bean.getImgUrl()).into(article_page_img);
        Glide.with(this).load(JsonUtil.bean.getUserPhoto()).into(article_page_user_photo);
-      // article_comment_count.setText(total);
+      article_comment_count.setText(Integer.toString(total));
        article_user_name.setText(JsonUtil.bean.getUserName());
        article_page_content.setText(JsonUtil.bean.getContent());
     }
@@ -159,12 +167,11 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
      * @return 评论数据
      */
     private List<CommentDetailBean> generateTestData(){
-        //while (testJson1==null);
-        Gson gson = new Gson();
-        commentBean = gson.fromJson(JsonUtil.commentJson, CommentBean.class);
-        //System.out.println(commentBean.getData());
-       //total = commentBean.getData().getTotal();
+        commentBean = new Gson().fromJson(JsonUtil.commentJson, CommentBean.class);
+       // commentBean = JsonUtil.commentBean;
         List<CommentDetailBean> commentList = commentBean.getData().getList();
+        total = commentBean.getData().getTotal();
+       // commentBean.getData().getList().get(0).getReplyList().get(0).getCommentId();
         return commentList;
     }
 
@@ -258,10 +265,35 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
 
                     //commentOnWork(commentContent);
                     dialog.dismiss();
-                    CommentDetailBean detailBean = new CommentDetailBean("小明", commentContent,"刚刚");
-
+                    CommentDetailBean detailBean = new CommentDetailBean(JsonUtil.loginJson.getData().getPhoto(),JsonUtil.loginJson.getData().getUserName(), commentContent,"刚刚");
                     adapter.addTheCommentData(detailBean);
-                    Toast.makeText(ArticleReviewActivity.this,"评论成功",Toast.LENGTH_SHORT).show();
+
+                    //评论
+                    Map<String, Object> params = new HashMap<>();
+                    params.put("userid", JsonUtil.loginJson.getData().getId());
+                    params.put("articleId", JsonUtil.bean.getArticleId());
+                    params.put("content", commentContent);
+                    OkHttpUtil.sendPostRequest("comment/add", params, new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            String data = response.body().string();
+                            LRReturnJson json = new Gson().fromJson(data, LRReturnJson.class);
+                            if (json.getCode().equals("3009")) {
+                                Looper.prepare();
+                                Toast.makeText(ArticleReviewActivity.this,json.getMsg(),Toast.LENGTH_SHORT).show();
+                                Looper.loop();
+                            }else {
+                                Looper.prepare();
+                                Toast.makeText(ArticleReviewActivity.this,"评论失败",Toast.LENGTH_SHORT).show();
+                                Looper.loop();
+                            }
+                        }
+                    });
 
                 }else {
                     Toast.makeText(ArticleReviewActivity.this,"评论内容不能为空",Toast.LENGTH_SHORT).show();
@@ -310,10 +342,35 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
                 if(!TextUtils.isEmpty(replyContent)){
 
                     dialog.dismiss();
-                    ReplyDetailBean detailBean = new ReplyDetailBean("小红",replyContent);
+                    ReplyDetailBean detailBean = new ReplyDetailBean(JsonUtil.loginJson.getData().getUserName(),replyContent);
                     adapter.addTheReplyData(detailBean, position);
                     expandableListView.expandGroup(position);
-                    Toast.makeText(ArticleReviewActivity.this,"回复成功",Toast.LENGTH_SHORT).show();
+
+                    //回复评论
+                    Map<String, Object> params = new HashMap<>();
+                    params.put("userid", JsonUtil.loginJson.getData().getId());
+                    params.put("commentId", JsonUtil.commentId);
+                    params.put("content", replyContent);
+                    OkHttpUtil.sendPostRequest("comment/reply", params, new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            String data = response.body().string();
+                            LRReturnJson json = new Gson().fromJson(data, LRReturnJson.class);
+                            if (json.getMsg().equals("3009")) {
+                                Looper.prepare();
+                                Toast.makeText(ArticleReviewActivity.this, json.getMsg(), Toast.LENGTH_SHORT).show();
+                                Looper.loop();
+                            }
+
+                        }
+                    });
+
+
                 }else {
                     Toast.makeText(ArticleReviewActivity.this,"回复内容不能为空",Toast.LENGTH_SHORT).show();
                 }

@@ -21,7 +21,7 @@ public class ArticlePresenter extends PresenterBase {
     public void publish() {
         if (mViewReference != null && mIModel != null && mViewReference.get() != null) {
             IArticleView articleView  = (IArticleView) mViewReference.get();
-            int userId = JsonUtil.userId;
+            int userId = JsonUtil.loginJson.getData().getId();
             String title = articleView.getArtTitle();
             String content = articleView.getArtContent();
             String imgUrl = articleView.getImgUrl();

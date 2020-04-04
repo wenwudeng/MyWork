@@ -17,10 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 import com.wenwu.pm.activity.home.fragment.HomeDynamicFragment;
 import com.wenwu.pm.activity.review.ArticleReviewActivity;
+import com.wenwu.pm.activity.review.bean.CommentBean;
 import com.wenwu.pm.utils.JsonUtil;
 import com.wenwu.pm.utils.OkHttpUtil;
 
@@ -89,7 +91,6 @@ public class DynamicRecyclerAdapter extends RecyclerView.Adapter<DynamicRecycler
         //将获得的concern_item视图实例作为ViewHolder获取实例的参数
         final ViewHolder holder = new ViewHolder(view);
 
-
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,14 +100,15 @@ public class DynamicRecyclerAdapter extends RecyclerView.Adapter<DynamicRecycler
                 JsonUtil.bean = cardViewItemBeanList.get(position);
 
                 CardViewItemBean cardViewItemBean = cardViewItemBeanList.get(position);
-
-                v.getContext().startActivity(new Intent(v.getContext(), ArticleReviewActivity.class));
-                Toast.makeText(v.getContext(), "you click view" + cardViewItemBean.getContent(), Toast.LENGTH_SHORT).show();
-
                 /*提前加载文章评论数据*/
                 initCommentData();
+                v.getContext().startActivity(new Intent(v.getContext(), ArticleReviewActivity.class));
+                Toast.makeText(v.getContext(), "you click view" + cardViewItemBean.getContent(), Toast.LENGTH_SHORT).show();
             }
         });
+
+
+
 
         holder.userFavourButton.setOnClickListener(new View.OnClickListener(){
 
@@ -168,7 +170,9 @@ public class DynamicRecyclerAdapter extends RecyclerView.Adapter<DynamicRecycler
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                JsonUtil.commentJson = response.body().string();
+                String data = response.body().string();
+                JsonUtil.commentJson = data;
+               // JsonUtil.commentBean = new Gson().fromJson(JsonUtil.commentJson, CommentBean.class);
             }
         });
     }

@@ -106,7 +106,7 @@ public class CommentExpandAdapter extends BaseExpandableListAdapter {
         }
         Glide.with(context).load(commentBeanList.get(groupPosition).getUserLogo())
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                .error(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_auth)
                 .centerCrop()
                 .into(groupHolder.logo);
 
@@ -144,6 +144,10 @@ public class CommentExpandAdapter extends BaseExpandableListAdapter {
         }
 
         String replyUser = commentBeanList.get(groupPosition).getReplyList().get(childPosition).getNickName();
+
+        //获取评论Id
+        JsonUtil.commentId = commentBeanList.get(groupPosition).getReplyList().get(childPosition).getCommentId();
+
         if(!TextUtils.isEmpty(replyUser)){
             childHolder.tv_name.setText(replyUser + ":");
         }else {
@@ -208,6 +212,7 @@ public class CommentExpandAdapter extends BaseExpandableListAdapter {
             Log.e(TAG, "addTheReplyData: >>>>该刷新回复列表了:"+replyDetailBean.toString() );
             if(commentBeanList.get(groupPosition).getReplyList() != null ){
                 commentBeanList.get(groupPosition).getReplyList().add(replyDetailBean);
+
             }else {
                 List<ReplyDetailBean> replyList = new ArrayList<>();
                 replyList.add(replyDetailBean);

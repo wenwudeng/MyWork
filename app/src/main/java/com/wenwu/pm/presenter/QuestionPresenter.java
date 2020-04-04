@@ -21,7 +21,7 @@ public class QuestionPresenter extends PresenterBase {
     public void publish() {
         if (mViewReference != null && mIModel != null && mViewReference.get() != null) {
             IQuestionView questionView = (IQuestionView) mViewReference.get();
-            int userId = JsonUtil.userId;
+            int userId = JsonUtil.loginJson.getData().getId();
             String title = questionView.getQuesTitle();
             String content = questionView.getContent();
             String imgUrl = questionView.getImageUrl();

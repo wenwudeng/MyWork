@@ -18,7 +18,8 @@ public class CommentDetailBean implements Serializable {
     private String createDate;
     private List<ReplyDetailBean> replyList;
 
-    public CommentDetailBean(String nickName,  String content, String createDate) {
+    public CommentDetailBean(String userLogo,String nickName,  String content, String createDate) {
+        this.userLogo = userLogo;
         this.nickName = nickName;
         this.content = content;
         this.createDate = createDate;

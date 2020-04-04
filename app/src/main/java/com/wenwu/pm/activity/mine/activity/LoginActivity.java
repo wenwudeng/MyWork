@@ -13,11 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.MainActivity;
-import com.wenwu.pm.goson.LRReturnJson;
 import com.wenwu.pm.goson.LoginReturnJson;
 import com.wenwu.pm.presenter.LoginPresenter;
-import com.wenwu.pm.utils.GsonUtil;
-import com.wenwu.pm.utils.JsonUtil;
 import com.wenwu.pm.view.ILoginView;
 
 import java.io.IOException;
