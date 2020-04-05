@@ -12,8 +12,9 @@ public class CardViewItemBean {
     private String userName;
     private String userPhoto;
     private int acceptFavourCount;
+    private int collect;
 
-    public CardViewItemBean(int articleId,String title, String imgUrl, String content,
+    public CardViewItemBean(int articleId, String title, String imgUrl, String content,
                             String userName, String userPhoto, int acceptFavourCount) {
         this.articleId = articleId;
         this.title = title;
@@ -22,6 +23,23 @@ public class CardViewItemBean {
         this.userName = userName;
         this.userPhoto = userPhoto;
         this.acceptFavourCount = acceptFavourCount;
+    }
+
+    public CardViewItemBean(int articleId, String title, String imgUrl, String content, int acceptFavourCount, int collect) {
+        this.articleId = articleId;
+        this.title = title;
+        this.imgUrl = imgUrl;
+        this.content = content;
+        this.acceptFavourCount = acceptFavourCount;
+        this.collect = collect;
+    }
+
+    public int getCollect() {
+        return collect;
+    }
+
+    public void setCollect(int collect) {
+        this.collect = collect;
     }
 
     public int getArticleId() {

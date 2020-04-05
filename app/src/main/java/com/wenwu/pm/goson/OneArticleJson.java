@@ -1,53 +1,20 @@
 package com.wenwu.pm.goson;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author:wenwudeng
- * @date:15:26 2020/4/3
- * 所有文章实体
+ * @date:14:06 2020/4/5
+ * 单独返回一篇文章的json数据的实体类
  */
-public class ShowArticlesJson {
+public class OneArticleJson {
     private boolean success;
     private String code;
     private String msg;
-    private List<Data> data;
+    private Data data;
 
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public List<Data> getData() {
-        return data;
-    }
-
-    public void setData(List<Data> data) {
-        this.data = data;
-    }
-
-    public class Data  {
-        public int articleId;
+    public class Data{
+        public int id;
         public int userId;
         public String userName;
         public String userPhoto;
@@ -58,12 +25,12 @@ public class ShowArticlesJson {
         public int like;
         public int collect;
 
-        public int getArticleId() {
-            return articleId;
+        public int getId() {
+            return id;
         }
 
-        public void setArticleId(int articleId) {
-            this.articleId = articleId;
+        public void setId(int id) {
+            this.id = id;
         }
 
         public int getUserId() {
@@ -137,5 +104,37 @@ public class ShowArticlesJson {
         public void setCollect(int collect) {
             this.collect = collect;
         }
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public Data getData() {
+        return data;
+    }
+
+    public void setData(Data data) {
+        this.data = data;
     }
 }

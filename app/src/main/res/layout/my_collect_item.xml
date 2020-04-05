@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="90dp"
     android:layout_margin="10dp"
     app:cardCornerRadius="4dp">
 
@@ -15,7 +15,8 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="5dp">
 
             <ImageView
                 android:layout_width="20dp"
@@ -56,6 +57,7 @@
                 android:layout_toRightOf="@id/my_collect_user_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_marginStart="5dp"
                 android:text="留白" />
 
@@ -64,7 +66,7 @@
                 android:id="@+id/my_collect_recommend_button"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="8dp"
                 android:layout_toLeftOf="@id/my_collect_review_count"
                 android:background="@mipmap/icon_comment_sm"
                 />
@@ -74,6 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginTop="5dp"
                 android:layout_toLeftOf="@id/my_collect_favour_button"
                 android:layout_marginStart="5dp"
                 android:text="0" />
@@ -84,7 +87,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="8dp"
                 android:layout_toLeftOf="@id/my_collect_favour_count"
                 android:background="@mipmap/icon_upvote"
                 />
@@ -94,6 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginTop="5dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginStart="5dp"
                 android:text="0" />

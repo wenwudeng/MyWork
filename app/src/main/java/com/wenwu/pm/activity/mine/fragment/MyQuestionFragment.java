@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.mine.adapter.QuesRecyclerAdapter;
 import com.wenwu.pm.activity.mine.bean.QuestionCardViewItem;
+import com.wenwu.pm.goson.MyQuestionJson;
+import com.wenwu.pm.utils.JsonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,13 +45,13 @@ public class MyQuestionFragment extends Fragment {
      * 初始化数据
      */
     public void init() {
-        for (int i = 0; i < 3; i++) {
-            QuestionCardViewItem cardViewItemBean = new QuestionCardViewItem("养猫好还是养狗好？", "1小时前", "12");
-            cardViewItemBeanList.add(cardViewItemBean);
-            QuestionCardViewItem cardViewItemBean1 = new QuestionCardViewItem("狗狗不吃东西怎么办？", "1小时前", "0");
-            cardViewItemBeanList.add(cardViewItemBean1);
+        List<MyQuestionJson.Data> dataList = JsonUtil.myQuestionJson.getData();
+        for (MyQuestionJson.Data data : dataList) {
+            QuestionCardViewItem item = new QuestionCardViewItem(data.getTitle(),data.getTime(),data.getAnswer(),
+                    data.getId(),data.getUserid(),data.getContent(),data.getImg(),data.getLocation(),data.getLike()
+            ,data.getCollect());
+            cardViewItemBeanList.add(item);
         }
-
     }
 
 

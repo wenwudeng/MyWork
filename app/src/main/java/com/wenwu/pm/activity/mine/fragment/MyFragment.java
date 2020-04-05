@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.Gson;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.message.activity.MsgCollectPraiseActivity;
 import com.wenwu.pm.activity.mine.activity.ConcernActivity;
@@ -23,12 +24,21 @@ import com.wenwu.pm.activity.mine.activity.EditPersonalInfoActivity;
 import com.wenwu.pm.activity.mine.activity.FansActivity;
 import com.wenwu.pm.activity.mine.activity.SettingActivity;
 import com.wenwu.pm.activity.mine.adapter.MyPagerAdapter;
+import com.wenwu.pm.goson.MyCommentJson;
+import com.wenwu.pm.goson.OneArticleJson;
 import com.wenwu.pm.utils.JsonUtil;
+import com.wenwu.pm.utils.OkHttpUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class MyFragment extends Fragment implements View.OnClickListener{
 
@@ -87,8 +97,8 @@ public class MyFragment extends Fragment implements View.OnClickListener{
         fragmentList = new ArrayList<>();
         fragmentList.add(new MyLogFragment());
         fragmentList.add(new MyQuestionFragment());
-        fragmentList.add(new MyCollectFragment());
         fragmentList.add(new MyReviewFragment());
+        fragmentList.add(new MyCollectFragment());
         return fragmentList;
     }
 
@@ -125,11 +135,6 @@ public class MyFragment extends Fragment implements View.OnClickListener{
         JsonUtil.loginJson.getData().setUserName(userName);
         JsonUtil.loginJson.getData().setProfile(profile);
         JsonUtil.loginJson.getData().setPhoto(userPhoto);
-
     }
-
-
-
-
 
 }

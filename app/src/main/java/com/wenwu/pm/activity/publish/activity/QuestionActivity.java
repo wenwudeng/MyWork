@@ -169,10 +169,10 @@ public class QuestionActivity extends AppCompatActivity implements IQuestionView
     @Override
     public void onViewSuccess(Object object) {
         json = (LRReturnJson)object;
-        //Looper.prepare();
-        //Toast.makeText(getApplicationContext(),json.getMsg(), Toast.LENGTH_LONG).show();
+        Looper.prepare();
+        Toast.makeText(getApplicationContext(),json.getMsg(), Toast.LENGTH_LONG).show();
         startActivity(new Intent(QuestionActivity.this, MainActivity.class));
-        //Looper.loop();
+        Looper.loop();
     }
 
     @Override

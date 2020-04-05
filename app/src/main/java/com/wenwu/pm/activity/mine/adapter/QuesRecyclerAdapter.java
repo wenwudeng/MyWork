@@ -1,5 +1,6 @@
 package com.wenwu.pm.activity.mine.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,11 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.home.adapter.DynamicRecyclerAdapter;
+import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 import com.wenwu.pm.activity.mine.bean.QuestionCardViewItem;
+import com.wenwu.pm.activity.review.ArticleReviewActivity;
+import com.wenwu.pm.utils.JsonUtil;
 
 import java.util.List;
 
@@ -21,7 +26,7 @@ import java.util.List;
  */
 public class QuesRecyclerAdapter extends RecyclerView.Adapter<QuesRecyclerAdapter.ViewHolder>{
     private List<QuestionCardViewItem> questionCardViewItemList;
-    private QuestionCardViewItem questionCardViewItem;
+    private QuestionCardViewItem item;
 
 
     public QuesRecyclerAdapter(List<QuestionCardViewItem> cardViewItemBeanList) {
@@ -57,12 +62,21 @@ public class QuesRecyclerAdapter extends RecyclerView.Adapter<QuesRecyclerAdapte
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_question_item, parent, false);
         //将获得的concern_item视图实例作为ViewHolder获取实例的参数
         final QuesRecyclerAdapter.ViewHolder holder = new QuesRecyclerAdapter.ViewHolder(view);
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                QuestionCardViewItem questionCardViewItem = questionCardViewItemList.get(position);
-                Toast.makeText(v.getContext(), "you click view" + questionCardViewItem.getTitle(), Toast.LENGTH_SHORT).show();
+
+                item = questionCardViewItemList.get(position);
+                //传参
+                JsonUtil.bean = new CardViewItemBean(item.getId(),item.getTitle(),item.getImg(),item.getContent(),JsonUtil.loginJson.getData().getUserName(),
+                        JsonUtil.loginJson.getData().getPhoto(),item.getLike());
+
+                /*加载评论数据*/
+               DynamicRecyclerAdapter.initCommentData();
+                v.getContext().startActivity(new Intent(v.getContext(), ArticleReviewActivity.class));
+                Toast.makeText(v.getContext(), "you click view" + item.getTitle(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -80,7 +94,7 @@ public class QuesRecyclerAdapter extends RecyclerView.Adapter<QuesRecyclerAdapte
         QuestionCardViewItem questionCardViewItem = questionCardViewItemList.get(position);
         holder.title.setText(questionCardViewItem.getTitle());
         holder.time.setText(questionCardViewItem.getTime());
-        holder.answerCount.setText(questionCardViewItem.getAnswerCount());
+        holder.answerCount.setText(Integer.toString(questionCardViewItem.getAnswerCount()));
     }
 
     @Override

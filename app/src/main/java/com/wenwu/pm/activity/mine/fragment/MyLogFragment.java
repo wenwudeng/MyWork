@@ -43,11 +43,8 @@ public class MyLogFragment extends Fragment {
      * 初始化数据
      */
     public void initData() {
-        System.out.println(JsonUtil.myLogJson);
         List<MyLogJson.Data> dataList = JsonUtil.myLogJson.getData();
-
         for (MyLogJson.Data data : dataList) {
-            System.out.println(data);
             CardViewItemBean cardViewItemBean = new CardViewItemBean(data.getId(),data.getTitle(),
                     data.getImg(),data.getContent(),JsonUtil.loginJson.getData().getUserName(),JsonUtil.loginJson.getData().getPhoto(),data.getLike());
             cardViewItemBeanList.add(cardViewItemBean);

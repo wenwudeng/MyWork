@@ -28,7 +28,6 @@ import com.wenwu.pm.R;
 import com.wenwu.pm.activity.mine.fragment.MyFragment;
 import com.wenwu.pm.goson.LRReturnJson;
 import com.wenwu.pm.goson.LoginReturnJson;
-import com.wenwu.pm.goson.ShowReturnJson;
 import com.wenwu.pm.presenter.EditInfoPresenter;
 import com.wenwu.pm.utils.GetPhotoFromPhotoAlbumPathUtil;
 import com.wenwu.pm.utils.JsonUtil;

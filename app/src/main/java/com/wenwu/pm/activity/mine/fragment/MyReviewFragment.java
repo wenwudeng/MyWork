@@ -16,25 +16,39 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.mine.adapter.ReviewRecyclerAdapter;
 import com.wenwu.pm.activity.mine.bean.ReviewCardViewItem;
+import com.wenwu.pm.goson.MyCommentJson;
+import com.wenwu.pm.goson.OneArticleJson;
+import com.wenwu.pm.utils.JsonUtil;
+import com.wenwu.pm.utils.OkHttpUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class MyReviewFragment extends Fragment {
     private List<ReviewCardViewItem> reviewList = new ArrayList<>();
+    private List<OneArticleJson> articleJsonList = new ArrayList<>();
+
+    private OneArticleJson json;
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.my_review,container,false);
+
+        return inflater.inflate(R.layout.my_review, container, false);
     }
-
-
 
 
     @Override
@@ -44,7 +58,7 @@ public class MyReviewFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        ReviewRecyclerAdapter adapter = new ReviewRecyclerAdapter(reviewList);
+        ReviewRecyclerAdapter adapter = new ReviewRecyclerAdapter(reviewList, this);
         recyclerView.setAdapter(adapter);
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_my_review);
@@ -55,21 +69,22 @@ public class MyReviewFragment extends Fragment {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
-                        Toast.makeText(getActivity(),"刷新完成", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "刷新完成", Toast.LENGTH_SHORT).show();
                     }
-                },200);
+                }, 200);
             }
         });
     }
+
     /**
      * 初始化数据
      */
     public void init() {
-        for (int i = 0; i < 3; i++) {
-            ReviewCardViewItem item = new ReviewCardViewItem(R.drawable.chen,"陈瑶","1小时前","建议去看兽医","狗狗不吃饭怎么办？","0");
+        List<MyCommentJson.Data> dataList = JsonUtil.myCommentJson.getData();
+        for (MyCommentJson.Data data : dataList) {
+           ReviewCardViewItem item = new ReviewCardViewItem(JsonUtil.loginJson.getData().getPhoto(),JsonUtil.loginJson.getData().getUserName(),data.getCTime(),
+                   data.getCcontent(),data.getTitle(),data.getAid(),data.getClike(),data.getAlike(),data.getContent(),data.getLocation(),data.getImg());
             reviewList.add(item);
         }
-
     }
-
 }

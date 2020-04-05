@@ -14,16 +14,20 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.home.adapter.DynamicRecyclerAdapter;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 import com.wenwu.pm.activity.mine.fragment.MyLogFragment;
 import com.wenwu.pm.activity.review.ArticleReviewActivity;
+
 import com.wenwu.pm.utils.JsonUtil;
 
 import java.util.List;
 
+
 import de.hdodenhof.circleimageview.CircleImageView;
+
 
 /**
  * @author:wenwudeng
@@ -36,6 +40,7 @@ public class LogRecyclerAdapter extends RecyclerView.Adapter<LogRecyclerAdapter.
     private CardViewItemBean cardViewItemBean;
 
     private MyLogFragment myLogFragment;
+
 
     private boolean flag = false;
 
@@ -87,7 +92,6 @@ public class LogRecyclerAdapter extends RecyclerView.Adapter<LogRecyclerAdapter.
                 int position = holder.getAdapterPosition();
                 /*传参*/
                 JsonUtil.bean = cardViewItemBeanList.get(position);
-                System.out.println(JsonUtil.bean);
 
                 CardViewItemBean cardViewItemBean = cardViewItemBeanList.get(position);
 
@@ -119,8 +123,6 @@ public class LogRecyclerAdapter extends RecyclerView.Adapter<LogRecyclerAdapter.
                 }
             }
         });
-
-
         return holder;
     }
 

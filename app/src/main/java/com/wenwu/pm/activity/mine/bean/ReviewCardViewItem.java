@@ -5,40 +5,53 @@ package com.wenwu.pm.activity.mine.bean;
  * @date:3:36 PM 3/19/2020
  */
 public class ReviewCardViewItem {
-    private int userPhoto;
+
+    private String userPhoto;
     private String userNam;
-    private String time;
-    private String reviewContent;
-    private String quesTitle;
-    private String favourCount;
+    private String cTime;
+    private String commentContent;
+    private String ArtTitle;
+    private int articleId;
+    private int cLike;
+    private int aLike;
+    private String articleContent;
+    private String location;
+    private String img;
 
-    private int showImg;
-    private String showContent;
+    public ReviewCardViewItem() { }
 
-    public ReviewCardViewItem(int userPhoto,String userNam, String time, String reviewContent, String quesTitle, String favourCount) {
+    public ReviewCardViewItem(String userPhoto, String userNam, String cTime,
+                              String commentContent, String artTitle, int articleId,
+                              int cLike, int aLike, String articleContent, String location,
+                              String img) {
+
         this.userPhoto = userPhoto;
         this.userNam = userNam;
-        this.time = time;
-        this.reviewContent = reviewContent;
-        this.quesTitle = quesTitle;
-        this.favourCount = favourCount;
+        this.cTime = cTime;
+        this.commentContent = commentContent;
+        ArtTitle = artTitle;
+        this.articleId = articleId;
+        this.cLike = cLike;
+        this.aLike = aLike;
+        this.articleContent = articleContent;
+        this.location = location;
+        this.img = img;
     }
 
-    public int getUserPhoto() {
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getUserPhoto() {
         return userPhoto;
     }
 
-    public void setUserPhoto(int userPhoto) {
+    public void setUserPhoto(String userPhoto) {
         this.userPhoto = userPhoto;
-    }
-
-    public ReviewCardViewItem(int userPhoto, String userNam, String time, String reviewContent, int showImg, String showContent) {
-        this.userPhoto = userPhoto;
-        this.userNam = userNam;
-        this.time = time;
-        this.reviewContent = reviewContent;
-        this.showImg = showImg;
-        this.showContent = showContent;
     }
 
     public String getUserNam() {
@@ -49,51 +62,68 @@ public class ReviewCardViewItem {
         this.userNam = userNam;
     }
 
-    public String getTime() {
-        return time;
+    public String getcTime() {
+        return cTime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setcTime(String cTime) {
+        this.cTime = cTime;
     }
 
-    public String getReviewContent() {
-        return reviewContent;
+    public String getCommentContent() {
+        return commentContent;
     }
 
-    public void setReviewContent(String reviewContent) {
-        this.reviewContent = reviewContent;
+    public void setCommentContent(String commentContent) {
+        this.commentContent = commentContent;
     }
 
-    public String getQuesTitle() {
-        return quesTitle;
+    public String getArtTitle() {
+        return ArtTitle;
     }
 
-    public void setQuesTitle(String quesTitle) {
-        this.quesTitle = quesTitle;
+    public void setArtTitle(String artTitle) {
+        ArtTitle = artTitle;
     }
 
-    public String getFavourCount() {
-        return favourCount;
+    public int getArticleId() {
+        return articleId;
     }
 
-    public void setFavourCount(String favourCount) {
-        this.favourCount = favourCount;
+    public void setArticleId(int articleId) {
+        this.articleId = articleId;
     }
 
-    public int getShowImg() {
-        return showImg;
+    public int getcLike() {
+        return cLike;
     }
 
-    public void setShowImg(int showImg) {
-        this.showImg = showImg;
+    public void setcLike(int cLike) {
+        this.cLike = cLike;
     }
 
-    public String getShowContent() {
-        return showContent;
+    public int getaLike() {
+        return aLike;
     }
 
-    public void setShowContent(String showContent) {
-        this.showContent = showContent;
+    public void setaLike(int aLike) {
+        this.aLike = aLike;
     }
+
+    public String getArticleContent() {
+        return articleContent;
+    }
+
+    public void setArticleContent(String articleContent) {
+        this.articleContent = articleContent;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
 }

@@ -8,8 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Looper;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,17 +20,16 @@ import com.next.easynavigation.view.EasyNavigationBar;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.find.fragment.FindFragment;
 import com.wenwu.pm.activity.publish.activity.PublishLogActivity;
-import com.wenwu.pm.goson.LRReturnJson;
+
 import com.wenwu.pm.goson.LoginReturnJson;
 import com.wenwu.pm.activity.home.fragment.HomeFragment;
 import com.wenwu.pm.activity.message.fragment.MessageFragment;
 import com.wenwu.pm.activity.mine.fragment.MyFragment;
 import com.wenwu.pm.activity.publish.activity.LongArticleActivity;
 import com.wenwu.pm.activity.publish.activity.QuestionActivity;
-import com.wenwu.pm.goson.ShowReturnJson;
-import com.wenwu.pm.presenter.ShowInfoPresenter;
+
 import com.wenwu.pm.utils.JsonUtil;
-import com.wenwu.pm.view.IShowView;
+
 
 
 
@@ -50,8 +48,7 @@ public class MainActivity extends AppCompatActivity  {
 
     //个人信息数据对接
 
-  /*  private ShowInfoPresenter presenter;
-    private  int userId;*/
+
 
     private String[] tabText = {"首页", "发现", "", "消息", "我的"};
     private int[] normalIcon = {R.mipmap.tab_home_normal, R.mipmap.tab_pic_normal, R.mipmap.btn_pai, R.mipmap.tab_shop_normal, R.mipmap.tab_mine_normal};
@@ -93,9 +90,6 @@ public class MainActivity extends AppCompatActivity  {
                     public boolean onTabClickEvent(View view, int position) {
                         if (position == 4) {
 
-                            //setData();
-                            //setView(JsonUtil.userId);
-                            // showInfoWithOkHttp("showInfo", intent.getStringExtra("account"));
                             initView();
                         } else if (position == 2) {
                             PopMenu mPopMenu = new PopMenu.Builder().attachToActivity(MainActivity.this)
@@ -148,31 +142,7 @@ public class MainActivity extends AppCompatActivity  {
         profile = findViewById(R.id.my_profile);
 
         showResponse(JsonUtil.loginJson);
-
-       // presenter.showInfo(JsonUtil.userId);
     }
-
-   /* private void setData() {
-        this.presenter = new ShowInfoPresenter(this);
-    }*/
-
-/*
-    @Override
-    public void onViewSuccess(Object object) {
-        ShowReturnJson json = (ShowReturnJson) object;
-        Looper.prepare();
-        Toast.makeText(getApplicationContext(),json.getMsg(), Toast.LENGTH_LONG).show();
-        showResponse(JsonUtil.showJson);
-        Looper.loop();
-    }
-
-    @Override
-    public void onViewFail(Object object) {
-        ShowReturnJson json = (ShowReturnJson) object;
-        Looper.prepare();
-        Toast.makeText(getApplicationContext(),json.getMsg(), Toast.LENGTH_LONG).show();
-        Looper.loop();
-    }*/
 
     //线程更新
     public void showResponse(final LoginReturnJson json) {
@@ -195,13 +165,6 @@ public class MainActivity extends AppCompatActivity  {
             }
         }));
     }
-
-/*    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //记得在销毁的时候断掉引用链，养成良好的习惯
-        this.presenter = null;
-    }*/
 
 }
 

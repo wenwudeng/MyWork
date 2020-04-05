@@ -1,5 +1,6 @@
 package com.wenwu.pm.activity.mine.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.home.adapter.DynamicRecyclerAdapter;
+import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 import com.wenwu.pm.activity.mine.bean.ReviewCardViewItem;
+import com.wenwu.pm.activity.mine.fragment.MyReviewFragment;
+import com.wenwu.pm.activity.review.ArticleReviewActivity;
+import com.wenwu.pm.utils.JsonUtil;
 
 import java.util.List;
 
@@ -24,12 +31,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class ReviewRecyclerAdapter extends RecyclerView.Adapter<ReviewRecyclerAdapter.ViewHolder>{
     private List<ReviewCardViewItem> ReviewCardViewItemList;
-    private ReviewCardViewItem ReviewCardViewItem;
+    private ReviewCardViewItem reviewCardViewItem;
     private boolean flag = false;
 
+    private MyReviewFragment fragment;
 
-    public ReviewRecyclerAdapter(List<ReviewCardViewItem> cardViewItemBeanList) {
+
+    public ReviewRecyclerAdapter(List<ReviewCardViewItem> cardViewItemBeanList,MyReviewFragment fragment) {
         this.ReviewCardViewItemList = cardViewItemBeanList;
+        this.fragment = fragment;
     }
 
     // ViewHolder对控件实例进行缓存,避免每次都去每次都去通过id去获得控件实例句柄.*/
@@ -75,12 +85,19 @@ public class ReviewRecyclerAdapter extends RecyclerView.Adapter<ReviewRecyclerAd
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_review_item, parent, false);
         //将获得的concern_item视图实例作为ViewHolder获取实例的参数
         final ReviewRecyclerAdapter.ViewHolder holder = new ReviewRecyclerAdapter.ViewHolder(view);
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                ReviewCardViewItem ReviewCardViewItem = ReviewCardViewItemList.get(position);
-                Toast.makeText(v.getContext(), "you click view" + ReviewCardViewItem.getQuesTitle(), Toast.LENGTH_SHORT).show();
+                ReviewCardViewItem item = ReviewCardViewItemList.get(position);
+                //传参
+                JsonUtil.bean = new CardViewItemBean(item.getArticleId(), item.getArtTitle(), item.getImg(), item.getArticleContent(), JsonUtil.loginJson.getData().getUserName(), JsonUtil.loginJson.getData().getPhoto(), item.getaLike());
+
+                /*加载评论数据*/
+                DynamicRecyclerAdapter.initCommentData();
+                v.getContext().startActivity(new Intent(v.getContext(), ArticleReviewActivity.class));
+                Toast.makeText(v.getContext(), "you click view" + item.getArtTitle(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -89,9 +106,9 @@ public class ReviewRecyclerAdapter extends RecyclerView.Adapter<ReviewRecyclerAd
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                ReviewCardViewItem = ReviewCardViewItemList.get(position);
-                Integer count = Integer.parseInt(ReviewCardViewItem.getFavourCount())+1;
-                Integer count1 = count-1;
+                reviewCardViewItem = ReviewCardViewItemList.get(position);
+                int count = reviewCardViewItem.getcLike()+1;
+                int count1 = count-1;
                 if (v.getId() == R.id.my_review_favour_button) {
                     if (!flag) {
                         holder.like.setBackgroundResource(R.mipmap.icon_upvoted);
@@ -117,13 +134,13 @@ public class ReviewRecyclerAdapter extends RecyclerView.Adapter<ReviewRecyclerAd
      */
     @Override
     public void onBindViewHolder(@NonNull ReviewRecyclerAdapter.ViewHolder holder, int position) {
-        ReviewCardViewItem ReviewCardViewItem = ReviewCardViewItemList.get(position);
-        holder.userPhoto.setImageResource(ReviewCardViewItem.getUserPhoto());
-        holder.userName.setText(ReviewCardViewItem.getUserNam());
-        holder.time .setText(ReviewCardViewItem.getTime());
-        holder.reviewContent.setText(ReviewCardViewItem.getReviewContent());
-        holder.quesTitle.setText(ReviewCardViewItem.getQuesTitle());
-        holder.favourCount.setText(ReviewCardViewItem.getFavourCount());
+        ReviewCardViewItem item = ReviewCardViewItemList.get(position);
+        Glide.with(fragment).load(item.getUserPhoto()).into(holder.userPhoto);
+        holder.userName.setText(item.getUserNam());
+        holder.time .setText(item.getcTime());
+        holder.reviewContent.setText(item.getCommentContent());
+        holder.quesTitle.setText(item.getArtTitle());
+        holder.favourCount.setText(Integer.toString(item.getcLike()));
     }
 
     @Override

@@ -1,28 +1,31 @@
 package com.wenwu.pm.goson;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author:wenwudeng
- * @date:0:00 2020/4/5
+ * @date:10:08 AM 3/20/2020
  */
-public class MyLogJson {
+public class MyQuestionJson implements Serializable {
+
     private boolean success;
     private String code;
     private String msg;
     private List<Data> data;
 
-    public class Data{
-        private int id;//文章id
+    public class Data {
+        private int id;
         private int userid;
         private String title;
         private String content;
         private String img;
+        private String location;
         private int like;
         private int collect;
+        private int answer;
         private String time;
         private boolean status;
-        private String location;
 
         public int getId() {
             return id;
@@ -64,6 +67,14 @@ public class MyLogJson {
             this.img = img;
         }
 
+        public String getLocation() {
+            return location;
+        }
+
+        public void setLocation(String location) {
+            this.location = location;
+        }
+
         public int getLike() {
             return like;
         }
@@ -80,6 +91,14 @@ public class MyLogJson {
             this.collect = collect;
         }
 
+        public int getAnswer() {
+            return answer;
+        }
+
+        public void setAnswer(int answer) {
+            this.answer = answer;
+        }
+
         public String getTime() {
             return time;
         }
@@ -94,30 +113,6 @@ public class MyLogJson {
 
         public void setStatus(boolean status) {
             this.status = status;
-        }
-
-        public String getLocation() {
-            return location;
-        }
-
-        public void setLocation(String location) {
-            this.location = location;
-        }
-
-        @Override
-        public String toString() {
-            return "Data{" +
-                    "id=" + id +
-                    ", userid=" + userid +
-                    ", title='" + title + '\'' +
-                    ", content='" + content + '\'' +
-                    ", img='" + img + '\'' +
-                    ", like=" + like +
-                    ", collect=" + collect +
-                    ", time='" + time + '\'' +
-                    ", status=" + status +
-                    ", location='" + location + '\'' +
-                    '}';
         }
     }
 
@@ -145,21 +140,11 @@ public class MyLogJson {
         this.msg = msg;
     }
 
-    public List<Data> getData() {
-        return data;
-    }
-
     public void setData(List<Data> data) {
         this.data = data;
     }
 
-    @Override
-    public String toString() {
-        return "MyLogJson{" +
-                "success=" + success +
-                ", code='" + code + '\'' +
-                ", msg='" + msg + '\'' +
-                ", data=" + data +
-                '}';
+    public List<Data> getData() {
+        return data;
     }
 }
