@@ -1,5 +1,6 @@
 package com.wenwu.pm.activity.find.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.bumptech.glide.Glide;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.find.bean.FindHelpPetShow;
+import com.wenwu.pm.activity.find.fragment.FindHelpPetFragment;
+import com.wenwu.pm.activity.home.adapter.DynamicRecyclerAdapter;
+import com.wenwu.pm.activity.home.bean.CardViewItemBean;
+import com.wenwu.pm.activity.review.ArticleReviewActivity;
+import com.wenwu.pm.utils.JsonUtil;
 
 import java.util.List;
 
@@ -24,8 +31,10 @@ import java.util.List;
 public class FHelpRecyclerAdapter extends RecyclerView.Adapter<FHelpRecyclerAdapter.ViewHolder> {
     private List<FindHelpPetShow> helpPetShowList;
 
-    public FHelpRecyclerAdapter(List<FindHelpPetShow> helpPetShowList) {
+    private FindHelpPetFragment fragment;
+    public FHelpRecyclerAdapter(List<FindHelpPetShow> helpPetShowList,FindHelpPetFragment fragment) {
         this.helpPetShowList = helpPetShowList;
+        this.fragment = fragment;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
@@ -55,12 +64,20 @@ public class FHelpRecyclerAdapter extends RecyclerView.Adapter<FHelpRecyclerAdap
         //获得R.layout.find_helppet_item.xml视图view实例
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.find_helppet_item, parent, false);
         final ViewHolder holder = new ViewHolder(view);
+
         holder.helpPetShowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                FindHelpPetShow contentShow = helpPetShowList.get(position);
-                Toast.makeText(v.getContext(), "you click view" + contentShow.getTitle(), Toast.LENGTH_SHORT).show();
+
+                FindHelpPetShow item = helpPetShowList.get(position);
+                /*传参至文章展示内容*/
+                JsonUtil.bean = new CardViewItemBean(item.getqId(), item.getTitle(), item.getImg(), item.getContent(), item.getUserNam(), item.getPhoto(), item.getLike());
+
+                /*加载评论数据*/
+                DynamicRecyclerAdapter.initCommentData();
+                v.getContext().startActivity(new Intent(v.getContext(), ArticleReviewActivity.class));
+                Toast.makeText(v.getContext(), "you click view" + item.getTitle(), Toast.LENGTH_SHORT).show();
             }
         });
         return holder;
@@ -69,11 +86,13 @@ public class FHelpRecyclerAdapter extends RecyclerView.Adapter<FHelpRecyclerAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         FindHelpPetShow petShow = helpPetShowList.get(position);
-        holder.help_img_show.setImageResource(R.drawable.img);
+        Glide.with(fragment).load(petShow.getPhoto()).into(holder.help_img_show);
         holder.help_title_show.setText(petShow.getTitle());
         holder.help_content_show.setText(petShow.getContent());
-        holder.helip_time_show.setText(petShow.getDate());
-        holder.help_reply_count_show.setText(Integer.toString(petShow.getAnswerCount()));
+        holder.help_reply_count_show.setText("1周前");
+        //holder.helip_time_show.setText(petShow.getTime());
+       holder.help_reply_count_show.setText(Integer.toString(petShow.getAnswer()));
+
     }
 
     @Override

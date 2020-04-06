@@ -15,6 +15,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.home.adapter.HomePagerAdapter;
+import com.wenwu.pm.goson.FindHelpJson;
 import com.wenwu.pm.goson.MyCommentJson;
 import com.wenwu.pm.goson.MyLogJson;
 import com.wenwu.pm.goson.MyQuestionJson;
@@ -54,6 +55,8 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        getFindHelpData();
         getMyLogData();
         getMyQuestionData();
         getMyCommentData();
@@ -153,5 +156,21 @@ public class HomeFragment extends Fragment {
 
     }
 
+    /*获取find模块宠物互助数据*/
+    public void getFindHelpData() {
+        OkHttpUtil.sendPostRequest("question/getQuestions", null, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String data = response.body().string();
+                FindHelpJson json = new Gson().fromJson(data, FindHelpJson.class);
+                JsonUtil.findHelpJson = json;
+            }
+        });
+    }
 
 }

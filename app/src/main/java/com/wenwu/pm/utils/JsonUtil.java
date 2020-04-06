@@ -1,12 +1,12 @@
 package com.wenwu.pm.utils;
 
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
-import com.wenwu.pm.activity.mine.bean.QuestionCardViewItem;
+import com.wenwu.pm.goson.FindHelpJson;
 import com.wenwu.pm.goson.LoginReturnJson;
 import com.wenwu.pm.goson.MyCommentJson;
 import com.wenwu.pm.goson.MyLogJson;
 import com.wenwu.pm.goson.MyQuestionJson;
-import com.wenwu.pm.goson.OneArticleJson;
+
 
 import java.util.List;
 
@@ -36,9 +36,12 @@ public class JsonUtil {
 
 
    //保存提问页面数据
-   public static QuestionCardViewItem questionJson;
+  // public static QuestionCardViewItem questionJson;
 
    //保存Gson解析的提问数据
    public static MyCommentJson myCommentJson;
+
+   //保存Gson解析后的宠友互助数据
+   public static FindHelpJson findHelpJson;
 
 }

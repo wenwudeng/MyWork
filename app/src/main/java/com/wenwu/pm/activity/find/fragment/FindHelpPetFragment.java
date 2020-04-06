@@ -18,6 +18,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.find.adapter.FHelpRecyclerAdapter;
 import com.wenwu.pm.activity.find.bean.FindHelpPetShow;
+import com.wenwu.pm.goson.FindHelpJson;
+import com.wenwu.pm.goson.MyQuestionJson;
+import com.wenwu.pm.utils.JsonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +50,7 @@ public class FindHelpPetFragment extends Fragment {
 
         recyclerView.setLayoutManager(layoutManager);
 
-        FHelpRecyclerAdapter helpRecyclerAdapter = new FHelpRecyclerAdapter(list);
+        FHelpRecyclerAdapter helpRecyclerAdapter = new FHelpRecyclerAdapter(list,this);
 
         recyclerView.setAdapter(helpRecyclerAdapter);
 
@@ -68,9 +71,12 @@ public class FindHelpPetFragment extends Fragment {
     }
 
     private void init() {
-        for (int i = 0; i < 20; i++) {
-            FindHelpPetShow petShow = new FindHelpPetShow(R.drawable.img, "中国加油,武汉加油!", "中国人民万众一心,我们一定会战胜此次疫情", "1周前", 15);
-            list.add(petShow);
+        List<FindHelpJson.Data> dataList = JsonUtil.findHelpJson.getData();
+        for (FindHelpJson.Data data : dataList) {
+            FindHelpPetShow item = new FindHelpPetShow(data.getqId(), data.getuId(), data.getTitle(), data.getContent(),
+                    data.getImg(), data.getLocation(), data.getLike(), data.getAnswer(), data.getTime(), data.getPhoto(), data.getUserNam());
+            list.add(item);
         }
+
     }
 }
