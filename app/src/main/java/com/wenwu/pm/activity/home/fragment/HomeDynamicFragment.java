@@ -47,7 +47,7 @@ public class HomeDynamicFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view2);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view2);
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         DynamicRecyclerAdapter adapter = new DynamicRecyclerAdapter(cardViewItemBeanList,this);

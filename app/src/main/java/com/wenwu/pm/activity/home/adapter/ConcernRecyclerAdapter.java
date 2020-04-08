@@ -17,8 +17,7 @@ import com.bumptech.glide.Glide;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 import com.wenwu.pm.activity.home.fragment.HomeConcernFragment;
-import com.wenwu.pm.activity.home.fragment.HomeDynamicFragment;
-import com.wenwu.pm.activity.review.ArticleReviewActivity;
+import com.wenwu.pm.activity.publish.activity.ArticleReviewActivity;
 
 import java.util.List;
 

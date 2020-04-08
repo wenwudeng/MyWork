@@ -5,7 +5,7 @@
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.wenwu.pm.activity.review.ArticleReviewActivity">
+    tools:context=".activity.publish.activity.ArticleReviewActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/main_content"
@@ -26,7 +26,7 @@
                 android:layout_height="match_parent"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 android:fitsSystemWindows="true"
-                app:contentScrim="#212121"
+                app:contentScrim="@color/red"
                 app:expandedTitleMarginStart="48dp"
                 app:expandedTitleMarginEnd="64dp">
 
@@ -44,8 +44,7 @@
                       android:layout_width="match_parent"
                       android:layout_height="40dp"
                       app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                      app:layout_collapseMode="pin"
-                        app:titleTextAppearance="@style/Toolbar.TitleText"/>
+                      app:layout_collapseMode="pin" />
 
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -177,7 +176,7 @@
                     android:layout_marginTop="5dp"
                     android:orientation="vertical">
 
-                    <com.wenwu.pm.activity.review.CommentExpandableListView
+                    <com.wenwu.pm.activity.publish.view.CommentExpandableListView
                         android:id="@+id/detail_page_lv_comment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

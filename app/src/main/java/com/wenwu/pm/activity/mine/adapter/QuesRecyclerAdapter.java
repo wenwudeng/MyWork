@@ -15,7 +15,7 @@ import com.wenwu.pm.R;
 import com.wenwu.pm.activity.home.adapter.DynamicRecyclerAdapter;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 import com.wenwu.pm.activity.mine.bean.QuestionCardViewItem;
-import com.wenwu.pm.activity.review.ArticleReviewActivity;
+import com.wenwu.pm.activity.publish.activity.ArticleReviewActivity;
 import com.wenwu.pm.utils.JsonUtil;
 
 import java.util.List;

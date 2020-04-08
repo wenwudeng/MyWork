@@ -1,4 +1,4 @@
-package com.wenwu.pm.activity.review.bean;
+package com.wenwu.pm.activity.publish.bean;
 
 import java.io.Serializable;
 

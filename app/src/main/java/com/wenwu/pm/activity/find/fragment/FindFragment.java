@@ -34,7 +34,7 @@ public class FindFragment extends Fragment {
         FindPagerAdapter findPagerAdapter = new FindPagerAdapter(getChildFragmentManager(), initViewPager());
         viewPager = view.findViewById(R.id.view_pagerFind);
         viewPager.setAdapter(findPagerAdapter);
-
+        viewPager.setOffscreenPageLimit(2);
         tabLayout = view.findViewById(R.id.tab_layoutFind);
 
         tabLayout.setupWithViewPager(viewPager);

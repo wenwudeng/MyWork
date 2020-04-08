@@ -1,4 +1,4 @@
-package com.wenwu.pm.activity.review.adapter;
+package com.wenwu.pm.activity.publish.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -14,8 +14,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.wenwu.pm.R;
-import com.wenwu.pm.activity.review.bean.CommentDetailBean;
-import com.wenwu.pm.activity.review.bean.ReplyDetailBean;
+import com.wenwu.pm.activity.publish.bean.CommentDetailBean;
+import com.wenwu.pm.activity.publish.bean.ReplyDetailBean;
 import com.wenwu.pm.utils.JsonUtil;
 
 import java.util.ArrayList;

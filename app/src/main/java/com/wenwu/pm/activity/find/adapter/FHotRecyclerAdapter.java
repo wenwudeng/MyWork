@@ -1,5 +1,6 @@
 package com.wenwu.pm.activity.find.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.find.bean.FindHotTopicShow;
+import com.wenwu.pm.activity.find.activity.topic.TopicActivity;
 
 import java.util.List;
 
@@ -59,6 +61,7 @@ public class FHotRecyclerAdapter extends RecyclerView.Adapter<FHotRecyclerAdapte
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 FindHotTopicShow topicShow = topicShowList.get(position);
+                v.getContext().startActivity(new Intent(v.getContext(), TopicActivity.class));
                 Toast.makeText(v.getContext(), "you click view" + topicShow.getTopic(), Toast.LENGTH_SHORT).show();
             }
         });

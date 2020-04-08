@@ -56,10 +56,11 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        getFindHelpData();
+
         getMyLogData();
         getMyQuestionData();
         getMyCommentData();
+        getFindHelpData();
         return inflater.inflate(R.layout.fragment_home,container,false);
     }
 
@@ -104,9 +105,7 @@ public class HomeFragment extends Fragment {
         OkHttpUtil.sendPostRequest("article/getAllArticle", param, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
             }
-
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String data = response.body().string();
@@ -126,7 +125,6 @@ public class HomeFragment extends Fragment {
             public void onFailure(Call call, IOException e) {
 
             }
-
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String data = response.body().string();
@@ -145,7 +143,6 @@ public class HomeFragment extends Fragment {
             public void onFailure(Call call, IOException e) {
 
             }
-
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String data = response.body().string();
@@ -160,9 +157,7 @@ public class HomeFragment extends Fragment {
     public void getFindHelpData() {
         OkHttpUtil.sendPostRequest("question/getQuestions", null, new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
+            public void onFailure(Call call, IOException e) { }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
@@ -172,5 +167,6 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
 
 }

@@ -1,4 +1,4 @@
-package com.wenwu.pm.activity.review;
+package com.wenwu.pm.activity.publish.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -27,10 +27,11 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 import com.wenwu.pm.R;
-import com.wenwu.pm.activity.review.adapter.CommentExpandAdapter;
-import com.wenwu.pm.activity.review.bean.CommentBean;
-import com.wenwu.pm.activity.review.bean.CommentDetailBean;
-import com.wenwu.pm.activity.review.bean.ReplyDetailBean;
+import com.wenwu.pm.activity.publish.adapter.CommentExpandAdapter;
+import com.wenwu.pm.activity.publish.bean.CommentBean;
+import com.wenwu.pm.activity.publish.bean.CommentDetailBean;
+import com.wenwu.pm.activity.publish.bean.ReplyDetailBean;
+import com.wenwu.pm.activity.publish.view.CommentExpandableListView;
 import com.wenwu.pm.goson.LRReturnJson;
 import com.wenwu.pm.utils.JsonUtil;
 import com.wenwu.pm.utils.OkHttpUtil;

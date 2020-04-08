@@ -16,9 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
-import com.wenwu.pm.activity.home.fragment.HomeDynamicFragment;
 import com.wenwu.pm.activity.home.fragment.HomeRecommendFragment;
-import com.wenwu.pm.activity.review.ArticleReviewActivity;
+import com.wenwu.pm.activity.publish.activity.ArticleReviewActivity;
 import com.wenwu.pm.utils.JsonUtil;
 import com.wenwu.pm.utils.OkHttpUtil;
 

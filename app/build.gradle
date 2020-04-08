@@ -35,6 +35,8 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.2'
+
     implementation 'com.github.forvv231:EasyNavigation:1.0.3' /*导航栏*/
     implementation 'com.github.bigdongdong:ChatView:1.2' //添加聊天气泡依赖
     implementation 'de.hdodenhof:circleimageview:3.1.0' //圆形头像

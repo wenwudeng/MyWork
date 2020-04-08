@@ -1,4 +1,4 @@
-package com.wenwu.pm.activity.review.view;
+package com.wenwu.pm.activity.publish.view;
 
 import android.content.Context;
 import android.os.Build;
