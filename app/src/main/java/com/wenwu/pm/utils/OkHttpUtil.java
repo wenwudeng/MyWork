@@ -30,14 +30,15 @@ public class OkHttpUtil {
     public static final String API = "http://192.168.1.112:8081/api/";
     public static final String UPLOAD_URL = "http://47.101.171.252:8890/uploadFile?username=";
 
+    public static final String MAP_URL = "https://restapi.amap.com/v3/place/around?key=1321b7ea2e0b99553ea27afa841d1ada&keywords=" +
+            "宠物医院|宠物诊所&sortrule=distance&children=1&extensions=base&radius=3000&location=";
 
-
-     /*// 发送GET请求
+     // 发送GET请求
     public static void sendGetRequest(String url, okhttp3.Callback callback){
         OkHttpClient client = new OkHttpClient(); // 创建一个client
-        Request request = new Request.Builder().url(url).build(); // 组装一个Request对象
+        Request request = new Request.Builder().url(MAP_URL+url).build(); // 组装一个Request对象
         client.newCall(request).enqueue(callback); // 发送请求
-    }*/
+    }
 
     // 发送POST请求
     public static void sendPostRequest(String url, Map<String, Object> map, okhttp3.Callback callback){

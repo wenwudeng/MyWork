@@ -4,14 +4,32 @@
     package="com.wenwu.pm">
     <!-- 相机 -->
     <uses-permission android:name="android.permission.CAMERA" /> <!-- 允许联网 -->
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- 获取GSM（2g）、WCDMA（联通3g）等网络状态的信息 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 获取wifi网络状态的信息 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- 获取sd卡写的权限，用于文件上传和下载 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- sdk读权限 -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 允许读取手机状态 用于创建BmobInstallation -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 访问网络，网络定位需要上网 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--
+    &lt;!&ndash; 允许挂载和反挂载文件系统可移动存储 &ndash;&gt;
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    &lt;!&ndash; 允许程序读取底层系统日志文件 &ndash;&gt;
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    &lt;!&ndash; 允许程序读取或写入系统设置 &ndash;&gt;
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    &lt;!&ndash; 获取模拟定位信息 &ndash;&gt;
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
+    -->
+    <!-- 允许访问振动设备 -->
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 允许使用PowerManager的 WakeLocks保持进程在休眠时从屏幕消失 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- android 9.0上使用前台服务，需要添加权限 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 读取缓存数据 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+ <!--   android:name=".App"-->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/cat_icon"
@@ -23,8 +41,27 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="q">
-        <activity android:name=".activity.find.activity.topic.TopicActivity"/>
 
+        <!-- 高德地图配置 -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="4c9c9e95e9641d2a0576a19a3a662874" />
+
+        <service android:name="com.amap.api.location.APSService" />
+
+        <activity
+            android:name="com.amap.api.navi.AmapRouteActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.NoTitleBar" />
+
+
+        <activity android:name=".activity.find.activity.hospital.NavMapActivity"/>
+        <activity android:name=".activity.find.activity.hospital.CheckPermissionsActivity"/>
+        <activity android:name=".activity.find.activity.hospital.HospitalActivity"/>
+
+        <activity android:name=".activity.find.activity.EatActivity" />
+        <activity android:name=".activity.find.activity.wiki.PetWikiActivity" />
+        <activity android:name=".activity.find.activity.topic.TopicActivity" />
         <activity android:name=".activity.mine.activity.PersonShowActivity" />
         <activity android:name=".activity.publish.activity.ArticleReviewActivity" />
         <activity android:name=".activity.publish.activity.PublishLogActivity" />
@@ -44,7 +81,7 @@
         <activity android:name=".activity.mine.activity.ForgetActivity" />
         <activity android:name=".activity.mine.activity.RegisterActivity" />
         <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.mine.activity.LoginActivity">
+        <activity android:name=".activity.mine.activity.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />

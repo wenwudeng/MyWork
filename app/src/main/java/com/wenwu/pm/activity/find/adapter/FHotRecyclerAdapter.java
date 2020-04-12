@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.wenwu.pm.R;
-import com.wenwu.pm.activity.find.bean.FindHotTopicShow;
 import com.wenwu.pm.activity.find.activity.topic.TopicActivity;
+import com.wenwu.pm.activity.find.bean.FindHotTopicShow;
 
 import java.util.List;
 

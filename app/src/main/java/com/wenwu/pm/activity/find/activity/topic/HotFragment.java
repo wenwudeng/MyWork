@@ -17,12 +17,15 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.find.activity.topic.HotFragmentAdapter;
+import com.wenwu.pm.activity.find.activity.topic.Model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
+ * 热议话题-最热
  */
 public class HotFragment extends Fragment {
     private RecyclerView recycler;
@@ -43,12 +46,12 @@ public class HotFragment extends Fragment {
         recycler.setLayoutManager(layoutManager);
         HotFragmentAdapter adapter = new HotFragmentAdapter(R.layout.home_item,list);
         recycler.setAdapter(adapter);
-        adapter.setOnItemClickListener(new OnItemClickListener() {
+    /*    adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 toast(getActivity(),"别点我").show();
             }
-        });
+        });*/
     }
 
     public void init() {

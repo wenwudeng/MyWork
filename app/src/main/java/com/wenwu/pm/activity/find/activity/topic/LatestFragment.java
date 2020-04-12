@@ -19,6 +19,10 @@ import com.wenwu.pm.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 热议话题-最新
+ */
+
 public class LatestFragment extends Fragment {
     private RecyclerView recycler;
     private List<Model> list;
@@ -37,12 +41,12 @@ public class LatestFragment extends Fragment {
         recycler.setLayoutManager(layoutManager);
         HotFragmentAdapter adapter = new HotFragmentAdapter(R.layout.home_item,list);
         recycler.setAdapter(adapter);
-        adapter.setOnItemClickListener(new OnItemClickListener() {
+  /*      adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 HotFragment.toast(getActivity(),"别点我").show();
             }
-        });
+        });*/
     }
 
 

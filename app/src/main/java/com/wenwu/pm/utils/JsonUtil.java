@@ -1,5 +1,6 @@
 package com.wenwu.pm.utils;
 
+import com.wenwu.pm.activity.find.activity.hospital.PetHospitalModel;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 import com.wenwu.pm.goson.FindHelpJson;
 import com.wenwu.pm.goson.LoginReturnJson;
@@ -8,6 +9,7 @@ import com.wenwu.pm.goson.MyLogJson;
 import com.wenwu.pm.goson.MyQuestionJson;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -43,5 +45,6 @@ public class JsonUtil {
 
    //保存Gson解析后的宠友互助数据
    public static FindHelpJson findHelpJson;
+
 
 }

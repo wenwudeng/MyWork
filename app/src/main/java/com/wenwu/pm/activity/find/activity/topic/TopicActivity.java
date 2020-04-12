@@ -19,6 +19,9 @@ import com.wenwu.pm.activity.publish.activity.PublishLogActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 热议话题
+ */
 public class TopicActivity extends AppCompatActivity implements View.OnClickListener {
     private ViewPager viewPager;
     private TabLayout tabLayout;

@@ -77,6 +77,5 @@ public class FindHelpPetFragment extends Fragment {
                     data.getImg(), data.getLocation(), data.getLike(), data.getAnswer(), data.getTime(), data.getPhoto(), data.getUserNam());
             list.add(item);
         }
-
     }
 }

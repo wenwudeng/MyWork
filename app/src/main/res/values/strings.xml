@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name" translatable="false">宠物生活</string>
 
+    <string name="startlocation">开始定位</string>
+    <string name="stoplocation">停止定位</string>
+
     <style name="pt_home">首页</style>
 
     <string name="framework_home">首页</string>

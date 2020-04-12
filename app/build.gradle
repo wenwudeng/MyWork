@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.wenwu.pm"
         minSdkVersion 23
-        targetSdkVersion 27
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -24,10 +24,21 @@ android {
     }
 
     useLibrary 'org.apache.http.legacy'
-}
+
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
+
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+    }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
@@ -35,31 +46,32 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.2'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
 
-    implementation 'com.github.forvv231:EasyNavigation:1.0.3' /*ÂØºËà™Ê†è*/
-    implementation 'com.github.bigdongdong:ChatView:1.2' //Ê∑ªÂä†ËÅäÂ§©Ê∞îÊ≥°‰æùËµñ
-    implementation 'de.hdodenhof:circleimageview:3.1.0' //ÂúÜÂΩ¢Â§¥ÂÉè
-    implementation 'com.lrq.menu:addpopmenu:1.0.7' //ÂºπÁ™ó
-
-    //glide ÂõæÁâáÂä†ËΩΩ
+    implementation 'com.github.forvv231:EasyNavigation:1.0.3'//µº∫Ω¿∏
+    implementation 'com.github.bigdongdong:ChatView:1.2'//¡ƒÃÏ∆¯≈›
+    implementation 'de.hdodenhof:circleimageview:3.1.0'//‘≤–ŒÕ∑œÒ
+    implementation 'com.lrq.menu:addpopmenu:1.0.7' //µØ¥∞
+    //glide Õº∆¨º”‘ÿ
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
-
-    implementation 'com.github.sendtion:XRichText:1.9.4'
+    implementation 'com.just.agentweb:agentweb:4.1.3'//webView
 
     //bomb
     implementation 'cn.bmob.android:bmob-sdk:3.7.7'
-    implementation "io.reactivex.rxjava2:rxjava:2.2.3"
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.3'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation 'com.squareup.okio:okio:2.5.0'
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.okhttp3:okhttp:3.12.0'
-
-
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation files('libs/AMap3DMap_7.3.0_AMapNavi_7.3.0_20200407.jar')
+    implementation files('libs/AMap_Location_V4.9.0_20200302.jar')
+    implementation files('libs/AMap_Search_V7.3.0_20200331.jar')
+    implementation files('libs/Msc.jar')
 }
