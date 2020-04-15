@@ -1,5 +1,6 @@
 package com.wenwu.pm.activity.find.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -15,15 +16,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
+import com.google.gson.Gson;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.find.adapter.FHelpRecyclerAdapter;
 import com.wenwu.pm.activity.find.bean.FindHelpPetShow;
 import com.wenwu.pm.goson.FindHelpJson;
 import com.wenwu.pm.goson.MyQuestionJson;
 import com.wenwu.pm.utils.JsonUtil;
+import com.wenwu.pm.utils.OkHttpUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * @author:wenwudeng
@@ -41,19 +49,19 @@ public class FindHelpPetFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        getFindHelpData();
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        init();
-
+       // init();
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_helPet);
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
-
         recyclerView.setLayoutManager(layoutManager);
-
         FHelpRecyclerAdapter helpRecyclerAdapter = new FHelpRecyclerAdapter(list,this);
-
         recyclerView.setAdapter(helpRecyclerAdapter);
-
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_helpPet);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -70,12 +78,23 @@ public class FindHelpPetFragment extends Fragment {
         });
     }
 
-    private void init() {
-        List<FindHelpJson.Data> dataList = JsonUtil.findHelpJson.getData();
-        for (FindHelpJson.Data data : dataList) {
-            FindHelpPetShow item = new FindHelpPetShow(data.getqId(), data.getuId(), data.getTitle(), data.getContent(),
-                    data.getImg(), data.getLocation(), data.getLike(), data.getAnswer(), data.getTime(), data.getPhoto(), data.getUserNam());
-            list.add(item);
-        }
+    /*获取find模块宠物互助数据*/
+    public void getFindHelpData() {
+        OkHttpUtil.sendPostRequest("question/getQuestions", null, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) { }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String reData = response.body().string();
+                FindHelpJson json = new Gson().fromJson(reData, FindHelpJson.class);
+                List<FindHelpJson.Data> dataList = json.getData();
+                for (FindHelpJson.Data data : dataList) {
+                    FindHelpPetShow item = new FindHelpPetShow(data.getqId(), data.getuId(), data.getTitle(), data.getContent(),
+                            data.getImg(), data.getLocation(), data.getLike(), data.getAnswer(), data.getTime(), data.getPhoto(), data.getUserNam());
+                    list.add(item);
+                }
+            }
+        });
     }
 }

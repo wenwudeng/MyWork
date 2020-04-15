@@ -55,20 +55,14 @@ public class MainActivity extends AppCompatActivity  {
     private int[] selectIcon = {R.mipmap.tab_home_pressed, R.mipmap.tab_pic_pressed, R.mipmap.btn_pai, R.mipmap.tab_shop_pressed, R.mipmap.tab_mine_pressed};
     private List<Fragment> fragments = new ArrayList<>();
 
-    private TextView userName;
-    private CircleImageView userPhoto;
-    private TextView concernCount;
-    private TextView fansCount;
-    private TextView collectCount;
-    private ImageView gender;
-    private TextView city;
-    private TextView pet;
-    private TextView profile;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        System.out.println("=======MainActivity=====");
 
         navigationBar = findViewById(R.id.navigationBar);
 
@@ -90,7 +84,7 @@ public class MainActivity extends AppCompatActivity  {
                     public boolean onTabClickEvent(View view, int position) {
                         if (position == 4) {
 
-                            initView();
+
                         } else if (position == 2) {
                             PopMenu mPopMenu = new PopMenu.Builder().attachToActivity(MainActivity.this)
                                     .addMenuItem(new PopMenuItem("发布日志", ResourcesCompat.getDrawable(getResources(), R.mipmap.publish_post, null)))
@@ -126,45 +120,11 @@ public class MainActivity extends AppCompatActivity  {
                 .mode(EasyNavigationBar.MODE_ADD)
                 .anim(Anim.ZoomIn)
                 .build();
-
-
     }
 
-    private void initView() {
-        userName = findViewById(R.id.my_user_name);
-        userPhoto = findViewById(R.id.my_user_photo);
-        concernCount = findViewById(R.id.my_concern_count);
-        collectCount = findViewById(R.id.my_collect_count);
-        fansCount = findViewById(R.id.my_fans_count);
-        gender = findViewById(R.id.my_sex);
-        city = findViewById(R.id.my_city);
-        pet = findViewById(R.id.my_pet);
-        profile = findViewById(R.id.my_profile);
 
-        showResponse(JsonUtil.loginJson);
-    }
 
-    //线程更新
-    public void showResponse(final LoginReturnJson json) {
-        runOnUiThread(new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Glide.with(MainActivity.this).load(json.getData().getPhoto()).into(userPhoto);
-                userName.setText(json.getData().getUserName());
-                fansCount.setText(Integer.toString(json.getData().getFollow()));
-                concernCount.setText(Integer.toString(json.getData().getFollow()));
-                collectCount.setText(Integer.toString(json.getData().getCollect()));
-                if (json.getData().getGender().equals("男")) {
-                    gender.setImageResource(R.drawable.sex_boy_p);
-                }else {
-                    gender.setImageResource(R.drawable.sex_girl_p);
-                }
-                city.setText(json.getData().getCity());
-                pet.setText(json.getData().getPet());
-                profile.setText(json.getData().getProfile());
-            }
-        }));
-    }
+
 
 }
 

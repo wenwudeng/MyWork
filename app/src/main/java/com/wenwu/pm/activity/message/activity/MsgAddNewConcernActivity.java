@@ -29,7 +29,7 @@ public class MsgAddNewConcernActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.msg_add_new_concern);
 
-        init();
+     //   init();
         recyclerView = findViewById(R.id.recycler_view_msg_concern);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
@@ -62,13 +62,13 @@ public class MsgAddNewConcernActivity extends AppCompatActivity {
     }
 
     private void init() {
-        MsgAddNewConcern concern = new MsgAddNewConcern(R.drawable.img, "蒙眼丽莎", "3天前");
+ /*       MsgAddNewConcern concern = new MsgAddNewConcern(R.drawable.img, "蒙眼丽莎", "3天前");
         list.add(concern);
 
         MsgAddNewConcern concern1 = new MsgAddNewConcern(R.drawable.li, "李易峰", "3天前");
         list.add(concern1);
 
         MsgAddNewConcern concern2 = new MsgAddNewConcern(R.drawable.chen, "陈瑶", "3天前");
-        list.add(concern2);
+        list.add(concern2);*/
     }
 }

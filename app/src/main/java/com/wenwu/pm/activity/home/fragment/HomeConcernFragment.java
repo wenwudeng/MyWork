@@ -28,7 +28,6 @@ import java.util.List;
  * 首页模块中的关注碎片页
  */
 public class HomeConcernFragment extends Fragment {
-
     //用于用户头像
     private List<CardViewItemBean> cardViewItemBeanList = new ArrayList<>();
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -40,22 +39,9 @@ public class HomeConcernFragment extends Fragment {
         return inflater.inflate(R.layout.home_concern,container,false);
     }
 
-    /**d
-     * 初始化数据
-     */
-    public void init() {
-/*        for (int i = 0; i < 8; i++) {
-            CardViewItemBean cardViewItemBean = new CardViewItemBean("抗战疫情", R.drawable.li, "中国加油,武汉加油!", "梦想", R.mipmap.pic2,100);
-            cardViewItemBeanList.add(cardViewItemBean);
-            CardViewItemBean cardViewItemBean1 = new CardViewItemBean("抗战疫情", R.drawable.chen, "中国加油,武汉加油!", "梦想", R.mipmap.pic4,100);
-            cardViewItemBeanList.add(cardViewItemBean1);
-        }*/
-    }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        init();
         RecyclerView recyclerView =  view.findViewById(R.id.recycler_view);
         StaggeredGridLayoutManager layout = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layout);
@@ -76,4 +62,6 @@ public class HomeConcernFragment extends Fragment {
             }
         });
     }
+
+
 }

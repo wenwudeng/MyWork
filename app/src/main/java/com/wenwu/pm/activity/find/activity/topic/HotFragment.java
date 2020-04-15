@@ -46,12 +46,7 @@ public class HotFragment extends Fragment {
         recycler.setLayoutManager(layoutManager);
         HotFragmentAdapter adapter = new HotFragmentAdapter(R.layout.home_item,list);
         recycler.setAdapter(adapter);
-    /*    adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                toast(getActivity(),"别点我").show();
-            }
-        });*/
+
     }
 
     public void init() {

@@ -27,9 +27,11 @@ public class HotFragmentAdapter extends BaseQuickAdapter<Model, BaseViewHolder> 
 
     @Override
     protected void convert(@NotNull BaseViewHolder holder, Model model) {
-       // Glide.with(getContext()).load(model.getImage()).into((ImageView) holder.findView(R.id.userUploadImg));
+        if (getContext() != null) {
+            Glide.with(getContext()).load(model.getImage()).into((ImageView) holder.getView(R.id.userUploadImg));
+            Glide.with(getContext()).load(model.getImage()).into((ImageView) holder.getView(R.id.user_photo));
+        }
         holder.setText(R.id.userUpLoadText, model.getTitle());
-     //   Glide.with(getContext()).load(model.getImage()).into((ImageView) holder.findView(R.id.user_photo));
         holder.setText(R.id.user_id, model.getUserName());
     }
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,17 +16,18 @@ import androidx.fragment.app.Fragment;
 
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.message.activity.MsgCollectPraiseActivity;
-import com.wenwu.pm.activity.mine.activity.ConcernActivity;
+import com.wenwu.pm.activity.mine.activity.FollowActivity;
 import com.wenwu.pm.activity.mine.activity.EditPersonalInfoActivity;
 import com.wenwu.pm.activity.mine.activity.FansActivity;
 import com.wenwu.pm.activity.mine.activity.SettingActivity;
 import com.wenwu.pm.activity.mine.adapter.MyPagerAdapter;
-import com.wenwu.pm.goson.MyCommentJson;
-import com.wenwu.pm.goson.OneArticleJson;
+import com.wenwu.pm.goson.LRReturnJson;
+import com.wenwu.pm.goson.LoginReturnJson;
 import com.wenwu.pm.utils.JsonUtil;
 import com.wenwu.pm.utils.OkHttpUtil;
 
@@ -52,6 +54,17 @@ public class MyFragment extends Fragment implements View.OnClickListener{
     private TextView tex_fans;
     private TextView tex_collect;
 
+    private TextView userName;
+    private CircleImageView userPhoto;
+    private TextView concernCount;
+    private TextView fansCount;
+    private TextView collectCount;
+    private ImageView gender;
+    private TextView city;
+    private TextView pet;
+    private TextView profile;
+
+    private String follow;
 
 
     @Nullable
@@ -68,8 +81,20 @@ public class MyFragment extends Fragment implements View.OnClickListener{
         viewPager.setAdapter(myPagerAdapter);
         tabLayout = view.findViewById(R.id.tab_layoutMy);
         tabLayout.setupWithViewPager(viewPager);
-
         viewPager.setOffscreenPageLimit(2);
+        initView(view);
+    }
+
+    private void initView(View view) {
+        userName = view.findViewById(R.id.my_user_name);
+        userPhoto = view.findViewById(R.id.my_user_photo);
+        concernCount = view.findViewById(R.id.my_concern_count);
+        collectCount = view.findViewById(R.id.my_collect_count);
+        fansCount = view.findViewById(R.id.my_fans_count);
+        gender = view.findViewById(R.id.my_sex);
+        city = view.findViewById(R.id.my_city);
+        pet = view.findViewById(R.id.my_pet);
+        profile = view.findViewById(R.id.my_profile);
 
         tex_concern = view.findViewById(R.id.my_concern);
         tex_concern.setOnClickListener(this);
@@ -86,7 +111,11 @@ public class MyFragment extends Fragment implements View.OnClickListener{
         CircleImageView imageView = view.findViewById(R.id.my_user_photo);
         imageView.setOnClickListener(this);
 
+        getFollow();
+        showResponse(JsonUtil.loginJson.getData());
+
     }
+
 
     /**
      * 初始化ListFragment,将三个Fragment加入list
@@ -115,7 +144,7 @@ public class MyFragment extends Fragment implements View.OnClickListener{
 
             case R.id.my_concern:
                 Toast.makeText(v.getContext(),"关注",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(v.getContext(), ConcernActivity.class));
+                startActivity(new Intent(v.getContext(), FollowActivity.class));
                 break;
 
             case R.id.my_fans:
@@ -135,6 +164,48 @@ public class MyFragment extends Fragment implements View.OnClickListener{
         JsonUtil.loginJson.getData().setUserName(userName);
         JsonUtil.loginJson.getData().setProfile(profile);
         JsonUtil.loginJson.getData().setPhoto(userPhoto);
+        showResponse(JsonUtil.loginJson.getData());
+    }
+
+    //线程更新
+    public void showResponse(final LoginReturnJson.Data json) {
+        getActivity().runOnUiThread(new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Glide.with(getActivity()).load(json.getPhoto()).into(userPhoto);
+                userName.setText(json.getUserName());
+                fansCount.setText(Integer.toString(json.getFollow()));
+                while (follow==null);
+                concernCount.setText(follow);
+                collectCount.setText(Integer.toString(json.getCollect()));
+                if (json.getGender().equals("男")) {
+                    gender.setImageResource(R.drawable.sex_boy_p);
+                }else {
+                    gender.setImageResource(R.drawable.sex_girl_p);
+                }
+                city.setText(json.getCity());
+                pet.setText(json.getPet());
+                profile.setText(json.getProfile());
+            }
+        }));
+    }
+
+    public void getFollow() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", JsonUtil.loginJson.getData().getId());
+        OkHttpUtil.sendPostRequest("followAndFans/getFollows", map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String data = response.body().string();
+                LRReturnJson json = new Gson().fromJson(data, LRReturnJson.class);
+                follow = Integer.toString(json.getData());
+            }
+        });
     }
 
 }

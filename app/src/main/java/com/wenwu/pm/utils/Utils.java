@@ -22,6 +22,13 @@ public class Utils {
         return "17859735572";
     }
 
+    public static String addressFilter(String address) {
+        if (address.equals("[]")) {
+            return "地址不详";
+        }
+        return address;
+    }
+
 
 
 }

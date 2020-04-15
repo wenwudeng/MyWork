@@ -41,11 +41,10 @@ public class LoginModel implements IModel {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String responseData = response.body().string();
-              //  LRReturnJson LRReturnJson = new Gson().fromJson(responseData, LRReturnJson.class);
                 LoginReturnJson loginReturnJson = new Gson().fromJson(responseData, LoginReturnJson.class);
-                Log.e("json", loginReturnJson+"");
                 JsonUtil.loginJson =loginReturnJson;
                 if (loginReturnJson.getCode().equals("3000")) {
+                    Log.e("登录成功", loginReturnJson+"");
                     listener.onSuccess(loginReturnJson);
                 }else {
                     listener.onFail(loginReturnJson);

@@ -63,7 +63,7 @@ public class HomeDynamicFragment extends Fragment {
                         //刷新动画
                         swipeRefreshLayout.setRefreshing(false);
                         swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#FF5a60"));
-                        init();
+                       // init();
                         Toast.makeText(getActivity(),"刷新完成", Toast.LENGTH_SHORT).show();
                     }
                 },200);

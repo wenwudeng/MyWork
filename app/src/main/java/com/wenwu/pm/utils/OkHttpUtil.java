@@ -31,7 +31,7 @@ public class OkHttpUtil {
     public static final String UPLOAD_URL = "http://47.101.171.252:8890/uploadFile?username=";
 
     public static final String MAP_URL = "https://restapi.amap.com/v3/place/around?key=1321b7ea2e0b99553ea27afa841d1ada&keywords=" +
-            "宠物医院|宠物诊所&sortrule=distance&children=1&extensions=base&radius=3000&location=";
+            "宠物医院|宠物诊所&sortrule=distance&children=1&extensions=base&radius=5000&location=";
 
      // 发送GET请求
     public static void sendGetRequest(String url, okhttp3.Callback callback){

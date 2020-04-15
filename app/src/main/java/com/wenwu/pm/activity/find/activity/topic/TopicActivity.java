@@ -42,6 +42,7 @@ public class TopicActivity extends AppCompatActivity implements View.OnClickList
     public void init() {
         fb = findViewById(R.id.fb_take);
         fb.setOnClickListener(this::onClick);
+
         Toolbar toolbar = findViewById(R.id.topic_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -66,7 +66,7 @@ public class MsgANConcernRecyclerAdapter extends RecyclerView.Adapter<MsgANConce
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MsgAddNewConcern concern = list.get(position);
-        holder.photo.setImageResource(concern.getUserImage());
+       // holder.photo.setImageResource(concern.getUserImage());
         holder.userId.setText(concern.getUserId());
         holder.time.setText(concern.getUserTime());
     }

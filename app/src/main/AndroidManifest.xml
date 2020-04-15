@@ -59,15 +59,15 @@
         <activity android:name=".activity.find.activity.hospital.CheckPermissionsActivity"/>
         <activity android:name=".activity.find.activity.hospital.HospitalActivity"/>
 
-        <activity android:name=".activity.find.activity.EatActivity" />
+        <activity android:name=".activity.find.activity.wiki.EatActivity" />
         <activity android:name=".activity.find.activity.wiki.PetWikiActivity" />
         <activity android:name=".activity.find.activity.topic.TopicActivity" />
-        <activity android:name=".activity.mine.activity.PersonShowActivity" />
+        <activity android:name=".activity.mine.activity.PersonHomeActivity" />
         <activity android:name=".activity.publish.activity.ArticleReviewActivity" />
         <activity android:name=".activity.publish.activity.PublishLogActivity" />
         <activity android:name=".test.TakePhotoActivity" />
         <activity android:name=".activity.mine.activity.FansActivity" />
-        <activity android:name=".activity.mine.activity.ConcernActivity" /> <!-- <activity android:name=".test.OkHttpTestActivity"/> -->
+        <activity android:name=".activity.mine.activity.FollowActivity" /> <!-- <activity android:name=".test.OkHttpTestActivity"/> -->
         <activity android:name=".test.HttpConnectionActivity" />
         <activity android:name=".activity.publish.activity.LongArticleActivity" />
         <activity android:name=".activity.mine.activity.DrawerActivity" />

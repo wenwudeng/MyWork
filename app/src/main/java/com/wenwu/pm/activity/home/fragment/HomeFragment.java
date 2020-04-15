@@ -1,5 +1,6 @@
 package com.wenwu.pm.activity.home.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +43,7 @@ public class HomeFragment extends Fragment {
     private List<Fragment> fragmentList;
     private HomePagerAdapter myViewPagerAdapter;
 
-    private  MyCommentJson json;
+    private MyCommentJson json;
 
 
     /**
@@ -55,12 +56,6 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        getFindHelpData();
-        getMyLogData();
-        getMyQuestionData();
-        getMyCommentData();
-
         return inflater.inflate(R.layout.fragment_home,container,false);
     }
 
@@ -82,6 +77,7 @@ public class HomeFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setOffscreenPageLimit(2);
 
+
     }
 
 
@@ -97,76 +93,6 @@ public class HomeFragment extends Fragment {
         return fragmentList;
     }
 
-
-    /*获取我的模块的日志数据*/
-    public void getMyLogData() {
-        Map<String, Object> param = new HashMap<>();
-        param.put("userid", JsonUtil.loginJson.getData().getId());
-        OkHttpUtil.sendPostRequest("article/getAllArticle", param, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-            }
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String data = response.body().string();
-                MyLogJson json = new Gson().fromJson(data, MyLogJson.class);
-                JsonUtil.myLogJson = json;
-            }
-        });
-    }
-
-
-    /*获取我的主页提问页面数据*/
-    public void getMyQuestionData() {
-        Map<String, Object> param = new HashMap<>();
-        param.put("userid", JsonUtil.loginJson.getData().getId());
-        OkHttpUtil.sendPostRequest("question/getAll", param, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String data = response.body().string();
-                MyQuestionJson json = new Gson().fromJson(data, MyQuestionJson.class);
-                JsonUtil.myQuestionJson = json;
-            }
-        });
-    }
-
-    /*获取我的主页评论数据*/
-    public void getMyCommentData() {
-        Map<String, Object> param = new HashMap<>();
-        param.put("userid", JsonUtil.loginJson.getData().getId());
-        OkHttpUtil.sendPostRequest("comment/getCommentsArt", param, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String data = response.body().string();
-                json = new Gson().fromJson(data, MyCommentJson.class);
-                JsonUtil.myCommentJson = json;
-            }
-        });
-
-    }
-
-    /*获取find模块宠物互助数据*/
-    public void getFindHelpData() {
-        OkHttpUtil.sendPostRequest("question/getQuestions", null, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) { }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String data = response.body().string();
-                FindHelpJson json = new Gson().fromJson(data, FindHelpJson.class);
-                JsonUtil.findHelpJson = json;
-            }
-        });
-    }
 
 
 }

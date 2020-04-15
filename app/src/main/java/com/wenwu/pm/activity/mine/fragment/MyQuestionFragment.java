@@ -16,14 +16,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.mine.adapter.QuesRecyclerAdapter;
 import com.wenwu.pm.activity.mine.bean.QuestionCardViewItem;
 import com.wenwu.pm.goson.MyQuestionJson;
 import com.wenwu.pm.utils.JsonUtil;
+import com.wenwu.pm.utils.OkHttpUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * @author:wenwudeng
@@ -45,6 +54,7 @@ public class MyQuestionFragment extends Fragment {
      * 初始化数据
      */
     public void init() {
+        while ( JsonUtil.myQuestionJson.getData()==null);
         List<MyQuestionJson.Data> dataList = JsonUtil.myQuestionJson.getData();
         for (MyQuestionJson.Data data : dataList) {
             QuestionCardViewItem item = new QuestionCardViewItem(data.getTitle(),data.getTime(),data.getAnswer(),
@@ -57,7 +67,7 @@ public class MyQuestionFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        init();
+        getMyQuestionData();
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_my_ques);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -75,6 +85,30 @@ public class MyQuestionFragment extends Fragment {
                         Toast.makeText(getActivity(),"刷新完成", Toast.LENGTH_SHORT).show();
                     }
                 },200);
+            }
+        });
+    }
+
+    /*获取我的主页提问页面数据*/
+    public void getMyQuestionData() {
+        Map<String, Object> param = new HashMap<>();
+        param.put("userid", JsonUtil.loginJson.getData().getId());
+        OkHttpUtil.sendPostRequest("question/getAll", param, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String data1 = response.body().string();
+                MyQuestionJson json = new Gson().fromJson(data1, MyQuestionJson.class);
+                List<MyQuestionJson.Data> dataList = json.getData();
+                for (MyQuestionJson.Data data : dataList) {
+                    QuestionCardViewItem item = new QuestionCardViewItem(data.getTitle(),data.getTime(),data.getAnswer(),
+                            data.getId(),data.getUserid(),data.getContent(),data.getImg(),data.getLocation(),data.getLike()
+                            ,data.getCollect());
+                    cardViewItemBeanList.add(item);
+                }
             }
         });
     }

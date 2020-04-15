@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.util.LogTime;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -40,6 +41,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.LinkedTransferQueue;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
@@ -79,7 +81,6 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
         expandableListView = findViewById(R.id.detail_page_lv_comment);
         bt_comment = findViewById(R.id.detail_page_do_comment);
         bt_comment.setOnClickListener(this);
-
         article_page_img = findViewById(R.id.article_page_image);
         article_page_user_photo = findViewById(R.id.article_page_user_photo);
         article_user_name = findViewById(R.id.article_page_user_name);
@@ -87,7 +88,6 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
         article_page_share = findViewById(R.id.article_pager_share);
         article_page_concern = findViewById(R.id.article_page_concern);
         article_comment_count = findViewById(R.id.article_page_comment_count);//评论数
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
        CollapsingToolbarLayout collapsingToolbar =
@@ -95,6 +95,7 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
         collapsingToolbar.setTitle(JsonUtil.bean.getTitle());//文章标题
 
         commentsList = generateTestData();
+
         initExpandableListView(commentsList);
 
         initArticle();
@@ -103,7 +104,10 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
    public void initArticle() {
        Glide.with(this).load(JsonUtil.bean.getImgUrl()).into(article_page_img);
        Glide.with(this).load(JsonUtil.bean.getUserPhoto()).into(article_page_user_photo);
-      article_comment_count.setText(Integer.toString(total));
+       if (JsonUtil.loginJson.getData().getUserName().equals(JsonUtil.bean.getUserName())) {
+           article_page_concern.setVisibility(View.INVISIBLE);
+       }
+       article_comment_count.setText(Integer.toString(total));
        article_user_name.setText(JsonUtil.bean.getUserName());
        article_page_content.setText(JsonUtil.bean.getContent());
     }
@@ -114,6 +118,7 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
      * @return 评论数据
      */
     private List<CommentDetailBean> generateTestData(){
+        while (JsonUtil.commentJson==null);
         commentBean = new Gson().fromJson(JsonUtil.commentJson, CommentBean.class);
         List<CommentDetailBean> commentList = commentBean.getData().getList();
         total = commentBean.getData().getTotal();
@@ -136,11 +141,7 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
             public boolean onGroupClick(ExpandableListView expandableListView, View view, int groupPosition, long l) {
                 boolean isExpanded = expandableListView.isGroupExpanded(groupPosition);
                 Log.e(TAG, "onGroupClick: 当前的评论id>>>"+commentList.get(groupPosition).getId());
-//                if(isExpanded){
-//                    expandableListView.collapseGroup(groupPosition);
-//                }else {
-//                    expandableListView.expandGroup(groupPosition, true);
-//                }
+
                 showReplyDialog(groupPosition);
                 return true;
             }

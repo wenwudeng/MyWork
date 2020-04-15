@@ -53,7 +53,7 @@ public class MyReviewFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        init();
+        getMyCommentData();
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_my_review);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -86,5 +86,32 @@ public class MyReviewFragment extends Fragment {
                    data.getCcontent(),data.getTitle(),data.getAid(),data.getClike(),data.getAlike(),data.getContent(),data.getLocation(),data.getImg());
             reviewList.add(item);
         }
+
+
+    }
+
+    /*获取我的主页评论数据*/
+    public void getMyCommentData() {
+        Map<String, Object> param = new HashMap<>();
+        param.put("userid", JsonUtil.loginJson.getData().getId());
+        OkHttpUtil.sendPostRequest("comment/getCommentsArt", param, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String data1 = response.body().string();
+                MyCommentJson json = new Gson().fromJson(data1, MyCommentJson.class);
+                List<MyCommentJson.Data> dataList = json.getData();
+                for (MyCommentJson.Data data : dataList) {
+                    ReviewCardViewItem item = new ReviewCardViewItem(JsonUtil.loginJson.getData().getPhoto(),JsonUtil.loginJson.getData().getUserName(),data.getCTime(),
+                            data.getCcontent(),data.getTitle(),data.getAid(),data.getClike(),data.getAlike(),data.getContent(),data.getLocation(),data.getImg());
+                    reviewList.add(item);
+                }
+
+            }
+        });
+
     }
 }

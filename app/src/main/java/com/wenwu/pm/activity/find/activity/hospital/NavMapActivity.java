@@ -97,7 +97,7 @@ public class NavMapActivity extends AppCompatActivity implements INaviInfoCallba
     @Override
     public View getCustomNaviBottomView() {
         //返回null则不显示自定义区域
-        return getCustomView(null);
+        return null;
     }
 
     @Override

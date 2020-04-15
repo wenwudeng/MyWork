@@ -4,20 +4,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
+import com.ajguan.library.EasyRefreshLayout;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -30,11 +29,9 @@ import com.amap.api.navi.AmapNaviPage;
 import com.amap.api.navi.AmapNaviParams;
 import com.amap.api.navi.AmapNaviType;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+
 import com.wenwu.pm.R;
 
-import com.wenwu.pm.goson.hos.Pois;
 import com.wenwu.pm.utils.OkHttpUtil;
 import com.wenwu.pm.utils.Utils;
 
@@ -44,7 +41,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -61,12 +57,9 @@ public class HospitalActivity extends NavMapActivity {
     //声明AMapLocationClientOption对象
     public AMapLocationClientOption option = null;
 
-    private SwipeRefreshLayout refresh;
-
+    private EasyRefreshLayout refresh;
     private Toolbar toolbar;
-
     private  RecyclerView  recycler;
-
     private HospitalAdapter adapter;
 
 
@@ -81,6 +74,53 @@ public class HospitalActivity extends NavMapActivity {
     public void initView() {
         recycler = findViewById(R.id.recycler_location);
         refresh = findViewById(R.id.swipe_refresh_location);
+        refresh.addEasyEvent(new EasyRefreshLayout.EasyEvent() {
+            @Override
+            public void onLoadMore() {
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        final List<String> list = new ArrayList<>();
+                        for (int j = 0; j < 5; j++) {
+                            list.add("this is  new load data >>>>" + new Date().toLocaleString());
+                        }
+
+                        //adapter.addData(list);
+
+                        refresh.loadMoreComplete(new EasyRefreshLayout.Event() {
+                            @Override
+                            public void complete() {
+                             //   adapter.getData().addAll(list);
+                                adapter.notifyDataSetChanged();
+
+                            }
+                        }, 500);
+
+                    }
+                }, 2000);
+
+
+            }
+
+            @Override
+            public void onRefreshing() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        List<String> list = new ArrayList<>();
+                        for (int i = 0; i < 20; i++) {
+                            list.add("this is refresh data >>>" + new Date().toLocaleString());
+                        }
+                        adapter.setNewData(null);
+                        refresh.refreshComplete();
+                        Toast.makeText(getApplicationContext(), "refresh success", Toast.LENGTH_SHORT).show();
+                    }
+                }, 1000);
+
+            }
+        });
+
         toolbar = findViewById(R.id.location_toolbar);
         toolbar.setTitle("附近宠物医院");
         setSupportActionBar(toolbar);
@@ -106,7 +146,7 @@ public class HospitalActivity extends NavMapActivity {
                         JSONObject object = data.getJSONObject(i);
                         PetHospitalModel model = new PetHospitalModel();
                         model.setStoreName(object.getString("name"));
-                        model.setAddress(object.getString("address"));
+                        model.setAddress(Utils.addressFilter(object.getString("address")));
                         model.setDistance(Utils.distanceParse(object.getString("distance")));
                         model.setLocation(object.getString("location"));
                         model.settel(Utils.phone(object.getString("tel")));
@@ -152,13 +192,28 @@ public class HospitalActivity extends NavMapActivity {
 
     /*导航*/
     public void route(String StoreLocation,String storeName) {
-        String la = StoreLocation.substring(0, StoreLocation.indexOf(","));//经度
-        String lo = StoreLocation.substring(StoreLocation.indexOf(",")+1);//纬度
-        double a = Double.parseDouble(la);
-        double b =  Double.parseDouble(lo);
-        LatLng end = new LatLng(b,a);
-        AmapNaviPage.getInstance().showRouteActivity(getApplicationContext(), new AmapNaviParams(null, null, new Poi(storeName, end, ""),
-                AmapNaviType.DRIVER), HospitalActivity.this);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(HospitalActivity.this);
+        dialog.setMessage("即将为你导航至："+storeName);
+        dialog.setCancelable(true);
+        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String la = StoreLocation.substring(0, StoreLocation.indexOf(","));//经度
+                String lo = StoreLocation.substring(StoreLocation.indexOf(",")+1);//纬度
+                double a = Double.parseDouble(la);
+                double b =  Double.parseDouble(lo);
+                LatLng end = new LatLng(b,a);
+                AmapNaviPage.getInstance().showRouteActivity(getApplicationContext(), new AmapNaviParams(null, null, new Poi(storeName, end, ""),
+                        AmapNaviType.DRIVER), HospitalActivity.this);
+            }
+        });
+        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        dialog.show();
+
     }
 
 
@@ -232,6 +287,7 @@ public class HospitalActivity extends NavMapActivity {
                     df.format(date);//定位时间
                 } else {
                     String errText = "定位失败," + aMapLocation.getErrorCode() + ": " + aMapLocation.getErrorInfo();
+                    Toast.makeText(HospitalActivity.this,errText,Toast.LENGTH_SHORT).show();
                     Log.e("AmapErr", errText);
                 }
 

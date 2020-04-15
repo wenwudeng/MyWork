@@ -1,6 +1,7 @@
 package com.wenwu.pm.activity.mine.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -20,6 +21,7 @@ public class FansActivity extends AppCompatActivity {
     private List<MsgAddNewConcern> list = new ArrayList<>();
     private RecyclerView recyclerView;
     private SwipeRefreshLayout refreshLayout;
+    private Toolbar toolbar;
 
 
     @Override
@@ -27,7 +29,12 @@ public class FansActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_fans);
 
-        init();
+        //init();
+
+        toolbar = findViewById(R.id.fans_toolbar);
+        toolbar.setTitle("关注我的");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView = findViewById(R.id.recycler_view_my_fans);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
@@ -49,7 +56,7 @@ public class FansActivity extends AppCompatActivity {
         });
     }
 
-    private void init() {
+/*    private void init() {
         MsgAddNewConcern concern = new MsgAddNewConcern(R.drawable.img, "蒙眼丽莎");
         list.add(concern);
 
@@ -58,5 +65,5 @@ public class FansActivity extends AppCompatActivity {
 
         MsgAddNewConcern concern2 = new MsgAddNewConcern(R.drawable.chen, "陈瑶");
         list.add(concern2);
-    }
+    }*/
 }

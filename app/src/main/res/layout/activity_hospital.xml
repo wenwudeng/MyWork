@@ -11,7 +11,7 @@
         android:id="@+id/location_toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:titleMarginStart="100dp"
+        app:titleMarginStart="80dp"
         app:popupTheme="@color/colorPrimaryDark"/>
 
     <View
@@ -19,7 +19,7 @@
         android:layout_height="1dp"
         android:background="@color/gray" />
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <com.ajguan.library.EasyRefreshLayout
         android:id="@+id/swipe_refresh_location"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
@@ -29,5 +29,5 @@
             android:layout_height="match_parent"
             android:id="@+id/recycler_location" />
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </com.ajguan.library.EasyRefreshLayout>
 </LinearLayout>

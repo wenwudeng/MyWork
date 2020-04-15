@@ -77,7 +77,7 @@ public class FansRecyclerAdapter extends RecyclerView.Adapter<FansRecyclerAdapte
     @Override
     public void onBindViewHolder(@NonNull FansRecyclerAdapter.ViewHolder holder, int position) {
         MsgAddNewConcern concern = list.get(position);
-        holder.photo.setImageResource(concern.getUserImage());
+      //  holder.photo.setImageResource(concern.getUserImage());
         holder.userId.setText(concern.getUserId());
     }
 

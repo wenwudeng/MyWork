@@ -5,27 +5,29 @@ package com.wenwu.pm.activity.message.bean;
  * @date:11:35 PM 3/8/2020
  */
 public class MsgAddNewConcern {
-    private int userImage;
+    private String userImage;
     private String userId;
     private String userTime;
+    private boolean status;
 
-    public MsgAddNewConcern(int userImage, String userId, String userTime) {
+    public MsgAddNewConcern(String userImage, String userId, String userTime) {
         this.userImage = userImage;
         this.userId = userId;
         this.userTime = userTime;
     }
 
-    public MsgAddNewConcern(int userImage, String userId) {
+    public MsgAddNewConcern(String userImage, String userId,boolean status) {
         this.userImage = userImage;
         this.userId = userId;
+        this.status = status;
     }
 
-    public int getUserImage() {
+    public String getUserImage() {
 
         return userImage;
     }
 
-    public void setUserImage(int userImage) {
+    public void setUserImage(String userImage) {
         this.userImage = userImage;
     }
 

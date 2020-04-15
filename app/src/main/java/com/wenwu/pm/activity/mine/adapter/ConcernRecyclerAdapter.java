@@ -12,9 +12,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.message.bean.MsgAddNewConcern;
-import com.wenwu.pm.activity.mine.activity.PersonShowActivity;
+import com.wenwu.pm.activity.mine.activity.FollowActivity;
+import com.wenwu.pm.activity.mine.activity.PersonHomeActivity;
 
 import java.util.List;
 
@@ -26,12 +28,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class ConcernRecyclerAdapter extends RecyclerView.Adapter<ConcernRecyclerAdapter.ViewHolder>{
     private List<MsgAddNewConcern> list;
+    private FollowActivity followActivity;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         View ConcernItemView;
         CircleImageView photo;
         TextView userId;
-        Button follow;
+        Button unFollow;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -39,13 +42,14 @@ public class ConcernRecyclerAdapter extends RecyclerView.Adapter<ConcernRecycler
             ConcernItemView = itemView;
             photo = itemView.findViewById(R.id.my_concern_user_photo);
             userId = itemView.findViewById(R.id.my_concern_user_id);
-            follow = itemView.findViewById(R.id.my_concern_follow);
+            unFollow = itemView.findViewById(R.id.my_concern_follow);
         }
 
     }
 
-    public ConcernRecyclerAdapter(List<MsgAddNewConcern> list) {
+    public ConcernRecyclerAdapter(List<MsgAddNewConcern> list, FollowActivity followActivity) {
         this.list = list;
+        this.followActivity = followActivity;
     }
 
     @NonNull
@@ -60,15 +64,16 @@ public class ConcernRecyclerAdapter extends RecyclerView.Adapter<ConcernRecycler
                 int position = holder.getAdapterPosition();
                 MsgAddNewConcern concern = list.get(position);
                 Toast.makeText(v.getContext(), "you click view" + concern.getUserId(),Toast.LENGTH_SHORT).show();
-                v.getContext().startActivity(new Intent(v.getContext(), PersonShowActivity.class));
+                v.getContext().startActivity(new Intent(v.getContext(), PersonHomeActivity.class));
             }
         });
 
-        holder.follow.setOnClickListener(new View.OnClickListener() {
+        holder.unFollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.follow.setText("已关注");
-                holder.follow.setTextColor(Color.parseColor("#DEE1E6"));
+                holder.unFollow.setText("关注");
+                holder.unFollow.setTextColor(v.getResources().getColor(R.color.red));
+               holder.unFollow.setBackgroundResource(R.drawable.btn_round_unfollow);
             }
         });
 
@@ -78,7 +83,7 @@ public class ConcernRecyclerAdapter extends RecyclerView.Adapter<ConcernRecycler
     @Override
     public void onBindViewHolder(@NonNull ConcernRecyclerAdapter.ViewHolder holder, int position) {
         MsgAddNewConcern concern = list.get(position);
-        holder.photo.setImageResource(concern.getUserImage());
+        Glide.with(followActivity).load(concern.getUserImage()).into(holder.photo);
         holder.userId.setText(concern.getUserId());
     }
 

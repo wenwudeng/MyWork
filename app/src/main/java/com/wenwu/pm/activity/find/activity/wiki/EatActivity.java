@@ -1,4 +1,4 @@
-package com.wenwu.pm.activity.find.activity;
+package com.wenwu.pm.activity.find.activity.wiki;
 
 import androidx.appcompat.app.AppCompatActivity;
 

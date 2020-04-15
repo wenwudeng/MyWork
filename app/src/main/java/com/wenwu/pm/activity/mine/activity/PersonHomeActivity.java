@@ -1,6 +1,7 @@
 package com.wenwu.pm.activity.mine.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -22,9 +23,7 @@ import com.wenwu.pm.activity.mine.fragment.MyReviewFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
-public class PersonShowActivity extends AppCompatActivity implements View.OnClickListener{
+public class PersonHomeActivity extends AppCompatActivity implements View.OnClickListener{
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private List<Fragment> fragmentList;
@@ -42,6 +41,10 @@ public class PersonShowActivity extends AppCompatActivity implements View.OnClic
 
     private void initView() {
         MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), initViewPager());
+        Toolbar toolbar = findViewById(R.id.person_home_toolbar);
+        toolbar.setTitle("程序员");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         viewPager = findViewById(R.id.view_pager_person);
         viewPager.setAdapter(myPagerAdapter);
         tabLayout = findViewById(R.id.tab_layout_person);
@@ -54,6 +57,7 @@ public class PersonShowActivity extends AppCompatActivity implements View.OnClic
 
         collect = findViewById(R.id.person_collect);
         collect.setOnClickListener(this);
+
 
     }
 
@@ -72,7 +76,7 @@ public class PersonShowActivity extends AppCompatActivity implements View.OnClic
 
             case R.id.person_concern:
                 Toast.makeText(v.getContext(),"关注",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(v.getContext(), ConcernActivity.class));
+                startActivity(new Intent(v.getContext(), FollowActivity.class));
                 break;
 
             case R.id.person_fans:

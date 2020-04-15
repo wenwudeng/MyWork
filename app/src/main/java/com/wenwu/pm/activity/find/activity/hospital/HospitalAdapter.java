@@ -1,11 +1,12 @@
 package com.wenwu.pm.activity.find.activity.hospital;
 
 
+import androidx.annotation.Nullable;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.wenwu.pm.R;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 
@@ -29,6 +30,4 @@ public class HospitalAdapter extends BaseQuickAdapter<PetHospitalModel, BaseView
                 .addOnClickListener(R.id.location_call)
                 .addOnClickListener(R.id.location_route);
     }
-
-
 }
