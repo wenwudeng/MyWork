@@ -14,20 +14,26 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-
+import com.google.gson.Gson;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.home.adapter.DynamicRecyclerAdapter;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 import com.wenwu.pm.activity.mine.fragment.MyLogFragment;
 import com.wenwu.pm.activity.mine.fragment.PersonLogFragment;
 import com.wenwu.pm.activity.publish.activity.ArticleReviewActivity;
-
+import com.wenwu.pm.goson.MyLogJson;
 import com.wenwu.pm.utils.JsonUtil;
+import com.wenwu.pm.utils.OkHttpUtil;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 
 /**
@@ -35,21 +41,19 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @date:9:41 AM 3/19/2020
  * 数据在HomeFragment中加载
  */
-public class LogRecyclerAdapter extends RecyclerView.Adapter<LogRecyclerAdapter.ViewHolder>{
+public class PersonLogAdapter extends RecyclerView.Adapter<PersonLogAdapter.ViewHolder>{
 
     private List<CardViewItemBean> cardViewItemBeanList;
     private CardViewItemBean cardViewItemBean;
 
-    private MyLogFragment myLogFragment;
+    private PersonLogFragment personLogFragment;
 
     private boolean flag = false;
 
-    public LogRecyclerAdapter(List<CardViewItemBean> cardViewItemBean, MyLogFragment myLogFragment) {
+    public PersonLogAdapter(List<CardViewItemBean> cardViewItemBean, PersonLogFragment personLogFragment) {
         this.cardViewItemBeanList = cardViewItemBean;
-        this.myLogFragment = myLogFragment;
+        this.personLogFragment = personLogFragment;
     }
-
-
 
 
     // ViewHolder对控件实例进行缓存,避免每次都去每次都去通过id去获得控件实例句柄.*/
@@ -82,11 +86,16 @@ public class LogRecyclerAdapter extends RecyclerView.Adapter<LogRecyclerAdapter.
      */
     @NonNull
     @Override
-    public LogRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PersonLogAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         //获得R.layout.concern_item视图view实例
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_log_item, parent, false);
         //将获得的concern_item视图实例作为ViewHolder获取实例的参数
-        final LogRecyclerAdapter.ViewHolder holder = new LogRecyclerAdapter.ViewHolder(view);
+        final PersonLogAdapter.ViewHolder holder = new PersonLogAdapter.ViewHolder(view);
+
+/*        int position = holder.getAdapterPosition();
+        System.out.println(cardViewItemBeanList.get(position).getUserId());
+        personLogFragment.getMyLogData(cardViewItemBeanList.get(position).getUserId());*/
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,8 +103,8 @@ public class LogRecyclerAdapter extends RecyclerView.Adapter<LogRecyclerAdapter.
                 int position = holder.getAdapterPosition();
                 /*传参*/
                 JsonUtil.bean = cardViewItemBeanList.get(position);
-
                 CardViewItemBean cardViewItemBean = cardViewItemBeanList.get(position);
+
 
                 /*加载评论数据*/
                 DynamicRecyclerAdapter.initCommentData();
@@ -135,11 +144,11 @@ public class LogRecyclerAdapter extends RecyclerView.Adapter<LogRecyclerAdapter.
      * @param position 根据position获取各个实例
      */
     @Override
-    public void onBindViewHolder(@NonNull LogRecyclerAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PersonLogAdapter.ViewHolder holder, int position) {
         CardViewItemBean cardViewItemBean = cardViewItemBeanList.get(position);
         int count = cardViewItemBean.getAcceptFavourCount();
-        Glide.with(myLogFragment).load(cardViewItemBean.getImgUrl()).into(holder.showImg);
-        Glide.with(myLogFragment).load(cardViewItemBean.getUserPhoto()).into(holder.photo);
+        Glide.with(personLogFragment).load(cardViewItemBean.getImgUrl()).into(holder.showImg);
+        Glide.with(personLogFragment).load(cardViewItemBean.getUserPhoto()).into(holder.photo);
         holder.title_content.setText(cardViewItemBean.getContent());
         holder.userName.setText(cardViewItemBean.getUserName());
         holder.favourCount.setText(Integer.toString(count));

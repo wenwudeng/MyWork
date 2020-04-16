@@ -8,13 +8,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.message.bean.MsgAddNewConcern;
-import com.wenwu.pm.activity.mine.adapter.ConcernRecyclerAdapter;
+import com.wenwu.pm.activity.mine.adapter.FollowAdapter;
+import com.wenwu.pm.utils.JsonUtil;
 import com.wenwu.pm.utils.OkHttpUtil;
 
 import org.json.JSONArray;
@@ -32,11 +32,12 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class FollowActivity extends AppCompatActivity{
-    private List<MsgAddNewConcern> list = new ArrayList<>();
+    private  List<MsgAddNewConcern> list ;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout refreshLayout;
     private Toolbar toolbar;
-    private Button unFollow;
+
+    private FollowAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +45,10 @@ public class FollowActivity extends AppCompatActivity{
         initView();
     }
 
+
     public void initView() {
-        initData();
+        initData(JsonUtil.loginJson.getData().getId());
+        while (list==null);
         toolbar = findViewById(R.id.follow_toolbar);
         toolbar.setTitle("我关注的");
         setSupportActionBar(toolbar);
@@ -57,8 +60,7 @@ public class FollowActivity extends AppCompatActivity{
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
 
-     //   while (list==null);
-        ConcernRecyclerAdapter adapter = new ConcernRecyclerAdapter(list,this);
+        adapter = new FollowAdapter(list,this);
         recyclerView.setAdapter(adapter);
 
         refreshLayout = findViewById(R.id.swipe_refresh_my_concern);
@@ -66,25 +68,29 @@ public class FollowActivity extends AppCompatActivity{
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        refreshLayout.setRefreshing(false);
-                     //   initData();
+                       initData(JsonUtil.loginJson.getData().getId());
+                       adapter.notifyDataSetChanged();
                         Toast.makeText(getBaseContext(),"刷新完成", Toast.LENGTH_SHORT).show();
+                        refreshLayout.setRefreshing(false);
                     }
-                }, 200);
+                },2000);
             }
         });
     }
 
-    private void initData() {
-        OkHttpUtil.sendPostRequest("followAndFans/getAllFollowsInfo",null, new Callback() {
+    private void initData(int id) {
+        list= new ArrayList<>();
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId",id);
+        OkHttpUtil.sendPostRequest("followAndFans/getAllFollowsInfo",map, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
 
             }
-
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String returnData = response.body().string();
@@ -94,13 +100,12 @@ public class FollowActivity extends AppCompatActivity{
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject  arrayObject = array.getJSONObject(i);
                         MsgAddNewConcern concern = new MsgAddNewConcern(arrayObject.getString("photo"),
-                                arrayObject.getString("userName"),arrayObject.getBoolean("status"));
+                                arrayObject.getString("userName"),arrayObject.getBoolean("status"),arrayObject.getInt("id"));
                         list.add(concern);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         });
     }

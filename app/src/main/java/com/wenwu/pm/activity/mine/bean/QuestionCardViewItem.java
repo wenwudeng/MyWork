@@ -117,4 +117,20 @@ public class QuestionCardViewItem {
     public void setAnswerCount(int answerCount) {
         this.answerCount = answerCount;
     }
+
+    @Override
+    public String toString() {
+        return "QuestionCardViewItem{" +
+                "title='" + title + '\'' +
+                ", time='" + time + '\'' +
+                ", answerCount=" + answerCount +
+                ", id=" + id +
+                ", userid=" + userid +
+                ", content='" + content + '\'' +
+                ", img='" + img + '\'' +
+                ", location='" + location + '\'' +
+                ", like=" + like +
+                ", collect=" + collect +
+                '}';
+    }
 }

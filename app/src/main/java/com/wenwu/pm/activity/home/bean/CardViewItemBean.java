@@ -4,6 +4,7 @@ package com.wenwu.pm.activity.home.bean;
  * 此类用于用户发布信息bean
  */
 public class CardViewItemBean {
+    private int userId;
     private int articleId;
     private String title;
     private int sendImageId;
@@ -13,6 +14,18 @@ public class CardViewItemBean {
     private String userPhoto;
     private int acceptFavourCount;
     private int collect;
+
+    public CardViewItemBean(int userId,int articleId, String title, String imgUrl, String content,
+                            String userName, String userPhoto, int acceptFavourCount) {
+        this.userId = userId;
+        this.articleId = articleId;
+        this.title = title;
+        this.imgUrl = imgUrl;
+        this.content = content;
+        this.userName = userName;
+        this.userPhoto = userPhoto;
+        this.acceptFavourCount = acceptFavourCount;
+    }
 
     public CardViewItemBean(int articleId, String title, String imgUrl, String content,
                             String userName, String userPhoto, int acceptFavourCount) {
@@ -25,6 +38,7 @@ public class CardViewItemBean {
         this.acceptFavourCount = acceptFavourCount;
     }
 
+
     public CardViewItemBean(int articleId, String title, String imgUrl, String content, int acceptFavourCount, int collect) {
         this.articleId = articleId;
         this.title = title;
@@ -32,6 +46,24 @@ public class CardViewItemBean {
         this.content = content;
         this.acceptFavourCount = acceptFavourCount;
         this.collect = collect;
+    }
+
+    public CardViewItemBean(int userId,int articleId, String title, String imgUrl, String content, int acceptFavourCount, int collect) {
+        this.userId = userId;
+        this.articleId = articleId;
+        this.title = title;
+        this.imgUrl = imgUrl;
+        this.content = content;
+        this.acceptFavourCount = acceptFavourCount;
+        this.collect = collect;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getCollect() {

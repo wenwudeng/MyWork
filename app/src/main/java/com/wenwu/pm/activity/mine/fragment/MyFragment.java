@@ -190,13 +190,13 @@ public class MyFragment extends Fragment implements View.OnClickListener{
         }));
     }
 
+    /*关注*/
     public void getFollow() {
         Map<String, Object> map = new HashMap<>();
         map.put("userId", JsonUtil.loginJson.getData().getId());
         OkHttpUtil.sendPostRequest("followAndFans/getFollows", map, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
             }
 
             @Override

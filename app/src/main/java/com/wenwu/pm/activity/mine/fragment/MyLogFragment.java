@@ -40,8 +40,8 @@ import okhttp3.Response;
 public class MyLogFragment extends Fragment {
 
     private List<CardViewItemBean> cardViewItemBeanList = new ArrayList<>();
-
     private SwipeRefreshLayout swipeRefreshLayout;
+
 
     @Nullable
     @Override
@@ -50,11 +50,10 @@ public class MyLogFragment extends Fragment {
     }
 
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        getMyLogData();
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_my_log);
+       getMyLogData(JsonUtil.loginJson.getData().getId());
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_my_log);
         GridLayoutManager layoutManager = new GridLayoutManager(view.getContext(), 2);
         recyclerView.setLayoutManager(layoutManager);
         LogRecyclerAdapter adapter = new LogRecyclerAdapter(cardViewItemBeanList,this);
@@ -77,9 +76,9 @@ public class MyLogFragment extends Fragment {
 
 
     /*获取我的模块的日志数据*/
-    public void getMyLogData() {
+    public void getMyLogData(int userId) {
         Map<String, Object> param = new HashMap<>();
-        param.put("userid", JsonUtil.loginJson.getData().getId());
+        param.put("userid", userId);
         OkHttpUtil.sendPostRequest("article/getAllArticle", param, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -88,7 +87,6 @@ public class MyLogFragment extends Fragment {
             public void onResponse(Call call, Response response) throws IOException {
                 String returnData = response.body().string();
                 MyLogJson json = new Gson().fromJson(returnData, MyLogJson.class);
-              //  JsonUtil.myLogJson = json;
                 List<MyLogJson.Data> dataList = json.getData();
                 for (MyLogJson.Data data : dataList) {
                     CardViewItemBean cardViewItemBean = new CardViewItemBean(data.getId(),data.getTitle(),

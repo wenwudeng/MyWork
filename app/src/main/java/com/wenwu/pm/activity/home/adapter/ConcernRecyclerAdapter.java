@@ -18,10 +18,13 @@ import com.wenwu.pm.R;
 import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 import com.wenwu.pm.activity.home.fragment.HomeConcernFragment;
 import com.wenwu.pm.activity.publish.activity.ArticleReviewActivity;
+import com.wenwu.pm.utils.JsonUtil;
 
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.wenwu.pm.activity.home.adapter.DynamicRecyclerAdapter.initCommentData;
 
 /**
  * RecyclerView适配器
@@ -74,12 +77,25 @@ public class ConcernRecyclerAdapter extends RecyclerView.Adapter<ConcernRecycler
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_item, parent, false);
         //将获得的concern_item视图实例作为ViewHolder获取实例的参数
         final ViewHolder holder = new ViewHolder(view);
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
+
+                /*传参*/
+                JsonUtil.bean = cardViewItemBeanList.get(position);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 CardViewItemBean cardViewItemBean = cardViewItemBeanList.get(position);
+                /*提前加载文章评论数据*/
+                initCommentData();
                 v.getContext().startActivity(new Intent(v.getContext(), ArticleReviewActivity.class));
+
                 Toast.makeText(v.getContext(), "you click view" + cardViewItemBean.getContent(), Toast.LENGTH_SHORT).show();
             }
         });

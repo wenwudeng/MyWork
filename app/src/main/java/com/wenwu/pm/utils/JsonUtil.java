@@ -21,6 +21,8 @@ public class JsonUtil {
    //保存Gson解析的登录信息
    public static LoginReturnJson loginJson;
 
+   public static LoginReturnJson personHome;
+
    //item数据初始化
    public static CardViewItemBean bean;//文章初始化
 
@@ -45,6 +47,4 @@ public class JsonUtil {
 
    //保存Gson解析后的宠友互助数据
    public static FindHelpJson findHelpJson;
-
-
 }

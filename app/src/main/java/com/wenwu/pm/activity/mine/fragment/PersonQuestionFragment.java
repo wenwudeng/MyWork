@@ -2,6 +2,11 @@ package com.wenwu.pm.activity.mine.fragment;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,14 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.os.Handler;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.mine.adapter.PersionQuestionAdapter;
 import com.wenwu.pm.activity.mine.adapter.QuesRecyclerAdapter;
 import com.wenwu.pm.activity.mine.bean.QuestionCardViewItem;
 import com.wenwu.pm.goson.MyQuestionJson;
@@ -38,11 +38,12 @@ import okhttp3.Response;
  * @author:wenwudeng
  * @date:9:41 AM 3/19/2020
  */
-public class MyQuestionFragment extends Fragment {
+public class PersonQuestionFragment extends Fragment {
 
-    private List<QuestionCardViewItem> cardViewItemBeanList = new ArrayList<>();
-
+    private static List<QuestionCardViewItem> cardViewItemBeanList;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private PersionQuestionAdapter adapter;
+    private static int id;
 
     @Nullable
     @Override
@@ -50,32 +51,13 @@ public class MyQuestionFragment extends Fragment {
         return inflater.inflate(R.layout.my_question,container,false);
     }
 
-/*
-    */
-/**
-     * 初始化数据
-     *//*
-
-    public void init() {
-        while ( JsonUtil.myQuestionJson.getData()==null);
-        List<MyQuestionJson.Data> dataList = JsonUtil.myQuestionJson.getData();
-        for (MyQuestionJson.Data data : dataList) {
-            QuestionCardViewItem item = new QuestionCardViewItem(data.getTitle(),data.getTime(),data.getAnswer(),
-                    data.getId(),data.getUserid(),data.getContent(),data.getImg(),data.getLocation(),data.getLike()
-            ,data.getCollect());
-            cardViewItemBeanList.add(item);
-        }
-    }
-*/
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        getMyQuestionData();
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_my_ques);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        QuesRecyclerAdapter adapter = new QuesRecyclerAdapter(cardViewItemBeanList);
+        adapter = new PersionQuestionAdapter(cardViewItemBeanList);
         recyclerView.setAdapter(adapter);
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_my_ques);
@@ -85,6 +67,8 @@ public class MyQuestionFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        getMyQuestionData(id);
+                        adapter.notifyDataSetChanged();
                         swipeRefreshLayout.setRefreshing(false);
                         Toast.makeText(getActivity(),"刷新完成", Toast.LENGTH_SHORT).show();
                     }
@@ -94,9 +78,11 @@ public class MyQuestionFragment extends Fragment {
     }
 
     /*获取我的主页提问页面数据*/
-    public void getMyQuestionData() {
+    public static void getMyQuestionData(int userId) {
+        id = userId;
+        cardViewItemBeanList = new ArrayList<>();
         Map<String, Object> param = new HashMap<>();
-        param.put("userid", JsonUtil.loginJson.getData().getId());
+        param.put("userid", userId);
         OkHttpUtil.sendPostRequest("question/getAll", param, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -111,6 +97,7 @@ public class MyQuestionFragment extends Fragment {
                     QuestionCardViewItem item = new QuestionCardViewItem(data.getTitle(),data.getTime(),data.getAnswer(),
                             data.getId(),data.getUserid(),data.getContent(),data.getImg(),data.getLocation(),data.getLike()
                             ,data.getCollect());
+                    System.out.println(item);
                     cardViewItemBeanList.add(item);
                 }
             }

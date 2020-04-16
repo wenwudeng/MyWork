@@ -28,6 +28,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.mine.adapter.FollowAdapter;
 import com.wenwu.pm.activity.publish.adapter.CommentExpandAdapter;
 import com.wenwu.pm.activity.publish.bean.CommentBean;
 import com.wenwu.pm.activity.publish.bean.CommentDetailBean;
@@ -87,6 +88,7 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
         article_page_content = findViewById(R.id.article_page_content);
         article_page_share = findViewById(R.id.article_pager_share);
         article_page_concern = findViewById(R.id.article_page_concern);
+        article_page_concern.setOnClickListener(this);
         article_comment_count = findViewById(R.id.article_page_comment_count);//评论数
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -178,10 +180,26 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.detail_page_do_comment){
-
+        switch (view.getId()) {
+            case R.id.detail_page_do_comment:
             showCommentDialog();
+            break;
+
+            case R.id.article_page_concern:
+                if (article_page_concern.getText().equals("已关注")) {
+                    article_page_concern.setText("关注");
+                    article_page_concern.setTextColor(getResources().getColor(R.color.red));
+                    article_page_concern.setBackgroundResource(R.drawable.btn_round_unfollow);
+                    FollowAdapter.unFollow(JsonUtil.bean.getUserId());
+                }else {
+                    article_page_concern.setText("已关注");
+                    article_page_concern.setTextColor(getResources().getColor(R.color.gray));
+                    article_page_concern.setBackgroundResource(R.drawable.btn_round_followed);
+                    FollowAdapter.follow(JsonUtil.bean.getUserId());
+                }
+                break;
         }
+
     }
 
     /**
