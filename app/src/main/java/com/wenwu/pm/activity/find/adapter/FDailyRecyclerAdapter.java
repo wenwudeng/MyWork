@@ -1,5 +1,6 @@
 package com.wenwu.pm.activity.find.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.find.bean.FindDailyTipsShow;
+import com.wenwu.pm.activity.find.fragment.FindDailyTipsFragment;
+import com.wenwu.pm.activity.home.adapter.DynamicRecyclerAdapter;
+import com.wenwu.pm.activity.home.bean.CardViewItemBean;
+import com.wenwu.pm.activity.publish.activity.ArticleReviewActivity;
+import com.wenwu.pm.utils.JsonUtil;
 
 import java.util.List;
-
-
 /**
  * @author:wenwudeng
  * @date:15:01 2020/2/17
@@ -24,9 +29,11 @@ import java.util.List;
 public class FDailyRecyclerAdapter extends RecyclerView.Adapter<FDailyRecyclerAdapter.ViewHolder>{
 
     private List<FindDailyTipsShow> dailyTipsContentShowList;
+    private FindDailyTipsFragment fragment;
 
-    public FDailyRecyclerAdapter(List<FindDailyTipsShow> dailyTipsContentShows) {
+    public FDailyRecyclerAdapter(List<FindDailyTipsShow> dailyTipsContentShows,FindDailyTipsFragment fragment) {
         this.dailyTipsContentShowList = dailyTipsContentShows;
+        this.fragment = fragment;
     }
 
     // ViewHolder对控件实例进行缓存,避免每次都去每次都去通过id去获得控件实例句柄.*/
@@ -60,12 +67,19 @@ public class FDailyRecyclerAdapter extends RecyclerView.Adapter<FDailyRecyclerAd
         //获得R.layout.find_dailyTips_item.xml视图view实例
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.find_dailytips_item, parent, false);
         final ViewHolder holder = new ViewHolder(view);
+
         holder.dailyTipsShowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                FindDailyTipsShow contentShow = dailyTipsContentShowList.get(position);
-                Toast.makeText(v.getContext(), "you click view" + contentShow.getContent(), Toast.LENGTH_SHORT).show();
+                FindDailyTipsShow item = dailyTipsContentShowList.get(position);
+                /*传参至文章展示内容*/
+                JsonUtil.bean = new CardViewItemBean(item.getAuthorId(),item.getaId(),item.getTitle(),item.getImage(),item.getContent(),item.getAuthorName(),item.getAuthorPhoto(),item.getLearnCount());
+
+                /*加载评论数据*/
+                DynamicRecyclerAdapter.initCommentData();
+                v.getContext().startActivity(new Intent(v.getContext(), ArticleReviewActivity.class));
+                Toast.makeText(v.getContext(), "you click view" + item.getContent(), Toast.LENGTH_SHORT).show();
             }
         });
         return holder;
@@ -81,7 +95,7 @@ public class FDailyRecyclerAdapter extends RecyclerView.Adapter<FDailyRecyclerAd
         FindDailyTipsShow contentShow = dailyTipsContentShowList.get(position);
         holder.daily_title_show.setText(contentShow.getTitle());
         holder.daily_content_show.setText(contentShow.getContent());
-        holder.daily_img_show.setImageResource(contentShow.getImage());
+        Glide.with(fragment).load(contentShow.getImage()).into(holder.daily_img_show);
         holder.daily_learner_count.setText(Integer.toString(contentShow.getLearnCount()));
 
     }

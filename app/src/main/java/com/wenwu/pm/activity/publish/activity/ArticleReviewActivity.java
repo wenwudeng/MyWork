@@ -35,6 +35,7 @@ import com.wenwu.pm.activity.publish.bean.CommentDetailBean;
 import com.wenwu.pm.activity.publish.bean.ReplyDetailBean;
 import com.wenwu.pm.activity.publish.view.CommentExpandableListView;
 import com.wenwu.pm.goson.LRReturnJson;
+import com.wenwu.pm.goson.SupportCollection;
 import com.wenwu.pm.utils.JsonUtil;
 import com.wenwu.pm.utils.OkHttpUtil;
 
@@ -63,12 +64,20 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
     private ImageButton article_page_share;
     private Button article_page_concern;
 
+    private ImageView collect;
+    private ImageView support;
+    private TextView collect_count;
+    private TextView support_count;
+
     private CommentExpandableListView expandableListView;
     private CommentExpandAdapter adapter;
     private CommentBean commentBean;
     private List<CommentDetailBean> commentsList;
     private BottomSheetDialog dialog;
     private int total;
+
+    private int supportCount;
+    private int collectionCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +87,8 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
     }
 
     private void initView() {
+        article_page_concern = findViewById(R.id.article_page_concern);
+        isFollow();
         toolbar = findViewById(R.id.toolbar);
         expandableListView = findViewById(R.id.detail_page_lv_comment);
         bt_comment = findViewById(R.id.detail_page_do_comment);
@@ -87,7 +98,18 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
         article_user_name = findViewById(R.id.article_page_user_name);
         article_page_content = findViewById(R.id.article_page_content);
         article_page_share = findViewById(R.id.article_pager_share);
-        article_page_concern = findViewById(R.id.article_page_concern);
+
+        collect = findViewById(R.id.article_pager_collect_icon);
+        collect.setOnClickListener(this);
+        support = findViewById(R.id.article_pager_support_icon);
+        support.setOnClickListener(this);
+        collect_count = findViewById(R.id.article_pager_collect_count);
+        support_count = findViewById(R.id.article_pager_support_count);
+
+
+        getCSupportStatus();
+
+
         article_page_concern.setOnClickListener(this);
         article_comment_count = findViewById(R.id.article_page_comment_count);//评论数
         setSupportActionBar(toolbar);
@@ -113,6 +135,146 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
        article_user_name.setText(JsonUtil.bean.getUserName());
        article_page_content.setText(JsonUtil.bean.getContent());
     }
+
+    /*查询关注状态*/
+    public void isFollow() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", JsonUtil.loginJson.getData().getId());
+        map.put("fId", JsonUtil.bean.getUserId());
+        OkHttpUtil.sendPostRequest("followAndFans/isFollow", map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String data = response.body().string();
+                LRReturnJson json = new Gson().fromJson(data, LRReturnJson.class);
+                if (json.getData() == 1) {
+                    article_page_concern.setText("已关注");
+                    article_page_concern.setTextColor(getResources().getColor(R.color.gray));
+                    article_page_concern.setBackgroundResource(R.drawable.btn_round_followed);
+                }else {
+                    article_page_concern.setText("关注");
+                    article_page_concern.setTextColor(getResources().getColor(R.color.red));
+                    article_page_concern.setBackgroundResource(R.drawable.btn_round_unfollow);
+                }
+            }
+        });
+    }
+
+    /*查询收藏和赞状态*/
+    public void getCSupportStatus() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("articleId", JsonUtil.bean.getArticleId());
+        OkHttpUtil.sendPostRequest("cLike/geLCollection", map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) { }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String data = response.body().string();
+                SupportCollection json = new Gson().fromJson(data, SupportCollection.class);
+               runOnUiThread(new Runnable() {
+                   @Override
+                   public void run() {
+                       if (json.getData() == null) {
+                           supportCount = 0;
+                           collectionCount = 0;
+                       }else {
+                           supportCount = json.getData().getSupportCount();
+                            collectionCount = json.getData().getCollectionCount();
+
+                           support_count.setText(Integer.toString(supportCount));
+                           collect_count.setText(Integer.toString(collectionCount));
+
+                           if (json.getData().isSupport()) {
+                               support.setImageResource(R.mipmap.icon_upvoted);
+                           }
+                           if (json.getData().isCollection()) {
+                               collect.setImageResource(R.mipmap.icon_collected);
+                           }
+                       }
+
+                   }
+               });
+            }
+        });
+    }
+
+    /*赞和收藏,取消赞和收藏*/
+    public void supportAndCollect(String url) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId",JsonUtil.loginJson.getData().getId());
+        map.put("articleId", JsonUtil.bean.getArticleId());
+        map.put("oId", JsonUtil.bean.getUserId());
+        OkHttpUtil.sendPostRequest(url, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) { }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String data = response.body().string();
+            }
+        });
+    }
+
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.detail_page_do_comment:
+                showCommentDialog();
+                break;
+
+            case R.id.article_page_concern:
+                if (article_page_concern.getText().equals("已关注")) {
+                    article_page_concern.setText("关注");
+                    article_page_concern.setTextColor(getResources().getColor(R.color.red));
+                    article_page_concern.setBackgroundResource(R.drawable.btn_round_unfollow);
+                    FollowAdapter.unFollow(JsonUtil.bean.getUserId());
+                }else {
+                    article_page_concern.setText("已关注");
+                    article_page_concern.setTextColor(getResources().getColor(R.color.gray));
+                    article_page_concern.setBackgroundResource(R.drawable.btn_round_followed);
+                    FollowAdapter.follow(JsonUtil.bean.getUserId());
+                }
+                break;
+            case R.id.article_pager_collect_icon:
+                String cCount = collect_count.getText().toString();
+                Integer count = Integer.parseInt(cCount);
+                if (!cCount.equals("0")) {
+                    collect.setImageResource(R.mipmap.icon_collect);
+                    supportAndCollect("cLike/unCollection");
+                    collect_count.setText(Integer.toString(count-1));
+                }else {
+                    collect.setImageResource(R.mipmap.icon_collected);
+                  //  supportAndCollect("cLike/collection");
+                    supportAndCollect("cLike/support");
+                    collect_count.setText(Integer.toString(count+1));
+                }
+                break;
+
+            case R.id.article_pager_support_icon:
+                String sCount = support_count.getText().toString();
+                Integer count1 = Integer.parseInt(sCount);
+                if (!sCount.equals("0")) {
+                    support.setImageResource(R.mipmap.icon_upvote);
+                    supportAndCollect("cLike/unSupport");
+                    support_count.setText(Integer.toString(count1-1));
+                }else {
+                    support.setImageResource(R.mipmap.icon_upvoted);
+
+                    support_count.setText(Integer.toString(count1+1));
+                }
+                break;
+
+        }
+
+    }
+
 
     /**
      * by moos on 2018/04/20
@@ -178,29 +340,8 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.detail_page_do_comment:
-            showCommentDialog();
-            break;
 
-            case R.id.article_page_concern:
-                if (article_page_concern.getText().equals("已关注")) {
-                    article_page_concern.setText("关注");
-                    article_page_concern.setTextColor(getResources().getColor(R.color.red));
-                    article_page_concern.setBackgroundResource(R.drawable.btn_round_unfollow);
-                    FollowAdapter.unFollow(JsonUtil.bean.getUserId());
-                }else {
-                    article_page_concern.setText("已关注");
-                    article_page_concern.setTextColor(getResources().getColor(R.color.gray));
-                    article_page_concern.setBackgroundResource(R.drawable.btn_round_followed);
-                    FollowAdapter.follow(JsonUtil.bean.getUserId());
-                }
-                break;
-        }
 
-    }
 
     /**
      * by moos on 2018/04/20
@@ -222,6 +363,7 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
 
         bt_comment.setOnClickListener(new View.OnClickListener() {
 
+            /*评论*/
             @Override
             public void onClick(View view) {
                 String commentContent = commentText.getText().toString().trim();

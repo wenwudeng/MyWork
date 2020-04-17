@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true"
     tools:context=".activity.MainActivity">
 
     <com.next.easynavigation.view.EasyNavigationBar

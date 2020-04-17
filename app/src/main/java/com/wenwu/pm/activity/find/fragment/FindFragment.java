@@ -14,24 +14,16 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.google.gson.Gson;
+
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.find.activity.wiki.EatActivity;
 import com.wenwu.pm.activity.find.activity.hospital.HospitalActivity;
 import com.wenwu.pm.activity.find.activity.wiki.PetWikiActivity;
 import com.wenwu.pm.activity.find.adapter.FindPagerAdapter;
-import com.wenwu.pm.goson.FindHelpJson;
-import com.wenwu.pm.utils.JsonUtil;
-import com.wenwu.pm.utils.OkHttpUtil;
 
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
 public class FindFragment extends Fragment implements View.OnClickListener {
     private ViewPager viewPager;
@@ -45,7 +37,7 @@ public class FindFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        System.out.println("=======FindFragment=====");
+
         return inflater.inflate(R.layout.fragment_find,container,false);
     }
 

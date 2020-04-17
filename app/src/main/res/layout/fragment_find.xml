@@ -15,13 +15,13 @@
             android:gravity="center"
             android:layout_gravity="center_horizontal"
             android:text="发现"
-            android:textSize="17sp"
+            android:textSize="15dp"
             android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="@color/gray" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

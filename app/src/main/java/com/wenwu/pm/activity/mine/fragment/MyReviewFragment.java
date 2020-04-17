@@ -76,9 +76,9 @@ public class MyReviewFragment extends Fragment {
         });
     }
 
-    /**
+/*    *
      * 初始化数据
-     */
+
     public void init() {
         List<MyCommentJson.Data> dataList = JsonUtil.myCommentJson.getData();
         for (MyCommentJson.Data data : dataList) {
@@ -87,8 +87,7 @@ public class MyReviewFragment extends Fragment {
             reviewList.add(item);
         }
 
-
-    }
+    }*/
 
     /*获取我的主页评论数据*/
     public void getMyCommentData() {
@@ -105,7 +104,7 @@ public class MyReviewFragment extends Fragment {
                 MyCommentJson json = new Gson().fromJson(data1, MyCommentJson.class);
                 List<MyCommentJson.Data> dataList = json.getData();
                 for (MyCommentJson.Data data : dataList) {
-                    ReviewCardViewItem item = new ReviewCardViewItem(JsonUtil.loginJson.getData().getPhoto(),JsonUtil.loginJson.getData().getUserName(),data.getCTime(),
+                    ReviewCardViewItem item = new ReviewCardViewItem(data.getUserid(),JsonUtil.loginJson.getData().getPhoto(),JsonUtil.loginJson.getData().getUserName(),data.getCTime(),
                             data.getCcontent(),data.getTitle(),data.getAid(),data.getClike(),data.getAlike(),data.getContent(),data.getLocation(),data.getImg());
                     reviewList.add(item);
                 }

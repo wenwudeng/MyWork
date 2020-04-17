@@ -38,7 +38,7 @@ public class MessageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        System.out.println("=======MessageFragment=====");
+
         return inflater.inflate(R.layout.fragment_message,container,false);
     }
 

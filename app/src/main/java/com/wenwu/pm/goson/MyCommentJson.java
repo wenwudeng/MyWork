@@ -14,6 +14,7 @@ public class MyCommentJson {
     private List<Data> data;
 
     public class Data {
+        private int userid;
         private int aid;
         private String title;
         private String content;
@@ -25,6 +26,21 @@ public class MyCommentJson {
         private int alike;
         private int clike;
 
+        public int getUserid() {
+            return userid;
+        }
+
+        public void setUserid(int userid) {
+            this.userid = userid;
+        }
+
+        public String getCtime() {
+            return ctime;
+        }
+
+        public void setCtime(String ctime) {
+            this.ctime = ctime;
+        }
 
         public int getAid() {
             return aid;

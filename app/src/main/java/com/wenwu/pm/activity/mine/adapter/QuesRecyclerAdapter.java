@@ -70,7 +70,7 @@ public class QuesRecyclerAdapter extends RecyclerView.Adapter<QuesRecyclerAdapte
 
                 item = questionCardViewItemList.get(position);
                 //传参
-                JsonUtil.bean = new CardViewItemBean(item.getId(),item.getTitle(),item.getImg(),item.getContent(),JsonUtil.loginJson.getData().getUserName(),
+                JsonUtil.bean = new CardViewItemBean(item.getUserid(),item.getId(),item.getTitle(),item.getImg(),item.getContent(),JsonUtil.loginJson.getData().getUserName(),
                         JsonUtil.loginJson.getData().getPhoto(),item.getLike());
 
                 /*加载评论数据*/

@@ -10,6 +10,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,9 +62,10 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        this.requestWindowFeature(Window.FEATURE_ACTION_BAR);
+       // this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        System.out.println("=======MainActivity=====");
+        setContentView(R.layout.activity_main);
 
         navigationBar = findViewById(R.id.navigationBar);
 

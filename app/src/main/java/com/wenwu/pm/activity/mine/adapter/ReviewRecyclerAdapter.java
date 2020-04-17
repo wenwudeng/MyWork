@@ -92,7 +92,7 @@ public class ReviewRecyclerAdapter extends RecyclerView.Adapter<ReviewRecyclerAd
                 int position = holder.getAdapterPosition();
                 ReviewCardViewItem item = ReviewCardViewItemList.get(position);
                 //传参
-                JsonUtil.bean = new CardViewItemBean(item.getArticleId(), item.getArtTitle(), item.getImg(), item.getArticleContent(), JsonUtil.loginJson.getData().getUserName(), JsonUtil.loginJson.getData().getPhoto(), item.getaLike());
+                JsonUtil.bean = new CardViewItemBean(item.getUserId(),item.getArticleId(), item.getArtTitle(), item.getImg(), item.getArticleContent(), JsonUtil.loginJson.getData().getUserName(), JsonUtil.loginJson.getData().getPhoto(), item.getaLike());
 
                 /*加载评论数据*/
                 DynamicRecyclerAdapter.initCommentData();

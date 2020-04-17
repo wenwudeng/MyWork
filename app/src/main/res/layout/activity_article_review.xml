@@ -211,31 +211,37 @@
             android:layout_marginRight="22dp"
             android:gravity="center_vertical"
             android:paddingLeft="18dp"/>
+
         <ImageView
+            android:id="@+id/article_pager_collect_icon"
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:src="@mipmap/icon_collect" />
+
         <TextView
+            android:id="@+id/article_pager_collect_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#9A9A9A"
             android:textSize="14sp"
             android:layout_marginLeft="10dp"
-            android:text="32"/>
+            android:text="0"/>
 
         <ImageView
+            android:id="@+id/article_pager_support_icon"
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:src="@mipmap/icon_upvote"
             android:layout_marginLeft="20dp" />
         <TextView
+            android:id="@+id/article_pager_support_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#9A9A9A"
             android:textSize="14sp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="14dp"
-            android:text="66"/>
+            android:text="0"/>
     </LinearLayout>
 
 

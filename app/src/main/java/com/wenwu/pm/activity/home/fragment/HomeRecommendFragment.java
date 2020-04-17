@@ -83,25 +83,19 @@ public class HomeRecommendFragment extends Fragment {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseData = response.body().string();
-                initData(responseData);
+                int i = 0;
+                ShowArticlesJson showArticlesJson = new Gson().fromJson(responseData, ShowArticlesJson.class);
+                List<ShowArticlesJson.Data> dataList = showArticlesJson.getData();
+                for (ShowArticlesJson.Data data : dataList) {
+                    if (i % 2 == 0) {
+                        CardViewItemBean cardViewItemBean = new CardViewItemBean(data.getArticleId(), data.getTitle(),
+                                data.getImg(), data.getContent(), data.getUserName(), data.getUserPhoto(), data.getLike());
+                        cardViewItemBeanList.add(cardViewItemBean);
+                    }
+                    i++;
+                }
             }
         });
-
     }
 
-    public void initData(String responseData) {
-
-        int i = 0;
-        ShowArticlesJson showArticlesJson = new Gson().fromJson(responseData, ShowArticlesJson.class);
-        List<ShowArticlesJson.Data> dataList = showArticlesJson.getData();
-        for (ShowArticlesJson.Data data : dataList) {
-            if (i % 2 == 0) {
-                CardViewItemBean cardViewItemBean = new CardViewItemBean(data.getArticleId(), data.getTitle(),
-                        data.getImg(), data.getContent(), data.getUserName(), data.getUserPhoto(), data.getLike());
-                cardViewItemBeanList.add(cardViewItemBean);
-            }
-            i++;
-        }
-
-    }
 }

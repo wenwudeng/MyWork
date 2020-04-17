@@ -17,14 +17,23 @@ public class ReviewCardViewItem {
     private String articleContent;
     private String location;
     private String img;
+    private int userId;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public ReviewCardViewItem() { }
 
-    public ReviewCardViewItem(String userPhoto, String userNam, String cTime,
+    public ReviewCardViewItem(int userId,String userPhoto, String userNam, String cTime,
                               String commentContent, String artTitle, int articleId,
                               int cLike, int aLike, String articleContent, String location,
                               String img) {
-
+        this.userId = userId;
         this.userPhoto = userPhoto;
         this.userNam = userNam;
         this.cTime = cTime;

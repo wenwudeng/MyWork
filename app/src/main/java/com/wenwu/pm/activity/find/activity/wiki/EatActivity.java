@@ -19,4 +19,5 @@ public class EatActivity extends PetWikiActivity {
     public String getUrl() {
         return "http://m.goumin.com/food/home.html";
     }
+
 }

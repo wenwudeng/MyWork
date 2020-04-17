@@ -162,7 +162,6 @@ public class PersonHomeActivity extends AppCompatActivity implements View.OnClic
         fragmentList.add(new PersonLogFragment());
         fragmentList.add(new PersonQuestionFragment());
         fragmentList.add(new PersonReviewFragment());
-       // fragmentList.add(new ());
         return fragmentList;
     }
 

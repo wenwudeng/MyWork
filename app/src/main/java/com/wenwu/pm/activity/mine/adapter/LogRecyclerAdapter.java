@@ -92,16 +92,16 @@ public class LogRecyclerAdapter extends RecyclerView.Adapter<LogRecyclerAdapter.
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
+                CardViewItemBean item = cardViewItemBeanList.get(position);
                 /*传参*/
-                JsonUtil.bean = cardViewItemBeanList.get(position);
-
-                CardViewItemBean cardViewItemBean = cardViewItemBeanList.get(position);
+                JsonUtil.bean = new CardViewItemBean(item.getUserId(),item.getArticleId(),item.getTitle(),item.getImgUrl(),item.getContent()
+                        ,item.getAcceptFavourCount(),item.getCollect());
 
                 /*加载评论数据*/
                 DynamicRecyclerAdapter.initCommentData();
 
                 v.getContext().startActivity(new Intent(v.getContext(), ArticleReviewActivity.class));
-                Toast.makeText(v.getContext(), "you click view" + cardViewItemBean.getContent(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "you click view" + item.getContent(), Toast.LENGTH_SHORT).show();
             }
         });
 

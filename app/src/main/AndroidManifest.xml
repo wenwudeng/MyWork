@@ -80,7 +80,7 @@
         <activity android:name=".activity.mine.activity.SetNewPasswordActivity" />
         <activity android:name=".activity.mine.activity.ForgetActivity" />
         <activity android:name=".activity.mine.activity.RegisterActivity" />
-        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.MainActivity"  />
         <activity android:name=".activity.mine.activity.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

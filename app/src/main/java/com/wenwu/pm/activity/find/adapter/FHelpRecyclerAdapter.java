@@ -72,7 +72,7 @@ public class FHelpRecyclerAdapter extends RecyclerView.Adapter<FHelpRecyclerAdap
 
                 FindHelpPetShow item = helpPetShowList.get(position);
                 /*传参至文章展示内容*/
-                JsonUtil.bean = new CardViewItemBean(item.getqId(), item.getTitle(), item.getImg(), item.getContent(), item.getUserNam(), item.getPhoto(), item.getLike());
+                JsonUtil.bean = new CardViewItemBean(item.getuId(),item.getqId(), item.getTitle(), item.getImg(), item.getContent(), item.getUserNam(), item.getPhoto(), item.getLike());
 
                 /*加载评论数据*/
                 DynamicRecyclerAdapter.initCommentData();

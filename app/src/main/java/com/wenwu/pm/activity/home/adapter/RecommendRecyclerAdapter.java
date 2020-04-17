@@ -88,11 +88,13 @@ public class RecommendRecyclerAdapter extends RecyclerView.Adapter<RecommendRecy
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                //点击item时传入文章内容
-                JsonUtil.bean = cardViewItemBeanList.get(position);
-                CardViewItemBean cardViewItemBean = cardViewItemBeanList.get(position);
+                CardViewItemBean item = cardViewItemBeanList.get(position);
+                /*传参*/
+                JsonUtil.bean = new CardViewItemBean(item.getUserId(),item.getArticleId(),item.getTitle(),item.getImgUrl(),item.getContent()
+                        ,item.getAcceptFavourCount(),item.getCollect());
+
                 v.getContext().startActivity(new Intent(v.getContext(), ArticleReviewActivity.class));
-                Toast.makeText(v.getContext(), "you click view" + cardViewItemBean.getContent(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "you click view" + item.getContent(), Toast.LENGTH_SHORT).show();
 
                 /*提前加载文章评论数据*/
                 initCommentData();
