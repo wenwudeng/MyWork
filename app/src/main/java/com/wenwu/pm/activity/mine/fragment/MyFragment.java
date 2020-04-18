@@ -160,10 +160,12 @@ public class MyFragment extends Fragment implements View.OnClickListener{
     }
 
     public void updateInfo(String userPhoto,String userName,String gender,String city,String profile,String pet) {
+        JsonUtil.loginJson.getData().setPhoto(userPhoto);
         JsonUtil.loginJson.getData().setCity(city);
         JsonUtil.loginJson.getData().setUserName(userName);
         JsonUtil.loginJson.getData().setProfile(profile);
-        JsonUtil.loginJson.getData().setPhoto(userPhoto);
+        JsonUtil.loginJson.getData().setPet(pet);
+        JsonUtil.loginJson.getData().setGender(gender);
         showResponse(JsonUtil.loginJson.getData());
     }
 
@@ -174,9 +176,8 @@ public class MyFragment extends Fragment implements View.OnClickListener{
             public void run() {
                 Glide.with(getActivity()).load(json.getPhoto()).into(userPhoto);
                 userName.setText(json.getUserName());
-                fansCount.setText(Integer.toString(json.getFollow()));
-                while (follow==null);
-                concernCount.setText(follow);
+                getFollow();
+                getFans();
                 collectCount.setText(Integer.toString(json.getCollect()));
                 if (json.getGender().equals("男")) {
                     gender.setImageResource(R.drawable.sex_boy_p);
@@ -203,9 +204,39 @@ public class MyFragment extends Fragment implements View.OnClickListener{
             public void onResponse(Call call, Response response) throws IOException {
                 String data = response.body().string();
                 LRReturnJson json = new Gson().fromJson(data, LRReturnJson.class);
-                follow = Integer.toString(json.getData());
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        concernCount.setText(Integer.toString(json.getData()));
+                    }
+                });
+
             }
         });
     }
 
+
+    /*fans*/
+    public void getFans() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("fId", JsonUtil.loginJson.getData().getId());
+        OkHttpUtil.sendPostRequest("followAndFans/getFans", map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String data = response.body().string();
+                LRReturnJson json = new Gson().fromJson(data, LRReturnJson.class);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        fansCount.setText(Integer.toString(json.getData()));
+                    }
+                });
+
+            }
+        });
+    }
 }

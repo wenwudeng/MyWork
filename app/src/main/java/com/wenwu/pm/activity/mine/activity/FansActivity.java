@@ -12,25 +12,42 @@ import android.widget.Toast;
 
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.message.bean.MsgAddNewConcern;
-import com.wenwu.pm.activity.mine.adapter.FansRecyclerAdapter;
+import com.wenwu.pm.activity.mine.adapter.FansAdapter;
+import com.wenwu.pm.utils.JsonUtil;
+import com.wenwu.pm.utils.OkHttpUtil;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class FansActivity extends AppCompatActivity {
-    private List<MsgAddNewConcern> list = new ArrayList<>();
+    private List<MsgAddNewConcern> list;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout refreshLayout;
     private Toolbar toolbar;
+    private FansAdapter adapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_fans);
+        initView();
+    }
 
-        //init();
-
+    public void initView() {
+        initData(JsonUtil.loginJson.getData().getId());
+        while (list==null);
         toolbar = findViewById(R.id.fans_toolbar);
         toolbar.setTitle("关注我的");
         setSupportActionBar(toolbar);
@@ -38,16 +55,19 @@ public class FansActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view_my_fans);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
-        FansRecyclerAdapter adapter = new FansRecyclerAdapter(list);
+        adapter = new FansAdapter(list,this);
         recyclerView.setAdapter(adapter);
 
         refreshLayout = findViewById(R.id.swipe_refresh_my_fans);
+        refreshLayout.setColorSchemeColors(getResources().getColor(R.color.red));
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        initData(JsonUtil.loginJson.getData().getId());
+                        adapter.notifyDataSetChanged();
                         refreshLayout.setRefreshing(false);
                         Toast.makeText(getBaseContext(),"刷新完成", Toast.LENGTH_SHORT).show();
                     }
@@ -56,14 +76,31 @@ public class FansActivity extends AppCompatActivity {
         });
     }
 
-/*    private void init() {
-        MsgAddNewConcern concern = new MsgAddNewConcern(R.drawable.img, "蒙眼丽莎");
-        list.add(concern);
+    private void initData(int id) {
+        list= new ArrayList<>();
+        Map<String, Object> map = new HashMap<>();
+        map.put("fId",id);
+        OkHttpUtil.sendPostRequest("followAndFans/getAllFansInfo",map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
 
-        MsgAddNewConcern concern1 = new MsgAddNewConcern(R.drawable.li, "李易峰");
-        list.add(concern1);
-
-        MsgAddNewConcern concern2 = new MsgAddNewConcern(R.drawable.chen, "陈瑶");
-        list.add(concern2);
-    }*/
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String returnData = response.body().string();
+                try {
+                    JSONObject jsonObject = new JSONObject(returnData);
+                    JSONArray array =  jsonObject.getJSONArray("data");
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject  arrayObject = array.getJSONObject(i);
+                        MsgAddNewConcern concern = new MsgAddNewConcern(arrayObject.getString("photo"),
+                                arrayObject.getString("userName"),arrayObject.getBoolean("status"),arrayObject.getInt("id"));
+                        list.add(concern);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 }

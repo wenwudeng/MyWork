@@ -118,16 +118,20 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
                findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(JsonUtil.bean.getTitle());//文章标题
 
+        initArticle();
+
         commentsList = generateTestData();
 
         initExpandableListView(commentsList);
 
-        initArticle();
+
     }
     /*初始化文章内容*/
    public void initArticle() {
        Glide.with(this).load(JsonUtil.bean.getImgUrl()).into(article_page_img);
+
        Glide.with(this).load(JsonUtil.bean.getUserPhoto()).into(article_page_user_photo);
+       Log.d(TAG,JsonUtil.bean.getUserPhoto()+"hh");
        if (JsonUtil.loginJson.getData().getUserName().equals(JsonUtil.bean.getUserName())) {
            article_page_concern.setVisibility(View.INVISIBLE);
        }
@@ -137,7 +141,7 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
     }
 
     /*查询关注状态*/
-    public void isFollow() {
+    public  void isFollow() {
         Map<String, Object> map = new HashMap<>();
         map.put("userId", JsonUtil.loginJson.getData().getId());
         map.put("fId", JsonUtil.bean.getUserId());
@@ -234,11 +238,13 @@ public class ArticleReviewActivity extends AppCompatActivity implements View.OnC
                     article_page_concern.setText("关注");
                     article_page_concern.setTextColor(getResources().getColor(R.color.red));
                     article_page_concern.setBackgroundResource(R.drawable.btn_round_unfollow);
+
                     FollowAdapter.unFollow(JsonUtil.bean.getUserId());
                 }else {
                     article_page_concern.setText("已关注");
                     article_page_concern.setTextColor(getResources().getColor(R.color.gray));
                     article_page_concern.setBackgroundResource(R.drawable.btn_round_followed);
+                    Log.d(TAG, JsonUtil.bean.getUserId() + "=====");
                     FollowAdapter.follow(JsonUtil.bean.getUserId());
                 }
                 break;

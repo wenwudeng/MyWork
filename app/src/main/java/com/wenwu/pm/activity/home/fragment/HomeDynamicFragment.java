@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,8 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
+
+import static android.content.ContentValues.TAG;
 
 public class HomeDynamicFragment extends Fragment {
     private List<CardViewItemBean> cardViewItemBeanList;
@@ -89,6 +92,8 @@ public class HomeDynamicFragment extends Fragment {
                 for (ShowArticlesJson.Data data : dataList) {
                     CardViewItemBean cardViewItemBean = new CardViewItemBean(data.getUserId(),data.getArticleId(),data.getTitle(),
                             data.getImg(),data.getContent(),data.getUserName(),data.getUserPhoto(),data.getLike());
+
+                    Log.d("MainActivity", data.getUserName()+data.getUserPhoto()+" ");
                     cardViewItemBeanList.add(cardViewItemBean);
                 }
 

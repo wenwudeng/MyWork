@@ -95,8 +95,7 @@ public class DynamicRecyclerAdapter extends RecyclerView.Adapter<DynamicRecycler
                 int position = holder.getAdapterPosition();
                 CardViewItemBean item = cardViewItemBeanList.get(position);
                 /*传参*/
-                JsonUtil.bean = new CardViewItemBean(item.getUserId(),item.getArticleId(),item.getTitle(),item.getImgUrl(),item.getContent()
-                ,item.getAcceptFavourCount(),item.getCollect());
+                JsonUtil.bean = item;
 
 
                 /*提前加载文章评论数据*/

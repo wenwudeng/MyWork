@@ -90,8 +90,7 @@ public class RecommendRecyclerAdapter extends RecyclerView.Adapter<RecommendRecy
                 int position = holder.getAdapterPosition();
                 CardViewItemBean item = cardViewItemBeanList.get(position);
                 /*传参*/
-                JsonUtil.bean = new CardViewItemBean(item.getUserId(),item.getArticleId(),item.getTitle(),item.getImgUrl(),item.getContent()
-                        ,item.getAcceptFavourCount(),item.getCollect());
+                JsonUtil.bean = item;
 
                 v.getContext().startActivity(new Intent(v.getContext(), ArticleReviewActivity.class));
                 Toast.makeText(v.getContext(), "you click view" + item.getContent(), Toast.LENGTH_SHORT).show();

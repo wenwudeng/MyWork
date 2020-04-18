@@ -138,4 +138,14 @@ public class ShowArticlesJson {
             this.collect = collect;
         }
     }
+
+    @Override
+    public String toString() {
+        return "ShowArticlesJson{" +
+                "success=" + success +
+                ", code='" + code + '\'' +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                '}';
+    }
 }

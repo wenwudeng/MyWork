@@ -88,7 +88,7 @@ public class HomeRecommendFragment extends Fragment {
                 List<ShowArticlesJson.Data> dataList = showArticlesJson.getData();
                 for (ShowArticlesJson.Data data : dataList) {
                     if (i % 2 == 0) {
-                        CardViewItemBean cardViewItemBean = new CardViewItemBean(data.getArticleId(), data.getTitle(),
+                        CardViewItemBean cardViewItemBean = new CardViewItemBean(data.getUserId(),data.getArticleId(), data.getTitle(),
                                 data.getImg(), data.getContent(), data.getUserName(), data.getUserPhoto(), data.getLike());
                         cardViewItemBeanList.add(cardViewItemBean);
                     }

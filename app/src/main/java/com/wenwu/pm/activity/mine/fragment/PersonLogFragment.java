@@ -85,7 +85,6 @@ public class PersonLogFragment extends Fragment {
     /*获取我的模块的日志数据*/
     public static void getMyLogData(int userId) {
         id = userId;
-
         cardViewItemBeanList = new ArrayList<>();
         Map<String, Object> param = new HashMap<>();
         param.put("userid", userId);
