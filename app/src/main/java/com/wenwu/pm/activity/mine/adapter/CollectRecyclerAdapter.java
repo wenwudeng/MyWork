@@ -1,9 +1,11 @@
 package com.wenwu.pm.activity.mine.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,8 +13,14 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.home.adapter.DynamicRecyclerAdapter;
+import com.wenwu.pm.activity.home.bean.CardViewItemBean;
 import com.wenwu.pm.activity.mine.bean.CollectCardViewItem;
+import com.wenwu.pm.activity.mine.fragment.MyCollectFragment;
+import com.wenwu.pm.activity.publish.activity.ArticleReviewActivity;
+import com.wenwu.pm.utils.JsonUtil;
 
 import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -24,11 +32,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CollectRecyclerAdapter extends RecyclerView.Adapter<CollectRecyclerAdapter.ViewHolder> {
     private List<CollectCardViewItem> CollectCardViewItemList;
     private CollectCardViewItem CollectCardViewItem;
+    private MyCollectFragment fragment;
     private boolean flag =false;
 
 
-    public CollectRecyclerAdapter(List<CollectCardViewItem> CollectCardViewItem) {
+    public CollectRecyclerAdapter(List<CollectCardViewItem> CollectCardViewItem,MyCollectFragment fragment) {
         this.CollectCardViewItemList = CollectCardViewItem;
+        this.fragment = fragment;
     }
 
 
@@ -42,12 +52,13 @@ public class CollectRecyclerAdapter extends RecyclerView.Adapter<CollectRecycler
         TextView recommendCount;
         Button favourButton;
         TextView favourCount;
+        ImageView article_img;
 
 
         private ViewHolder( View itemView) {
             super(itemView);
             cardView = (CardView) itemView;
-            title_content = itemView.findViewById(R.id.my_collect_title);
+            title_content = itemView.findViewById(R.id.my_collect_article_title);
             userPhoto = itemView.findViewById(R.id.my_collect_user_photo);
             userName = itemView.findViewById(R.id.my_collect_user_name);
 
@@ -56,6 +67,8 @@ public class CollectRecyclerAdapter extends RecyclerView.Adapter<CollectRecycler
 
             favourButton = itemView.findViewById(R.id.my_collect_favour_button);
             favourCount =  itemView.findViewById(R.id.my_collect_favour_count);
+
+            article_img = itemView.findViewById(R.id.my_collect_article_img);
         }
     }
 
@@ -72,12 +85,20 @@ public class CollectRecyclerAdapter extends RecyclerView.Adapter<CollectRecycler
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_collect_item, parent, false);
         //将获得的concern_item视图实例作为ViewHolder获取实例的参数
         final CollectRecyclerAdapter.ViewHolder holder = new CollectRecyclerAdapter.ViewHolder(view);
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                CollectCardViewItem CollectCardViewItem = CollectCardViewItemList.get(position);
-                Toast.makeText(v.getContext(), "you click view" + CollectCardViewItem.getTitle(), Toast.LENGTH_SHORT).show();
+                CollectCardViewItem item = CollectCardViewItemList.get(position);
+
+                JsonUtil.bean = new CardViewItemBean(item.getAuthorId(), item.getaId(), item.getTitle(), item.getImg(), item.getContent(),
+                        item.getAuthorName(), item.getAuthorPhoto(), item.getLike());
+                /*加载评论数据*/
+                DynamicRecyclerAdapter.initCommentData();
+
+                v.getContext().startActivity(new Intent(v.getContext(), ArticleReviewActivity.class));
+                Toast.makeText(v.getContext(), "you click view" + item.getTitle(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -86,7 +107,7 @@ public class CollectRecyclerAdapter extends RecyclerView.Adapter<CollectRecycler
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 CollectCardViewItem = CollectCardViewItemList.get(position);
-                Integer count = Integer.parseInt(CollectCardViewItem.getLikeCount())+1;
+                Integer count = CollectCardViewItem.getLike()+1;
                 Integer count1 = count-1;
                 if (v.getId() == R.id.my_collect_favour_button) {
                     if (!flag) {
@@ -114,9 +135,12 @@ public class CollectRecyclerAdapter extends RecyclerView.Adapter<CollectRecycler
      */
     @Override
     public void onBindViewHolder(@NonNull CollectRecyclerAdapter.ViewHolder holder, int position) {
-        CollectCardViewItem collectCardViewItem = CollectCardViewItemList.get(position);
-        holder.title_content.setText(collectCardViewItem.getTitle());
-        holder.userPhoto.setImageResource(collectCardViewItem.getPhoto());
+        CollectCardViewItem item = CollectCardViewItemList.get(position);
+
+        Glide.with(fragment).load(item.getImg()).into(holder.article_img);
+        holder.title_content.setText(item.getTitle()+" | "+item.getContent());
+        Glide.with(fragment).load(item.getAuthorPhoto()).into(holder.userPhoto);
+        holder.userName.setText(item.getAuthorName());
     }
 
     @Override

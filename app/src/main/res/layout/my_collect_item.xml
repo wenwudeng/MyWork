@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
+    android:layout_height="wrap_content"
     android:layout_margin="10dp"
     app:cardCornerRadius="4dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:orientation="vertical">
@@ -19,27 +19,28 @@
             android:padding="5dp">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/icon_ask" />
+                android:id="@+id/my_collect_article_img"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/chen" />
 
             <TextView
-                android:id="@+id/my_collect_title"
+                android:id="@+id/my_collect_article_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+              android:layout_marginTop="12dp"
                 android:maxLines="2"
                 android:ellipsize="end"
                 android:layout_marginStart="5dp"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:text="武汉加油，中国加油！" />
 
         </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:paddingRight="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginTop="20dp"
             android:layout_height="wrap_content">
 
@@ -54,7 +55,6 @@
 
             <TextView
                 android:id="@+id/my_collect_user_name"
-                android:layout_toRightOf="@id/my_collect_user_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -67,8 +67,8 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginTop="8dp"
-                android:layout_toLeftOf="@id/my_collect_review_count"
                 android:background="@mipmap/icon_comment_sm"
+                android:layout_marginStart="170dp"
                 />
 
             <TextView
@@ -76,19 +76,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="5dp"
-                android:layout_toLeftOf="@id/my_collect_favour_button"
                 android:layout_marginStart="5dp"
                 android:text="0" />
 
 
             <Button
                 android:id="@+id/my_collect_favour_button"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="20dp"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginTop="8dp"
-                android:layout_toLeftOf="@id/my_collect_favour_count"
+
                 android:background="@mipmap/icon_upvote"
                 />
 
@@ -97,12 +95,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="5dp"
-                android:layout_alignParentRight="true"
                 android:layout_marginStart="5dp"
                 android:text="0" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
 
