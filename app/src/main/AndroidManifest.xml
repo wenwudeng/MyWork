@@ -74,7 +74,7 @@
         <activity android:name=".activity.publish.activity.QuestionActivity" />
         <activity android:name=".activity.message.activity.MsgReViewActivity" />
         <activity android:name=".activity.message.activity.MsgCollectPraiseActivity" />
-        <activity android:name=".activity.message.activity.MsgAddNewConcernActivity" />
+        <activity android:name=".activity.message.activity.NewFansActivity" />
         <activity android:name=".activity.mine.activity.SettingActivity" />
         <activity android:name=".activity.mine.activity.EditPersonalInfoActivity" />
         <activity android:name=".activity.mine.activity.SetNewPasswordActivity" />

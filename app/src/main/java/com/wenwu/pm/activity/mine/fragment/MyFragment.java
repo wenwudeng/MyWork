@@ -153,7 +153,7 @@ public class MyFragment extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.my_collect:
-                Toast.makeText(v.getContext(),"收藏",Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(),"获赞",Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(v.getContext(), MsgCollectPraiseActivity.class));
                 break;
         }
@@ -178,6 +178,7 @@ public class MyFragment extends Fragment implements View.OnClickListener{
                 userName.setText(json.getUserName());
                 getFollow();
                 getFans();
+                getSupport();
                 collectCount.setText(Integer.toString(json.getCollect()));
                 if (json.getGender().equals("男")) {
                     gender.setImageResource(R.drawable.sex_boy_p);
@@ -233,6 +234,31 @@ public class MyFragment extends Fragment implements View.OnClickListener{
                     @Override
                     public void run() {
                         fansCount.setText(Integer.toString(json.getData()));
+                    }
+                });
+
+            }
+        });
+    }
+
+
+    /*fans*/
+    public void getSupport() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", JsonUtil.loginJson.getData().getId());
+        OkHttpUtil.sendPostRequest("cLike/getSupport", map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String data = response.body().string();
+                LRReturnJson json = new Gson().fromJson(data, LRReturnJson.class);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        collectCount.setText(Integer.toString(json.getData()));
                     }
                 });
 

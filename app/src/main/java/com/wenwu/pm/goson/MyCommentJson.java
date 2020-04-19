@@ -14,6 +14,8 @@ public class MyCommentJson {
     private List<Data> data;
 
     public class Data {
+        private String authorName;
+        private String authorPhoto;
         private int userid;
         private int aid;
         private String title;
@@ -25,6 +27,22 @@ public class MyCommentJson {
         private String ccontent;
         private int alike;
         private int clike;
+
+        public String getAuthorName() {
+            return authorName;
+        }
+
+        public void setAuthorName(String authorName) {
+            this.authorName = authorName;
+        }
+
+        public String getAuthorPhoto() {
+            return authorPhoto;
+        }
+
+        public void setAuthorPhoto(String authorPhoto) {
+            this.authorPhoto = authorPhoto;
+        }
 
         public int getUserid() {
             return userid;

@@ -6,6 +6,8 @@ package com.wenwu.pm.activity.mine.bean;
  */
 public class ReviewCardViewItem {
 
+    private String authorName;
+    private String authorPhoto;
     private String userPhoto;
     private String userNam;
     private String cTime;
@@ -19,6 +21,22 @@ public class ReviewCardViewItem {
     private String img;
     private int userId;
 
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public String getAuthorPhoto() {
+        return authorPhoto;
+    }
+
+    public void setAuthorPhoto(String authorPhoto) {
+        this.authorPhoto = authorPhoto;
+    }
+
     public int getUserId() {
         return userId;
     }
@@ -29,10 +47,12 @@ public class ReviewCardViewItem {
 
     public ReviewCardViewItem() { }
 
-    public ReviewCardViewItem(int userId,String userPhoto, String userNam, String cTime,
+    public ReviewCardViewItem(String authorName,String authorPhoto,int userId,String userPhoto, String userNam, String cTime,
                               String commentContent, String artTitle, int articleId,
                               int cLike, int aLike, String articleContent, String location,
                               String img) {
+        this.authorName = authorName;
+        this.authorPhoto = authorPhoto;
         this.userId = userId;
         this.userPhoto = userPhoto;
         this.userNam = userNam;

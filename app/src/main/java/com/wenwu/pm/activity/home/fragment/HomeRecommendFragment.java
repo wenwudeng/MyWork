@@ -33,7 +33,7 @@ import okhttp3.Response;
 
 public class HomeRecommendFragment extends Fragment {
     //用于用户头像
-    private static List<CardViewItemBean> cardViewItemBeanList ;
+    private  List<CardViewItemBean> cardViewItemBeanList ;
     private SwipeRefreshLayout swipeRefreshLayout;
     private  RecommendRecyclerAdapter adapter;
 

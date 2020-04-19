@@ -94,9 +94,9 @@ public class LogRecyclerAdapter extends RecyclerView.Adapter<LogRecyclerAdapter.
                 int position = holder.getAdapterPosition();
                 CardViewItemBean item = cardViewItemBeanList.get(position);
                 /*传参*/
-                JsonUtil.bean = new CardViewItemBean(item.getUserId(),item.getArticleId(),item.getTitle(),item.getImgUrl(),item.getContent()
-                        ,item.getAcceptFavourCount(),item.getCollect());
-
+            /*    JsonUtil.bean = new CardViewItemBean(item.getUserId(),item.getArticleId(),item.getTitle(),item.getImgUrl(),item.getContent()
+                        ,item.getAcceptFavourCount(),item.getCollect());*/
+                JsonUtil.bean = item;
                 /*加载评论数据*/
                 DynamicRecyclerAdapter.initCommentData();
 

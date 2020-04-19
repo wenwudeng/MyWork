@@ -18,9 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.wenwu.pm.R;
-import com.wenwu.pm.activity.message.activity.MsgAddNewConcernActivity;
 import com.wenwu.pm.activity.message.activity.MsgCollectPraiseActivity;
 import com.wenwu.pm.activity.message.activity.MsgReViewActivity;
+import com.wenwu.pm.activity.message.activity.NewFansActivity;
 import com.wenwu.pm.activity.message.adapter.MsgListItemAdapter;
 import com.wenwu.pm.activity.message.bean.MessageListItem;
 
@@ -79,7 +79,7 @@ public class MessageFragment extends Fragment {
         btn_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.getContext().startActivity(new Intent(v.getContext(), MsgAddNewConcernActivity.class));
+                v.getContext().startActivity(new Intent(v.getContext(), NewFansActivity.class));
             }
         });
 

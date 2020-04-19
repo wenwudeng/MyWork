@@ -4,14 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activity.message.fragment.MsgCollectPraiseFragment">
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:navigationIcon="@mipmap/arrow_left"
-        app:title="赞和收藏"
+        app:title="我获得的赞"
         app:titleMarginStart="90dp" />
 
     <View

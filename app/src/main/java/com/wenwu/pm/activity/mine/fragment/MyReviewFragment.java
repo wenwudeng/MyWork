@@ -104,7 +104,7 @@ public class MyReviewFragment extends Fragment {
                 MyCommentJson json = new Gson().fromJson(data1, MyCommentJson.class);
                 List<MyCommentJson.Data> dataList = json.getData();
                 for (MyCommentJson.Data data : dataList) {
-                    ReviewCardViewItem item = new ReviewCardViewItem(data.getUserid(),JsonUtil.loginJson.getData().getPhoto(),JsonUtil.loginJson.getData().getUserName(),data.getCTime(),
+                    ReviewCardViewItem item = new ReviewCardViewItem(data.getAuthorName(),data.getAuthorPhoto(),data.getUserid(),JsonUtil.loginJson.getData().getPhoto(),JsonUtil.loginJson.getData().getUserName(),data.getCTime(),
                             data.getCcontent(),data.getTitle(),data.getAid(),data.getClike(),data.getAlike(),data.getContent(),data.getLocation(),data.getImg());
                     reviewList.add(item);
                 }

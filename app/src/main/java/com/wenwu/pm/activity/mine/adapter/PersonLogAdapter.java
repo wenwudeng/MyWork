@@ -101,10 +101,10 @@ public class PersonLogAdapter extends RecyclerView.Adapter<PersonLogAdapter.View
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
+                CardViewItemBean item = cardViewItemBeanList.get(position);
                 /*传参*/
-                JsonUtil.bean = cardViewItemBeanList.get(position);
-                CardViewItemBean cardViewItemBean = cardViewItemBeanList.get(position);
-
+                JsonUtil.bean =  new CardViewItemBean(item.getUserId(),item.getArticleId(), item.getTitle(),
+                        item.getImgUrl(), item.getContent(), item.getUserName(), item.getUserPhoto(), item.getCollect());
 
                 /*加载评论数据*/
                 DynamicRecyclerAdapter.initCommentData();

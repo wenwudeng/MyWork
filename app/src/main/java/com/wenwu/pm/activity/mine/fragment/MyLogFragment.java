@@ -89,7 +89,7 @@ public class MyLogFragment extends Fragment {
                 MyLogJson json = new Gson().fromJson(returnData, MyLogJson.class);
                 List<MyLogJson.Data> dataList = json.getData();
                 for (MyLogJson.Data data : dataList) {
-                    CardViewItemBean cardViewItemBean = new CardViewItemBean(data.getId(),data.getTitle(),
+                    CardViewItemBean cardViewItemBean = new CardViewItemBean(data.getUserid(),data.getId(),data.getTitle(),
                             data.getImg(),data.getContent(),JsonUtil.loginJson.getData().getUserName(),JsonUtil.loginJson.getData().getPhoto(),data.getLike());
                     cardViewItemBeanList.add(cardViewItemBean);
                 }
