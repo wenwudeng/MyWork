@@ -8,8 +8,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.cxd.chatview.moudle.ChatView;
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.message.activity.MsgActivity;
 import com.wenwu.pm.activity.message.bean.Msg;
 
 
@@ -23,6 +25,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder> {
     private List<Msg> mMsgList;
+    private MsgActivity activity;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -52,8 +55,9 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder> {
         }
     }
 
-    public MsgAdapter(List<Msg> mMsgList) {
+    public MsgAdapter(List<Msg> mMsgList,MsgActivity activity) {
         this.mMsgList = mMsgList;
+        this.activity = activity;
     }
 
     @NonNull
@@ -66,11 +70,14 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Msg msg = mMsgList.get(position);
+        System.out.println(msg);
         if (msg.getType() == Msg.TYPE_RECEIVED) {
             //如果收到的消息,则显示左边消息布局,将右边布局隐藏
             holder.lefLayout.setVisibility(View.VISIBLE);
             holder.rightLayout.setVisibility(View.GONE);
             holder.leftMsg.setText(msg.getContent());
+            System.out.println("===holder======"+msg.getImage());
+            Glide.with(activity).load(msg.getImage()).into(holder.leftPhoto);
             holder.rightPhoto.setVisibility(View.GONE);
            /* holder.leftPhoto.setImageResource(msg.getImage());*/
         } else if (msg.getType() == Msg.TYPE_SEND) {
@@ -79,6 +86,7 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder> {
             holder.lefLayout.setVisibility(View.GONE);
             holder.leftPhoto.setVisibility(View.GONE);
             holder.rightMsg.setText(msg.getContent());
+            Glide.with(activity).load(msg.getImage()).into(holder.rightPhoto);
            /* holder.rightPhoto.setImageResource(msg.getImage());*/
         }
     }

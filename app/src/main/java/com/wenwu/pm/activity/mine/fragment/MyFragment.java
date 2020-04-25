@@ -81,7 +81,7 @@ public class MyFragment extends Fragment implements View.OnClickListener{
         viewPager.setAdapter(myPagerAdapter);
         tabLayout = view.findViewById(R.id.tab_layoutMy);
         tabLayout.setupWithViewPager(viewPager);
-        viewPager.setOffscreenPageLimit(2);
+        viewPager.setOffscreenPageLimit(3);
         initView(view);
     }
 

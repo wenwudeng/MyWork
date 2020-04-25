@@ -51,10 +51,11 @@ public class MyCollectFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        initData();
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_my_collect);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_my_collect);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
+        initData();
+        while(collectsList==null);
         adapter = new CollectRecyclerAdapter(collectsList,this);
         recyclerView.setAdapter(adapter);
 
@@ -91,6 +92,7 @@ public class MyCollectFragment extends Fragment {
                     String data1 = response.body().string();
                     UserCollections json = new Gson().fromJson(data1, UserCollections.class);
                     List<UserCollections.Data> dataList = json.getData();
+                    while(dataList==null);
                     for (UserCollections.Data data : dataList) {
                         CollectCardViewItem item = new CollectCardViewItem(data.getAuthorId(), data.getAuthorName(), data.getAuthorPhoto(), data.getaId()
                                 , data.getTitle(), data.getContent(), data.getImg(), data.getLike(), data.getComment());

@@ -11,24 +11,11 @@ public class Msg {
 
     private String content;
     private int type;
-    private int image;
+    private String image;
 
-    public Msg(String content, int type, int image) {
+    public Msg(String content, int type, String image) {
         this.content = content;
         this.type = type;
-        this.image = image;
-    }
-
-    public Msg(String content, int type) {
-        this.content = content;
-        this.type = type;
-    }
-
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
         this.image = image;
     }
 
@@ -36,7 +23,32 @@ public class Msg {
         return content;
     }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public int getType() {
         return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "Msg{" +
+                "content='" + content + '\'' +
+                ", type=" + type +
+                ", image='" + image + '\'' +
+                '}';
     }
 }

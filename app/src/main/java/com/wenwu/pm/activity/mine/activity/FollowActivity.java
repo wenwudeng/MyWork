@@ -32,7 +32,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class FollowActivity extends AppCompatActivity{
-    private  List<MsgAddNewConcern> list ;
+    private  volatile List<MsgAddNewConcern> list ;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout refreshLayout;
     private Toolbar toolbar;
@@ -42,24 +42,23 @@ public class FollowActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_concern);
+
         initView();
     }
 
 
     public void initView() {
-        initData(JsonUtil.loginJson.getData().getId());
-        while (list==null);
         toolbar = findViewById(R.id.follow_toolbar);
         toolbar.setTitle("我关注的");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-
+        initData(JsonUtil.loginJson.getData().getId());
+    //    while (list==null);
         recyclerView = findViewById(R.id.recycler_view_my_concern);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
-
         adapter = new FollowAdapter(list,this);
         recyclerView.setAdapter(adapter);
 

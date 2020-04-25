@@ -31,7 +31,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class FansActivity extends AppCompatActivity {
-    private List<MsgAddNewConcern> list;
+    private volatile List<MsgAddNewConcern> list;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout refreshLayout;
     private Toolbar toolbar;
@@ -42,16 +42,19 @@ public class FansActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_fans);
+
+
         initView();
     }
 
     public void initView() {
-        initData(JsonUtil.loginJson.getData().getId());
-        while (list==null);
+        //while (list==null);
         toolbar = findViewById(R.id.fans_toolbar);
         toolbar.setTitle("关注我的");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        initData(JsonUtil.loginJson.getData().getId());
         recyclerView = findViewById(R.id.recycler_view_my_fans);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);

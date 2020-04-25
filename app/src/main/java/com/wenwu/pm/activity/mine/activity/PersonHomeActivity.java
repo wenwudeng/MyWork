@@ -8,6 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.message.activity.MsgActivity;
 import com.wenwu.pm.activity.message.activity.MsgCollectPraiseActivity;
 import com.wenwu.pm.activity.mine.adapter.MyPagerAdapter;
 import com.wenwu.pm.activity.mine.fragment.MyCollectFragment;
@@ -55,7 +57,6 @@ public class PersonHomeActivity extends AppCompatActivity implements View.OnClic
     private TextView collect;
 
 
-    private TextView userName;
     private CircleImageView userPhoto;
     private TextView concernCount;
     private TextView fansCount;
@@ -65,6 +66,11 @@ public class PersonHomeActivity extends AppCompatActivity implements View.OnClic
     private TextView pet;
     private TextView profile;
     private Toolbar toolbar;
+    private Button chat;
+
+
+    private volatile String chatName;//用户名传至聊天界面
+    private volatile String photo;//用头像传至聊天界面
 
 
 
@@ -81,7 +87,7 @@ public class PersonHomeActivity extends AppCompatActivity implements View.OnClic
         viewPager.setAdapter(myPagerAdapter);
         tabLayout = findViewById(R.id.tab_layout_person);
         tabLayout.setupWithViewPager(viewPager);
-        viewPager.setOffscreenPageLimit(3);
+        viewPager.setOffscreenPageLimit(2);
 
         toolbar = findViewById(R.id.person_home_toolbar);
         setSupportActionBar(toolbar);
@@ -97,7 +103,9 @@ public class PersonHomeActivity extends AppCompatActivity implements View.OnClic
 
         profile = findViewById(R.id.person_profile);
 
-        show();
+        chat = findViewById(R.id.person_chat);
+        chat.setOnClickListener(this);
+
 
         concernCount = findViewById(R.id.person_concern_count);
         collectCount = findViewById(R.id.person_fans_count);
@@ -113,8 +121,10 @@ public class PersonHomeActivity extends AppCompatActivity implements View.OnClic
         collect = findViewById(R.id.person_collect);
         collect.setOnClickListener(this);
 
+        show();
     }
 
+    /*获取并显示个人信息*/
     public void show() {
         int id = getIntent().getIntExtra("id", 1);
 
@@ -140,6 +150,9 @@ public class PersonHomeActivity extends AppCompatActivity implements View.OnClic
                         PersonLogFragment.userName = json.getData().getUserName();
                         PersonLogFragment.photo = json.getData().getPhoto();
 
+                        chatName =json.getData().getUserName();
+                        photo = json.getData().getPhoto();
+
                         toolbar.setTitle(json.getData().getUserName());
                         Glide.with(PersonHomeActivity.this).load(json.getData().getPhoto()).into(userPhoto);
                         if (json.getData().getGender().equals("男")) {
@@ -149,7 +162,7 @@ public class PersonHomeActivity extends AppCompatActivity implements View.OnClic
                         }
                         city.setText(json.getData().getCity());
                         pet.setText(json.getData().getPet());
-                        pet.setText(json.getData().getProfile());
+                        profile.setText(json.getData().getProfile());
                     }
                 });
             }
@@ -182,6 +195,14 @@ public class PersonHomeActivity extends AppCompatActivity implements View.OnClic
             case R.id.person_collect:
                 Toast.makeText(v.getContext(), "收藏", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(v.getContext(), MsgCollectPraiseActivity.class));
+                break;
+            case R.id.person_chat:
+                Intent intent = new Intent(v.getContext(), MsgActivity.class);
+                if (chatName != null && photo!=null) {
+                    intent.putExtra("userName", chatName);
+                    intent.putExtra("photo", photo);
+                    startActivity(intent);
+                }
                 break;
         }
     }

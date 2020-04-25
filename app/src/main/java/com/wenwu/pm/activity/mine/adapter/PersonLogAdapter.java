@@ -110,7 +110,7 @@ public class PersonLogAdapter extends RecyclerView.Adapter<PersonLogAdapter.View
                 DynamicRecyclerAdapter.initCommentData();
 
                 v.getContext().startActivity(new Intent(v.getContext(), ArticleReviewActivity.class));
-                Toast.makeText(v.getContext(), "you click view" + cardViewItemBean.getContent(), Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(v.getContext(), "you click view" + cardViewItemBean.getContent(), Toast.LENGTH_SHORT).show();
             }
         });
 
