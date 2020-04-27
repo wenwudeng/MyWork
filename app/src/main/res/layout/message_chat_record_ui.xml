@@ -58,7 +58,7 @@
                 android:id="@+id/send"
                 android:layout_width="40dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="20dp"
                 android:background="@drawable/btn_round_msgchat"
                 android:text="发送"
                 android:textColor="@color/white" />

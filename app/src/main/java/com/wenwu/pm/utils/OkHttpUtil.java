@@ -27,7 +27,7 @@ import okhttp3.Response;
  * @date:11:20 AM 3/17/2020
  */
 public class OkHttpUtil {
-    public static final String API = "http://192.168.1.103:8081/api/";
+    public static final String API = "http://192.168.1.109:8081/api/";
     public static final String UPLOAD_URL = "http://47.101.171.252:8890/uploadFile?username=";
 
     public static final String MAP_URL = "https://restapi.amap.com/v3/place/around?key=1321b7ea2e0b99553ea27afa841d1ada&keywords=" +

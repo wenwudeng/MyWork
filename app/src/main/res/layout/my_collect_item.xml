@@ -68,7 +68,7 @@
                 android:layout_height="15dp"
                 android:layout_marginTop="8dp"
                 android:background="@mipmap/icon_comment_sm"
-                android:layout_marginStart="170dp"
+                android:layout_marginStart="150dp"
                 />
 
             <TextView
@@ -82,11 +82,10 @@
 
             <Button
                 android:id="@+id/my_collect_favour_button"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginTop="8dp"
-
                 android:background="@mipmap/icon_upvote"
                 />
 
