@@ -12,14 +12,6 @@
         android:layout_height="50dp"
         app:titleMarginStart="100dp"/>
 
-<!--        <TextView
-            android:id="@+id/"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="17sp"
-            android:text="小管家" />
-    </androidx.appcompat.widget.Toolbar>-->
 
     <View
         android:layout_width="match_parent"

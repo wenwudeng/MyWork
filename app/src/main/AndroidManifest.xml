@@ -88,7 +88,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.message.activity.MsgActivity" />
+        <activity android:name=".activity.message.activity.MsgActivity" >
+
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"

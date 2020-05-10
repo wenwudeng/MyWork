@@ -70,16 +70,14 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Msg msg = mMsgList.get(position);
-        System.out.println(msg);
         if (msg.getType() == Msg.TYPE_RECEIVED) {
             //如果收到的消息,则显示左边消息布局,将右边布局隐藏
             holder.lefLayout.setVisibility(View.VISIBLE);
             holder.rightLayout.setVisibility(View.GONE);
             holder.leftMsg.setText(msg.getContent());
-            System.out.println("===holder======"+msg.getImage());
             Glide.with(activity).load(msg.getImage()).into(holder.leftPhoto);
             holder.rightPhoto.setVisibility(View.GONE);
-           /* holder.leftPhoto.setImageResource(msg.getImage());*/
+
         } else if (msg.getType() == Msg.TYPE_SEND) {
             //如果是发出消息则显示右边消息布局,隐藏左边消息布局
             holder.rightLayout.setVisibility(View.VISIBLE);
@@ -87,7 +85,6 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder> {
             holder.leftPhoto.setVisibility(View.GONE);
             holder.rightMsg.setText(msg.getContent());
             Glide.with(activity).load(msg.getImage()).into(holder.rightPhoto);
-           /* holder.rightPhoto.setImageResource(msg.getImage());*/
         }
     }
 
