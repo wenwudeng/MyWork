@@ -69,13 +69,11 @@ public class FindHotTopicFragment extends Fragment {
     }
 
     private void init() {
-        for (int i = 0; i < 4; i++) {
             FindHotTopicShow topicShow = new FindHotTopicShow(R.drawable.img, "2345", "#你的城市,如何办理狗证?#", "分享你办理狗证的经历吧");
             topicShowsList.add(topicShow);
 
             FindHotTopicShow topicShow1 = new FindHotTopicShow(R.drawable.timg, "2345", "#宠物表情包大赛#", "把你家宠物的表情包丢过来吧~");
             topicShowsList.add(topicShow1);
-        }
 
     }
 

@@ -28,6 +28,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.BaseActivity;
 import com.wenwu.pm.activity.mine.adapter.FollowAdapter;
 import com.wenwu.pm.activity.publish.adapter.CommentExpandAdapter;
 import com.wenwu.pm.activity.publish.bean.CommentBean;
@@ -50,8 +51,8 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-
-public class ArticleReviewActivity extends AppCompatActivity implements View.OnClickListener{
+//文章内容类
+public class ArticleReviewActivity extends BaseActivity implements View.OnClickListener{
     private static final String TAG = "MainActivity";
     private Toolbar toolbar;
     private TextView bt_comment;

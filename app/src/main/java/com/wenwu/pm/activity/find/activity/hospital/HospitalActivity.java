@@ -30,6 +30,7 @@ import com.amap.api.navi.AmapNaviParams;
 import com.amap.api.navi.AmapNaviType;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
+import com.wenwu.pm.ActivityController;
 import com.wenwu.pm.R;
 
 import com.wenwu.pm.utils.OkHttpUtil;
@@ -70,6 +71,7 @@ public class HospitalActivity extends NavMapActivity {
         initView();
         initLocation();
     }
+
 
     public void initView() {
         recycler = findViewById(R.id.recycler_location);

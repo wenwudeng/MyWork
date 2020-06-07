@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.BaseActivity;
 import com.wenwu.pm.activity.MainActivity;
 import com.wenwu.pm.goson.LRReturnJson;
 import com.wenwu.pm.presenter.ArticlePresenter;
@@ -33,7 +34,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class PublishLogActivity extends AppCompatActivity implements IArticleView, View.OnClickListener {
+public class PublishLogActivity extends BaseActivity implements IArticleView, View.OnClickListener {
 
     private ImageButton imageButton;
     private EditText title;

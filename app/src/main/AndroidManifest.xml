@@ -70,7 +70,6 @@
         <activity android:name=".activity.mine.activity.FollowActivity" /> <!-- <activity android:name=".test.OkHttpTestActivity"/> -->
         <activity android:name=".test.HttpConnectionActivity" />
         <activity android:name=".activity.publish.activity.LongArticleActivity" />
-        <activity android:name=".activity.mine.activity.DrawerActivity" />
         <activity android:name=".activity.publish.activity.QuestionActivity" />
         <activity android:name=".activity.message.activity.MsgReViewActivity" />
         <activity android:name=".activity.message.activity.MsgCollectPraiseActivity" />

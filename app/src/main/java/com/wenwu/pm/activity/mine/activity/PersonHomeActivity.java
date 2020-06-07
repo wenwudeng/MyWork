@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.BaseActivity;
 import com.wenwu.pm.activity.message.activity.MsgActivity;
 import com.wenwu.pm.activity.message.activity.MsgCollectPraiseActivity;
 import com.wenwu.pm.activity.mine.adapter.MyPagerAdapter;
@@ -47,7 +48,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class PersonHomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class PersonHomeActivity extends BaseActivity implements View.OnClickListener {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private List<Fragment> fragmentList;

@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.next.easynavigation.constant.Anim;
 import com.next.easynavigation.view.EasyNavigationBar;
+import com.wenwu.pm.ActivityController;
 import com.wenwu.pm.R;
 import com.wenwu.pm.activity.find.fragment.FindFragment;
 import com.wenwu.pm.activity.publish.activity.PublishLogActivity;
@@ -44,13 +45,11 @@ import lrq.com.addpopmenu.PopMenuItem;
 import lrq.com.addpopmenu.PopMenuItemListener;
 
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity  extends BaseActivity   {
 
     private EasyNavigationBar navigationBar;
 
     //个人信息数据对接
-
-
 
     private String[] tabText = {"首页", "发现", "", "消息", "我的"};
     private int[] normalIcon = {R.mipmap.tab_home_normal, R.mipmap.tab_pic_normal, R.mipmap.btn_pai, R.mipmap.tab_shop_normal, R.mipmap.tab_mine_normal};
@@ -62,6 +61,7 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityController.addActivity(this);
         this.requestWindowFeature(Window.FEATURE_ACTION_BAR);
        // this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -125,10 +125,11 @@ public class MainActivity extends AppCompatActivity  {
                 .build();
     }
 
-
-
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityController.removeActivity(this);
+    }
 }
 
 

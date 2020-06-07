@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.BaseActivity;
 import com.wenwu.pm.activity.MainActivity;
 import com.wenwu.pm.goson.LoginReturnJson;
 import com.wenwu.pm.presenter.LoginPresenter;
@@ -19,7 +20,7 @@ import com.wenwu.pm.view.ILoginView;
 
 import java.io.IOException;
 
-public class LoginActivity extends AppCompatActivity implements ILoginView,View.OnClickListener{
+public class LoginActivity extends BaseActivity implements ILoginView,View.OnClickListener{
     private Button register;
     private Button forgetPass;
     private Button quickLoginByMsg;

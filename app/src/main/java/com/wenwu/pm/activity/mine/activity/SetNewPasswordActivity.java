@@ -5,8 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.BaseActivity;
 
-public class SetNewPasswordActivity extends AppCompatActivity {
+public class SetNewPasswordActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

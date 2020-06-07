@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.BaseActivity;
 import com.wenwu.pm.activity.MainActivity;
 import com.wenwu.pm.goson.LRReturnJson;
 import com.wenwu.pm.presenter.RegisterPresenter;
@@ -24,7 +25,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, IRegisterView {
+public class RegisterActivity extends BaseActivity implements View.OnClickListener, IRegisterView {
     private Button register;
     private Button sendCode;
     private Button existButton;

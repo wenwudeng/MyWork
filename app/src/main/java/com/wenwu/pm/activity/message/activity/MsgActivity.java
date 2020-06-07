@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.BaseActivity;
 import com.wenwu.pm.activity.message.adapter.MsgAdapter;
 import com.wenwu.pm.activity.message.bean.Msg;
 import com.wenwu.pm.utils.JsonUtil;
@@ -33,7 +34,7 @@ import java.util.List;
  * @date:20:35 2020/2/18
  * 私信聊天界面
  */
-public class MsgActivity extends AppCompatActivity {
+public class MsgActivity extends BaseActivity {
     private List<Msg> msgList = new ArrayList<>();
 
     private EditText inputText;
@@ -59,12 +60,12 @@ public class MsgActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.message_chat_record_ui);
 
-        /*socket*/
+    /*    *//*socket*/
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-      //  connect();
+      //  connect();*/
         initView();
     }
     public void initView() {
@@ -88,14 +89,21 @@ public class MsgActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //连接socket服务器
+                connect();
+            }
+        }).start();
+
+
         msgRecyclerView = findViewById(R.id.recycler_view_chatRecord);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         msgRecyclerView.setLayoutManager(layoutManager);
 
         msgAdapter = new MsgAdapter(msgList,this);
         msgRecyclerView.setAdapter(msgAdapter);
-
-        connect();
 
 
         send.setOnClickListener(new View.OnClickListener() {
@@ -117,11 +125,11 @@ public class MsgActivity extends AppCompatActivity {
 
     public void connect() {
         try {
-            socket = new Socket("192.168.1.109", 9999);
+            socket = new Socket("192.168.137.1", 9999);
             /*连接成功后主动发送信息*/
             if (isFirst) {//判断是不是第一次连接
                 PrintWriter out=new PrintWriter(socket.getOutputStream());
-                out.println("username");
+                out.println(JsonUtil.loginJson.getData().getUserName());
                 isFirst = false;
             }
         } catch (IOException e) {
@@ -138,9 +146,9 @@ public class MsgActivity extends AppCompatActivity {
             thread.start();
             PrintWriter out=new PrintWriter(socket.getOutputStream());
 
-                out.println(JsonUtil.loginJson.getData().getUserName()+","+username+","+content);
-                System.out.println("客户端发送："+content);
-                out.flush();
+            out.println(JsonUtil.loginJson.getData().getUserName()+","+username+","+content);
+            System.out.println("客户端发送："+content);
+            out.flush();
 
         }catch(Exception e){
             System.out.println("服务器连接异常====");
@@ -179,8 +187,6 @@ public class MsgActivity extends AppCompatActivity {
                                 msgRecyclerView.scrollToPosition(msgList.size() - 1);
                             }
                         });
-
-
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -193,15 +199,7 @@ public class MsgActivity extends AppCompatActivity {
 
     }
 
-/*    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        try {
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
+
 
     private void initMsg () {
             Msg msg1 = new Msg("你好吗？", Msg.TYPE_RECEIVED, chatUserPhoto);

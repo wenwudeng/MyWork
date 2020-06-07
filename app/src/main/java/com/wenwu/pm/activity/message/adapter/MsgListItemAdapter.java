@@ -60,10 +60,7 @@ public class MsgListItemAdapter extends RecyclerView.Adapter<MsgListItemAdapter.
         holder.listItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*int position = holder.getAdapterPosition();
-                MessageListItem msgItem = messageListItemList.get(position);*/
                v.getContext().startActivity(new Intent(v.getContext(), MsgActivity.class));
-                //Toast.makeText(v.getContext(), "you click view" + msgItem.getChatMessage(), Toast.LENGTH_SHORT).show();
             }
         });
         return holder;

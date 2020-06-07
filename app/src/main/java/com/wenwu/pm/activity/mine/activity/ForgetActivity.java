@@ -8,11 +8,12 @@ import android.view.View;
 import android.widget.Button;
 
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.BaseActivity;
 
 /**
  * 忘记密码
  */
-public class ForgetActivity extends AppCompatActivity {
+public class ForgetActivity extends BaseActivity {
     private Button nextButton;
     private Button backButton;
 

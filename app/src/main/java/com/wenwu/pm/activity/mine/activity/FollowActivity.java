@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.BaseActivity;
 import com.wenwu.pm.activity.message.bean.MsgAddNewConcern;
 import com.wenwu.pm.activity.mine.adapter.FollowAdapter;
 import com.wenwu.pm.utils.JsonUtil;
@@ -31,7 +32,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class FollowActivity extends AppCompatActivity{
+public class FollowActivity extends BaseActivity {
     private  volatile List<MsgAddNewConcern> list ;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout refreshLayout;

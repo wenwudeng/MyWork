@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.BaseActivity;
 import com.wenwu.pm.activity.message.adapter.MsgCollectRecyclerAdapter;
 import com.wenwu.pm.activity.message.bean.MsgAddNewConcern;
 import com.wenwu.pm.activity.message.bean.MsgCollectPraise;
@@ -34,7 +35,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class MsgCollectPraiseActivity extends AppCompatActivity {
+public class MsgCollectPraiseActivity extends BaseActivity {
     private List<MsgCollectPraise> list ;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout refreshLayout;

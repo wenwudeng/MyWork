@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.BaseActivity;
 import com.wenwu.pm.activity.MainActivity;
 import com.wenwu.pm.goson.LRReturnJson;
 import com.wenwu.pm.presenter.QuestionPresenter;
@@ -36,7 +37,7 @@ import okhttp3.Response;
  *提问求助activity
  */
 
-public class QuestionActivity extends AppCompatActivity implements IQuestionView,View.OnClickListener {
+public class QuestionActivity extends BaseActivity implements IQuestionView,View.OnClickListener {
     private ImageButton imageButton;
 
     // 调用相册的requestCode

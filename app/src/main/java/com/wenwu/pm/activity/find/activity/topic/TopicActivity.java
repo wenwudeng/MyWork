@@ -13,7 +13,9 @@ import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.wenwu.pm.ActivityController;
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.BaseActivity;
 import com.wenwu.pm.activity.publish.activity.PublishLogActivity;
 
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ import java.util.List;
 /**
  * 热议话题
  */
-public class TopicActivity extends AppCompatActivity implements View.OnClickListener {
+public class TopicActivity extends BaseActivity implements View.OnClickListener {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private List<Fragment> fragmentList;
@@ -33,11 +35,15 @@ public class TopicActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic);
-
+        ActivityController.addActivity(this);
         init();
-
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityController.removeActivity(this);
+    }
 
     public void init() {
         fb = findViewById(R.id.fb_take);

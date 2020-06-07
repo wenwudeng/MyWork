@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.wenwu.pm.ActivityController;
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.BaseActivity;
 
-public class SettingActivity extends AppCompatActivity {
+public class SettingActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +22,10 @@ public class SettingActivity extends AppCompatActivity {
         loginOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+
+                ActivityController.finishAll();
                 startActivity(new Intent(SettingActivity.this, LoginActivity.class));
+
             }
         });
     }

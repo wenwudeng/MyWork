@@ -21,7 +21,7 @@ import okhttp3.RequestBody;
  * @date:11:20 AM 3/17/2020
  */
 public class OkHttpUtil {
-    public static final String API = "http://192.168.1.109:8081/api/";
+    public static final String API = "http://192.168.137.1:8081/api/";
     public static final String UPLOAD_URL = "http://47.101.171.252:8890/uploadFile?username=";
 
     public static final String MAP_URL = "https://restapi.amap.com/v3/place/around?key=1321b7ea2e0b99553ea27afa841d1ada&keywords=" +
@@ -43,7 +43,7 @@ public class OkHttpUtil {
             // 不能直接把map转为RequestBody，必须遍历map的key，并逐一地往builder中添加对应的value
             Set<String> keys = map.keySet();
             for(String key : keys){
-                if (map.get(key)!=null) { //加了这句话就可以了
+                if (map.get(key)!=null) {
                     // 注意：RequestBody的参数只能是字符串类型的
                     String value = map.get(key).toString();
                     //System.out.println(key+":"+value);

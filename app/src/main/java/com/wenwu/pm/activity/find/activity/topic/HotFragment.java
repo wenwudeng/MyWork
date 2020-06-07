@@ -60,7 +60,7 @@ public class HotFragment extends Fragment {
             }
 
             model.setLike(0);
-            model.setTitle("test");
+            model.setTitle("t、");
             model.setUserPhoto(R.drawable.chen);
             model.setUserName("哇哈哈");
             list.add(model);

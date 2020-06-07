@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.BaseActivity;
 import com.wenwu.pm.activity.mine.fragment.MyFragment;
 import com.wenwu.pm.goson.LRReturnJson;
 import com.wenwu.pm.goson.LoginReturnJson;
@@ -41,7 +42,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class EditPersonalInfoActivity extends AppCompatActivity implements View.OnClickListener, IEditInfoView {
+public class EditPersonalInfoActivity extends BaseActivity implements View.OnClickListener, IEditInfoView {
     private RadioButton boy;
     private RadioButton girl;
     private Button save;

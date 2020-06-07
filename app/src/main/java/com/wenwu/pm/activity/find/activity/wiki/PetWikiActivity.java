@@ -21,8 +21,9 @@ import com.just.agentweb.DefaultWebClient;
 import com.just.agentweb.PermissionInterceptor;
 import com.just.agentweb.WebChromeClient;
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.BaseActivity;
 
-public class PetWikiActivity extends AppCompatActivity {
+public class PetWikiActivity extends BaseActivity {
     private  AgentWeb agentWeb;
     private LinearLayout layout;
     private String[] permission = null;

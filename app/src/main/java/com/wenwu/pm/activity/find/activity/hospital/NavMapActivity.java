@@ -17,15 +17,23 @@ import com.amap.api.navi.AmapNaviParams;
 import com.amap.api.navi.AmapNaviType;
 import com.amap.api.navi.INaviInfoCallback;
 import com.amap.api.navi.model.AMapNaviLocation;
+import com.wenwu.pm.ActivityController;
+import com.wenwu.pm.activity.BaseActivity;
 
-public class NavMapActivity extends AppCompatActivity implements INaviInfoCallback {
+public class NavMapActivity extends BaseActivity implements INaviInfoCallback {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityController.addActivity(this);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityController.removeActivity(this);
+    }
 
     /**
      * 返回键处理事件

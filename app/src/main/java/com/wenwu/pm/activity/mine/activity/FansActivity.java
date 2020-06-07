@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.widget.Toast;
 
 import com.wenwu.pm.R;
+import com.wenwu.pm.activity.BaseActivity;
 import com.wenwu.pm.activity.message.bean.MsgAddNewConcern;
 import com.wenwu.pm.activity.mine.adapter.FansAdapter;
 import com.wenwu.pm.utils.JsonUtil;
@@ -30,7 +31,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class FansActivity extends AppCompatActivity {
+public class FansActivity extends BaseActivity {
     private volatile List<MsgAddNewConcern> list;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout refreshLayout;
