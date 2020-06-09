@@ -70,6 +70,7 @@ public class ArticleReviewActivity extends BaseActivity implements View.OnClickL
     private TextView collect_count;
     private TextView support_count;
 
+
     private CommentExpandableListView expandableListView;
     private CommentExpandAdapter adapter;
     private CommentBean commentBean;
@@ -113,9 +114,10 @@ public class ArticleReviewActivity extends BaseActivity implements View.OnClickL
 
         article_page_concern.setOnClickListener(this);
         article_comment_count = findViewById(R.id.article_page_comment_count);//评论数
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-       CollapsingToolbarLayout collapsingToolbar =
+        CollapsingToolbarLayout collapsingToolbar =
                findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(JsonUtil.bean.getTitle());//文章标题
 
@@ -136,7 +138,8 @@ public class ArticleReviewActivity extends BaseActivity implements View.OnClickL
        if (JsonUtil.loginJson.getData().getUserName().equals(JsonUtil.bean.getUserName())) {
            article_page_concern.setVisibility(View.INVISIBLE);
        }
-       article_comment_count.setText(Integer.toString(total));
+
+      // article_comment_count.setText(JsonUtil.bean);
        article_user_name.setText(JsonUtil.bean.getUserName());
        article_page_content.setText(JsonUtil.bean.getContent());
     }
@@ -287,12 +290,15 @@ public class ArticleReviewActivity extends BaseActivity implements View.OnClickL
      * by moos on 2018/04/20
      * func:生成数据
      * @return 评论数据
+     * 获取后台评论数据
      */
     private List<CommentDetailBean> generateTestData(){
         while (JsonUtil.commentJson==null);
         commentBean = new Gson().fromJson(JsonUtil.commentJson, CommentBean.class);
         List<CommentDetailBean> commentList = commentBean.getData().getList();
         total = commentBean.getData().getTotal();
+        System.out.println("====评论数据==="+total);
+        article_comment_count.setText(Integer.toString(total));
         return commentList;
     }
 

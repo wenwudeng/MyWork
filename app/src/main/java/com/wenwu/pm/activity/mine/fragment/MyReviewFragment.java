@@ -1,6 +1,7 @@
 package com.wenwu.pm.activity.mine.fragment;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -62,12 +63,15 @@ public class MyReviewFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_my_review);
+        swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#FF5a60"));
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        getMyCommentData();
+                        adapter.notifyDataSetChanged();
                         swipeRefreshLayout.setRefreshing(false);
                         Toast.makeText(getActivity(), "刷新完成", Toast.LENGTH_SHORT).show();
                     }
@@ -76,18 +80,6 @@ public class MyReviewFragment extends Fragment {
         });
     }
 
-/*    *
-     * 初始化数据
-
-    public void init() {
-        List<MyCommentJson.Data> dataList = JsonUtil.myCommentJson.getData();
-        for (MyCommentJson.Data data : dataList) {
-           ReviewCardViewItem item = new ReviewCardViewItem(JsonUtil.loginJson.getData().getPhoto(),JsonUtil.loginJson.getData().getUserName(),data.getCTime(),
-                   data.getCcontent(),data.getTitle(),data.getAid(),data.getClike(),data.getAlike(),data.getContent(),data.getLocation(),data.getImg());
-            reviewList.add(item);
-        }
-
-    }*/
 
     /*获取我的主页评论数据*/
     public void getMyCommentData() {

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -53,6 +54,7 @@ public class MsgCollectPraiseActivity extends BaseActivity {
         recyclerView.setAdapter(adapter);
 
         refreshLayout = findViewById(R.id.swipe_refresh_msg_collect);
+        refreshLayout.setColorSchemeColors(Color.parseColor("#FF5a60"));
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

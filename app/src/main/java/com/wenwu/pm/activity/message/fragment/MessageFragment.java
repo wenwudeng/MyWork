@@ -2,6 +2,7 @@ package com.wenwu.pm.activity.message.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -52,6 +53,7 @@ public class MessageFragment extends Fragment {
         recyclerView.setAdapter(itemAdapter);
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_message);
+        swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#FF5a60"));
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

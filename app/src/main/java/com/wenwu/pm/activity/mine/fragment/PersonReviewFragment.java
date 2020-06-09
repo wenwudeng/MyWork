@@ -1,6 +1,7 @@
 package com.wenwu.pm.activity.mine.fragment;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -57,8 +58,7 @@ public class PersonReviewFragment extends Fragment {
 
         adapter = new PersonReviewAdapter(reviewList, this);
         recyclerView.setAdapter(adapter);
-
-        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_my_review);
+        swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#FF5a60"));        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_my_review);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

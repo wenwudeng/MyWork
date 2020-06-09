@@ -1,7 +1,5 @@
 package com.wenwu.pm.activity.find.activity.hospital;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -10,11 +8,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.amap.api.maps.model.LatLng;
-import com.amap.api.maps.model.Poi;
-import com.amap.api.navi.AmapNaviPage;
-import com.amap.api.navi.AmapNaviParams;
-import com.amap.api.navi.AmapNaviType;
 import com.amap.api.navi.INaviInfoCallback;
 import com.amap.api.navi.model.AMapNaviLocation;
 import com.wenwu.pm.ActivityController;

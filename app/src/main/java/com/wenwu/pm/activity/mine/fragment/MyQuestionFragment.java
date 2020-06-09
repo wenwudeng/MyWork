@@ -1,6 +1,7 @@
 package com.wenwu.pm.activity.mine.fragment;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -50,23 +51,7 @@ public class MyQuestionFragment extends Fragment {
         return inflater.inflate(R.layout.my_question,container,false);
     }
 
-/*
-    */
-/**
-     * 初始化数据
-     *//*
 
-    public void init() {
-        while ( JsonUtil.myQuestionJson.getData()==null);
-        List<MyQuestionJson.Data> dataList = JsonUtil.myQuestionJson.getData();
-        for (MyQuestionJson.Data data : dataList) {
-            QuestionCardViewItem item = new QuestionCardViewItem(data.getTitle(),data.getTime(),data.getAnswer(),
-                    data.getId(),data.getUserid(),data.getContent(),data.getImg(),data.getLocation(),data.getLike()
-            ,data.getCollect());
-            cardViewItemBeanList.add(item);
-        }
-    }
-*/
 
 
     @Override
@@ -79,12 +64,15 @@ public class MyQuestionFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_my_ques);
+        swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#FF5a60"));
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        getMyQuestionData();
+                        adapter.notifyDataSetChanged();
                         swipeRefreshLayout.setRefreshing(false);
                         Toast.makeText(getActivity(),"刷新完成", Toast.LENGTH_SHORT).show();
                     }

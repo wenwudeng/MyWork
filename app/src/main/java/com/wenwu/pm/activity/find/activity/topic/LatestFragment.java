@@ -46,19 +46,13 @@ public class LatestFragment extends Fragment {
 
     public void init() {
         list = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            Model model = new Model();
-            if (i % 2 == 0) {
-                model.setImage(R.drawable.chen);
-            }else {
-                model.setImage(R.drawable.btn_round_msgchat);
-            }
-            model.setLike(0);
-            model.setTitle("test");
-            model.setUserPhoto(R.drawable.chen);
-            model.setUserName("哇哈哈");
-            list.add(model);
+        Model model = new Model();
+        model.setLike(2);
+        model.setTitle("我家宠物的新衣服");
+        model.setUserPhoto(R.drawable.cat);
+        model.setUserName("铲屎官");
+        list.add(model);
         }
-    }
+    
 
 }

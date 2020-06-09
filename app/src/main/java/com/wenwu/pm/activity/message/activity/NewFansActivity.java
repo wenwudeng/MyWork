@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
@@ -60,7 +61,7 @@ public class NewFansActivity extends BaseActivity {
         recyclerView.setAdapter(adapter);
 
         refreshLayout = findViewById(R.id.swipe_refresh_my_fans);
-        refreshLayout.setColorSchemeColors(getResources().getColor(R.color.red));
+        refreshLayout.setColorSchemeColors(Color.parseColor("#FF5a60"));
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

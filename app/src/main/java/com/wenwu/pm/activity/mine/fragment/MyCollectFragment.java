@@ -1,6 +1,7 @@
 package com.wenwu.pm.activity.mine.fragment;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -60,6 +61,7 @@ public class MyCollectFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_my_collect);
+        swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#FF5a60"));
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

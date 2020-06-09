@@ -1,6 +1,7 @@
 package com.wenwu.pm.activity.mine.fragment;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -59,6 +60,7 @@ public class MyLogFragment extends Fragment {
         LogRecyclerAdapter adapter = new LogRecyclerAdapter(cardViewItemBeanList,this);
         recyclerView.setAdapter(adapter);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_my_log);
+        swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#FF5a60"));
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

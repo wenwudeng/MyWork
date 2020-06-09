@@ -1,6 +1,7 @@
 package com.wenwu.pm.activity.find.fragment;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -64,12 +65,15 @@ public class FindHelpPetFragment extends Fragment {
         recyclerView.setAdapter(helpRecyclerAdapter);
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_helpPet);
+        swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#FF5a60"));
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        getFindHelpData();
+                        helpRecyclerAdapter.notifyDataSetChanged();
                         swipeRefreshLayout.setRefreshing(false);
                         Toast.makeText(getActivity(),"刷新完成", Toast.LENGTH_SHORT).show();
                     }

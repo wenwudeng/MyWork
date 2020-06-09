@@ -51,20 +51,13 @@ public class HotFragment extends Fragment {
 
     public void init() {
         list = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
             Model model = new Model();
-            if (i % 2 == 0) {
-                model.setImage(R.drawable.chen);
-            }else {
-                model.setImage(R.drawable.btn_round_msgchat);
-            }
-
-            model.setLike(0);
-            model.setTitle("t、");
-            model.setUserPhoto(R.drawable.chen);
-            model.setUserName("哇哈哈");
+            model.setLike(1);
+            model.setTitle("宠物穿着打扮");
+            model.setUserPhoto(R.drawable.dog);
+            model.setUserName("理想世界");
             list.add(model);
-        }
+
     }
 
 

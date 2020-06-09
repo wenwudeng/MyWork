@@ -1,5 +1,6 @@
 package com.wenwu.pm.activity.home.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -63,14 +64,16 @@ public class HomeConcernFragment extends Fragment {
         adapter = new ConcernRecyclerAdapter(cardViewItemBeanList, this);
         recyclerView.setAdapter(adapter);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_concern);
+        swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#FF5a60"));
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        initData();
+                        adapter.notifyDataSetChanged();
                         swipeRefreshLayout.setRefreshing(false);
-
                         Toast.makeText(getActivity(),"刷新完成", Toast.LENGTH_SHORT).show();
                     }
                 },200);
